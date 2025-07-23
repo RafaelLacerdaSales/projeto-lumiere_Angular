@@ -1,0 +1,21 @@
+.main_testimony {
+  background-color: #f8f9fa;
+  height: 17vw;
+  border-radius: 15px;
+  padding: 40px 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.main_testimony p {
+  flex-wrap: wrap;
+  max-width: 900px;
+  margin: 0 auto;
+  font-style: italic;
+  color: #444;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-color: #00000088;
+  border-radius: 50%;
+}

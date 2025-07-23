@@ -1,0 +1,23 @@
+.cards img {
+  max-width: 500px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.cards h3 {
+  margin: 10px 0;
+}
+
+.star-rating i {
+  color: gold;
+  margin: 0 2px;
+}
+
+.Workshop_txt {
+  text-align: center;
+  font-family: var(--font-principal), serif;
+}
+
+.card-img-top {
+  width: 30vw;
+}

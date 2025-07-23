@@ -1,0 +1,8 @@
+.carousel-item img {
+  width: 20vw;
+  height: auto;
+  border-radius: 10px;
+}
+.procedures_txt h2 {
+  font-family: var(--font-principal), serif;
+}

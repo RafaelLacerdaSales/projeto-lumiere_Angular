@@ -1,1 +1,17 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+  --cor-principal: #fdfaf6;
+  --cor-botao: #716243;
+  --Fundo-caixas-workshop: #faf7f3;
+  --fundo-depoimentos: #f6f0e9;
+  --fundo-sobre: #f7e7ce;
+  --fundo-objetivo: #f9f5ef;
+  --fundo-procedimentos: #f5ede3;
+  --fundo-acompanhamento: #f8f3ea;
+  --fundo-workshop: #f7e7ce;
+  --fundo-unidade: #f9f5ef;
+  --font-principal: "Cormorant Garamond", serif;
+  --font-secundaria: "Open Sans", sans-serif;
+  --cor-titulo: #6d5632;
+  --cor-titulo-destaque: #a68c5b;
+  --cor-texto: #4b4431;
+}

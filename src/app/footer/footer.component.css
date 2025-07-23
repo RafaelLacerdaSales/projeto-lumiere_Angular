@@ -1,0 +1,19 @@
+.container_footer {
+  background-color: var(--cor-botao);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: auto;
+  color: #000000;
+  font-family: var(--font-secundaria), sans-serif;
+}
+.Procedures_footer {
+  height: auto;
+}
+.container_footer h2 {
+  color: #000000;
+  font-family: var(--font-principal), serif;
+}
+.container_footer img {
+  width: 8vw;
+}

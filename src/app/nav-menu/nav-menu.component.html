@@ -6,8 +6,11 @@
       <li>
         <a routerLink="/workshop">Workshop</a>
       </li>
-      <li><a routerLink="/contact">Contato</a></li>
+      <li>
+        <a href="#" (click)="abrirModalContato($event)">Contato</a>
+      </li>
       <li><a routerLink="/contact">Agendar</a></li>
     </ul>
   </nav>
+  <input class="btn-login" routerLink="/login" type="button" value="Login" />
 </header>

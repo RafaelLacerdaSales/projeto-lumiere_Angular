@@ -12,6 +12,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { WorkshopComponent } from './pages/workshop/workshop.component';
 import { ContactComponent } from './pages/contact/contact.component';
 import { FooterModule } from './footer/footer.module';
+import { LoginModule } from './pages/login/login.module';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { FooterModule } from './footer/footer.module';
     CarouselProceduresModule,
     CarouselWorkshopModule,
     FooterModule,
+    LoginModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

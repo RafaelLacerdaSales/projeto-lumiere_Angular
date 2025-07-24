@@ -1,0 +1,146 @@
+body {
+  font-family: var(--font-secundaria);
+}
+
+.img_background {
+  background-image: url(/assets/background_login.jpg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+.container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 36.5vw;
+  width: 100vw;
+}
+
+.btn-home {
+  display: flex;
+  padding: 10px 16px;
+  color: white;
+  font-weight: bold;
+  text-decoration: none;
+  border-radius: 8px;
+}
+
+.card {
+  background-color: var(--fundo-caixas-workshop);
+  border-radius: 12px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  width: 400px;
+}
+
+.card-header {
+  font-family: var(--font-principal);
+  font-size: 28px;
+  font-weight: bold;
+  text-align: center;
+  background-color: var(--cor-titulo);
+  color: white;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.form-label {
+  font-weight: bold;
+}
+
+.btn {
+  background-color: var(--cor-titulo);
+  border: none;
+  padding: 10px;
+  border-radius: 8px;
+  transition: 0.3s;
+}
+
+.btn:hover {
+  background-color: #5a4c39;
+}
+
+.text-center a {
+  color: white;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.text-center a:hover {
+  text-decoration: underline;
+}
+
+.textlumiere {
+  flex-wrap: wrap;
+  display: flex;
+  width: 45%;
+}
+
+#Lumiere_login {
+  font-family: var(--font-principal);
+  color: #d5bb77;
+  font-size: 3cm;
+  text-shadow: 2px 2px 5px #a38f75;
+  position: relative;
+  overflow: hidden;
+}
+
+.img_login img {
+  width: 80%;
+  height: auto;
+  display: flex;
+}
+
+.text_login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 15px;
+}
+
+.text_inferior {
+  background-color: var(--cor-titulo);
+  height: 5vw;
+  display: flex;
+  justify-content: center;
+}
+
+.barra-topo,
+.barra-baixo {
+  height: 80px;
+  width: 100%;
+  background-color: var(--cor-botao);
+  position: fixed;
+  left: 0;
+  z-index: 1;
+}
+
+.barra-topo {
+  top: 0;
+}
+
+.barra-baixo {
+  bottom: 0;
+}
+.background_image {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100%;
+  background-image: url(/assets/img/background_login.jpg);
+  filter: blur(10px);
+  background-size: auto;
+  background-repeat: no-repeat;
+  background-position: center;
+  z-index: -1;
+}

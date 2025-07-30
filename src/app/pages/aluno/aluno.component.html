@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Área do Aluno - Lumière Estética</title>
+    <link rel="stylesheet" href="/pages/css/aluno.css" />
+  </head>
+
+  <body id="paginaAluno">
+    <header>
+      <div class="header-content">
+        <span class="titulo-header">Lumière Estética</span>
+        <img src="/assets/img/icone (2).png" alt="" class="icone-header" />
+      </div>
+    </header>
+
+    <main>
+      <h2>Área do Aluno</h2>
+
+      <form>
+        <label for="email">Alterar E-mail</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="Seu novo e-mail"
+          required
+        />
+
+        <label for="senha">Alterar Senha</label>
+        <input
+          type="password"
+          id="senha"
+          name="senha"
+          placeholder="Nova senha"
+          required
+        />
+
+        <button type="submit">Salvar Alterações</button>
+      </form>
+
+      <hr style="margin: 40px 0; border: none; border-top: 1px solid #ddd" />
+
+      <h2>Certificado</h2>
+      <p>
+        Você pode gerar seu certificado de participação ou conclusão abaixo:
+      </p>
+      <button onclick="abrirModal()">Emitir Certificado</button>
+    </main>
+
+    <footer>
+      &copy; 2025 Lumière Estética. Todos os direitos reservados.
+      <p>
+        Para melhor atendê-lo disponibilizamos um canal exclusivo para
+        tratamento de reclamações, elogios e sugestões. Envie e-mail para :
+        faleconoscolumieregmail.com
+      </p>
+    </footer>
+
+    <!-- Modal -->
+    <div class="modal-overlay" id="modalCertificado">
+      <div class="modal">
+        <img
+          src="https://via.placeholder.com/350x240.png?text=Certificado+Lumi%C3%A8re"
+          alt="Certificado"
+        />
+        <div class="modal-content">
+          <h3>Opções de Certificado</h3>
+          <div class="modal-buttons">
+            <button onclick="window.print()">Imprimir</button>
+            <button onclick="baixarImagem()">Baixar Imagem</button>
+            <button onclick="compartilharCertificado()">Compartilhar</button>
+          </div>
+          <button class="close-modal" onclick="fecharModal()">Fechar</button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function abrirModal() {
+        document.getElementById("modalCertificado").style.display = "flex";
+      }
+
+      function fecharModal() {
+        document.getElementById("modalCertificado").style.display = "none";
+      }
+
+      function baixarImagem() {
+        alert("Função de download de imagem ainda não implementada.");
+      }
+
+      function compartilharCertificado() {
+        if (navigator.share) {
+          navigator
+            .share({
+              title: "Certificado Lumière Estética",
+              text: "Confira meu certificado!",
+              url: window.location.href,
+            })
+            .catch(console.error);
+        } else {
+          alert("Compartilhamento não suportado neste navegador.");
+        }
+      }
+    </script>
+  </body>
+</html>

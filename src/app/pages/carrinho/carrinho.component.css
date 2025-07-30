@@ -1,0 +1,394 @@
+:root {
+  --cor-botao: #716243;
+  --fundo-caixas-workshop: #faf7f3;
+  --fundo-depoimentos: #f6f0e9;
+  --cor-titulo: #a38f75;
+  --font-principal: "Cormorant Garamond", serif;
+  --font-secundaria: "Open Sans", sans-serif;
+}
+.img_background {
+  background-image: url(/assets/goldenflower.jpg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+body {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  font-family: var(--font-secundaria);
+  margin: 0;
+  min-height: 100vh;
+}
+
+header {
+  background-color: var(--cor-titulo);
+  color: white;
+  padding: 15px;
+  text-align: center;
+  font-size: 24px;
+  font-family: var(--font-principal);
+  font-weight: bold;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.cart-icon {
+  position: absolute;
+  right: 60px;
+  top: 15px;
+  font-size: 24px;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  height: auto;
+
+  padding-bottom: 50px;
+  gap: 20px;
+}
+
+.card {
+  background-color: var(--fundo-caixas-workshop);
+  border-radius: 12px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  padding: 30px;
+  width: 500px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.card-header {
+  font-family: var(--font-principal);
+  font-size: 28px;
+  font-weight: bold;
+  text-align: center;
+  background-color: var(--cor-titulo);
+  color: white;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+/* Lista de cursos */
+.cart-items {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  flex-grow: 1;
+}
+
+.cart-item {
+  display: flex;
+  gap: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 10px;
+  background: white;
+  align-items: center;
+}
+
+.item-thumb {
+  background-color: transparent;
+}
+
+.item-details {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.item-title {
+  font-family: var(--font-principal);
+  font-weight: bold;
+  font-size: 16px;
+  margin: 0 0 6px 0;
+  cursor: pointer;
+  color: var(--cor-titulo);
+  text-decoration: none;
+}
+
+.item-title:hover {
+  text-decoration: underline;
+}
+
+.item-instructor {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 6px;
+}
+
+.item-price {
+  font-weight: bold;
+  color: var(--cor-botao);
+  font-size: 16px;
+}
+
+.remove-btn {
+  background: none;
+  border: none;
+  color: #b44343;
+  font-weight: bold;
+  cursor: pointer;
+  align-self: flex-start;
+  font-size: 14px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.remove-btn:hover {
+  background-color: #f8d7d7;
+}
+
+/* Resumo do pedido e pagamento */
+.summary {
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
+  padding: 25px;
+  width: 350px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  height: fit-content;
+}
+
+.summary h3 {
+  font-family: var(--font-principal);
+  margin: 0 0 15px 0;
+  color: var(--cor-titulo);
+  font-size: 22px;
+  text-align: center;
+}
+
+.summary-line {
+  display: flex;
+  justify-content: space-between;
+  font-size: 16px;
+  color: #444;
+}
+
+.summary-line.total {
+  font-weight: bold;
+  font-size: 20px;
+  color: var(--cor-botao);
+  border-top: 1px solid #ddd;
+  padding-top: 10px;
+  margin-top: 10px;
+}
+
+/* Caixa do grupo de pagamento */
+.payment-wrapper {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 15px 20px;
+  background-color: white;
+}
+
+.payment-wrapper h3 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  font-family: var(--font-principal);
+  color: var(--cor-titulo);
+  font-size: 20px;
+}
+
+/* ocultar rádio padrão */
+.payment-methods input[type="radio"] {
+  display: none;
+}
+
+/* estilos dos labels como botões selecionáveis */
+.payment-label {
+  display: block;
+  padding: 12px 18px;
+  margin-bottom: 10px;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--cor-titulo);
+  user-select: none;
+  transition: all 0.3s ease;
+  background-color: white;
+}
+
+.payment-methods input[type="radio"]:checked + .payment-label {
+  border-color: var(--cor-botao);
+  background-color: var(--cor-botao);
+  color: white;
+  box-shadow: 0 0 8px var(--cor-botao);
+}
+
+/* Botão finalizar */
+.btn-finalizar {
+  background-color: var(--cor-botao);
+  color: white;
+  border: none;
+  padding: 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: bold;
+  transition: background-color 0.3s;
+  margin-top: 15px;
+  width: 100%;
+}
+
+.btn-finalizar:hover {
+  background-color: #5a4c39;
+}
+
+/* Responsivo */
+@media (max-width: 960px) {
+  .container {
+    flex-direction: column;
+    padding: 100px 15px 30px 15px;
+  }
+  .card,
+  .summary {
+    width: 100%;
+    max-width: 600px;
+  }
+  .summary {
+    margin-top: 30px;
+  }
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 2000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 400px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  font-family: var(--font-secundaria);
+}
+
+.modal-content h3 {
+  margin-top: 0;
+  color: var(--cor-titulo);
+  font-family: var(--font-principal);
+}
+
+.modal-content label {
+  font-weight: bold;
+  display: block;
+  margin-top: 15px;
+}
+
+.modal-content input {
+  width: 100%;
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.modal-content img.qr {
+  display: block;
+  margin: 20px auto;
+  width: 150px;
+}
+
+.close-modal {
+  background: var(--cor-botao);
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 6px;
+  margin-top: 20px;
+  width: 100%;
+  cursor: pointer;
+}
+
+.close-modal:hover {
+  background: #5a4c39;
+}
+
+.footer-sucinto {
+  background-color: var(--cor-titulo);
+  color: white;
+  font-family: var(--font-secundaria);
+  text-align: center;
+  padding: 20px 10px;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.2);
+  user-select: none;
+}
+
+#CarrinhodeCompra {
+  position: relative;
+  z-index: 0;
+}
+
+#CarrinhodeCompra::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("/assets/goldenflower.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.6;
+  filter: blur(2px);
+  z-index: -1;
+}
+
+header.navbar-carrinho {
+  background-color: var(--cor-titulo);
+  color: white;
+  font-family: var(--font-principal);
+  font-weight: bold;
+  font-size: 22px;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+header.navbar-carrinho .cart-icon {
+  font-size: 24px;
+  margin-right: 6px;
+}

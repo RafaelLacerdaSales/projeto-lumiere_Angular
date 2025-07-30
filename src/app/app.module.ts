@@ -9,17 +9,25 @@ import { NavMenuModule } from './nav-menu/nav-menu.module';
 import { CarouselModule } from './carousel/carousel.module';
 import { CarouselWorkshopModule } from './carousel-workshop/carousel-workshop.module';
 import { HomeComponent } from './pages/home/home.component';
-import { WorkshopComponent } from './pages/workshop/workshop.component';
+
 import { ContactComponent } from './pages/contact/contact.component';
 import { FooterModule } from './footer/footer.module';
 import { LoginModule } from './pages/login/login.module';
+import { AlunoComponent } from './pages/aluno/aluno.component';
+
+import { AulasComponent } from './pages/aulas/aulas.component';
+import { WorkshopComponent } from './pages/workshop/workshop.component';
+import { CarrinhoComponent } from './pages/carrinho/carrinho.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    WorkshopComponent,
     ContactComponent,
+    AlunoComponent,
+    AulasComponent,
+    WorkshopComponent,
+    CarrinhoComponent,
   ],
   imports: [
     BrowserModule,

@@ -2,15 +2,86 @@
   <img src="/assets/icone-2.png" alt="logo" />
   <nav>
     <ul>
-      <li><a routerLink="/home">Home</a></li>
-      <li>
+      <li class="BtnNoneVisible"><a routerLink="/home">Home</a></li>
+      <li class="Btn_visible">
         <a routerLink="/workshop">Workshop</a>
       </li>
       <li>
-        <a href="#" (click)="abrirModalContato($event)">Contato</a>
+        <a href="#" (click)="abrirModalContato($event)">Canais</a>
       </li>
-      <li><a routerLink="/contact">Agendar</a></li>
     </ul>
   </nav>
-  <input class="btn-login" routerLink="/login" type="button" value="Login" />
+  <input
+    class="btn-login btn-login_block"
+    routerLink="/login"
+    type="button"
+    value="Login"
+  />
 </header>
+
+<div
+  class="modal fade"
+  id="modalContato"
+  tabindex="-1"
+  aria-labelledby="modalContatoLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content text-center p-3">
+      <div class="modal-header border-0">
+        <h5 class="modal-title w-100" id="modalContatoLabel">
+          Acesse nossos canais
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Fechar"
+        ></button>
+      </div>
+
+      <div class="modal-body">
+        <p>Nos siga nas redes sociais:</p>
+        <div class="d-flex justify-content-center gap-3 mb-3">
+          <a
+            href="https://www.instagram.com/seu_usuario"
+            target="_blank"
+            class="text-dark fs-3"
+          >
+            <i class="bi bi-instagram"></i>
+          </a>
+          <a
+            href="https://www.facebook.com/seu_usuario"
+            target="_blank"
+            class="text-dark fs-3"
+          >
+            <i class="bi bi-facebook"></i>
+          </a>
+          <a
+            href="https://www.tiktok.com/@seu_usuario"
+            target="_blank"
+            class="text-dark fs-3"
+          >
+            <i class="bi bi-tiktok"></i>
+          </a>
+        </div>
+
+        <p>Ou entre em contato direto:</p>
+        <a
+          href="https://wa.me/5599999999999"
+          class="btn btn-success"
+          target="_blank"
+        >
+          <i class="bi bi-whatsapp"></i>
+          (99) 99999-9999
+        </a>
+      </div>
+
+      <div class="modal-footer border-0">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Fechar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

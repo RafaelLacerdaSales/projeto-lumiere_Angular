@@ -1,6 +1,6 @@
 import { Component, AfterViewInit } from '@angular/core';
-import { ModalService } from './services/modal.service';
-import * as bootstrap from 'bootstrap';
+
+declare function mostrarAlerta(): void;
 
 @Component({
   selector: 'app-root',
@@ -8,18 +8,8 @@ import * as bootstrap from 'bootstrap';
 })
 export class AppComponent implements AfterViewInit {
   title = 'Angular_Lu';
-  modalContato: bootstrap.Modal | undefined;
 
-  constructor(private modalService: ModalService) {}
-
-  ngAfterViewInit() {
-    const modalElement = document.getElementById('contatoModal');
-    if (modalElement) {
-      this.modalContato = new bootstrap.Modal(modalElement);
-    }
-
-    this.modalService.abrirContato$.subscribe(() => {
-      this.modalContato?.show();
-    });
+  ngAfterViewInit(): void {
+    mostrarAlerta();
   }
 }

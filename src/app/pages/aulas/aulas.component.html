@@ -1,0 +1,108 @@
+<nav class="top_menu d-flex justify-content-between align-items-center">
+  <h1>Lumiere</h1>
+  <div class="links">
+    <a href="home.html">Home</a>
+    <a href="workshop.html">Workshop</a>
+  </div>
+</nav>
+
+<div class="container mt-4">
+  <div class="row">
+    <!-- Conteúdo principal -->
+    <div class="col-lg-8">
+      <div class="card">
+        <div class="card-body">
+          <h2 class="card-title">Aula 1 - Boas-vindas</h2>
+          <div class="video-container my-3">
+            <iframe
+              src="https://www.youtube.com/embed/tgbNymZ7vqY"
+              title="Vídeo Aula"
+              frameborder="0"
+              allowfullscreen
+            ></iframe>
+          </div>
+          <div class="description mt-4">
+            <h4>Descrição:</h4>
+            <p>
+              Bem-vindo ao curso! Nesta primeira aula, você conhecerá os
+              objetivos do curso e como aproveitar melhor as aulas.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-body comments-section">
+          <h4>Comentários:</h4>
+          <div id="comments-list" class="mb-3">
+            <!-- Comentários -->
+          </div>
+          <form id="comment-form">
+            <textarea
+              id="comment-input"
+              class="form-control"
+              placeholder="Digite seu comentário..."
+              required
+            ></textarea>
+            <button type="submit" class="btn btn-dark mt-3">
+              Enviar Comentário
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Barra lateral -->
+    <div class="col-lg-4">
+      <div class="sidebar">
+        <div class="modulo">
+          <h2 onclick="toggleModulo(this)">
+            Módulo 1: Introdução <span class="arrow">▶</span>
+          </h2>
+          <ul class="modulo-lista">
+            <li>
+              <label
+                ><input type="checkbox" class="form-check-input me-2" /> Aula 1
+                - Boas-vindas</label
+              >
+            </li>
+            <li>
+              <label
+                ><input type="checkbox" class="form-check-input me-2" /> Aula 2
+                - Apresentação do Curso</label
+              >
+            </li>
+            <li>
+              <label
+                ><input type="checkbox" class="form-check-input me-2" /> Aula 3
+                - Como usar a plataforma</label
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document
+    .getElementById("comment-form")
+    .addEventListener("submit", function (e) {
+      e.preventDefault();
+      const commentInput = document.getElementById("comment-input");
+      const commentList = document.getElementById("comments-list");
+
+      const comment = document.createElement("p");
+      comment.textContent = commentInput.value;
+      comment.classList.add("border-bottom", "pb-2", "mb-2");
+      commentList.appendChild(comment);
+      commentInput.value = "";
+    });
+
+  function toggleModulo(header) {
+    const lista = header.nextElementSibling;
+    lista.classList.toggle("d-none");
+    header.classList.toggle("collapsed");
+  }
+</script>

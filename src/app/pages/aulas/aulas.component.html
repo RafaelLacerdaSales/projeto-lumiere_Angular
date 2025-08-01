@@ -1,11 +1,3 @@
-<nav class="top_menu d-flex justify-content-between align-items-center">
-  <h1>Lumiere</h1>
-  <div class="links">
-    <a href="home.html">Home</a>
-    <a href="workshop.html">Workshop</a>
-  </div>
-</nav>
-
 <div class="container mt-4">
   <div class="row">
     <!-- Conteúdo principal -->
@@ -56,10 +48,10 @@
     <div class="col-lg-4">
       <div class="sidebar">
         <div class="modulo">
-          <h2 onclick="toggleModulo(this)">
+          <h2 class="modulo-header" style="cursor: pointer">
             Módulo 1: Introdução <span class="arrow">▶</span>
           </h2>
-          <ul class="modulo-lista">
+          <ul class="modulo-lista d-none">
             <li>
               <label
                 ><input type="checkbox" class="form-check-input me-2" /> Aula 1
@@ -84,25 +76,3 @@
     </div>
   </div>
 </div>
-
-<script>
-  document
-    .getElementById("comment-form")
-    .addEventListener("submit", function (e) {
-      e.preventDefault();
-      const commentInput = document.getElementById("comment-input");
-      const commentList = document.getElementById("comments-list");
-
-      const comment = document.createElement("p");
-      comment.textContent = commentInput.value;
-      comment.classList.add("border-bottom", "pb-2", "mb-2");
-      commentList.appendChild(comment);
-      commentInput.value = "";
-    });
-
-  function toggleModulo(header) {
-    const lista = header.nextElementSibling;
-    lista.classList.toggle("d-none");
-    header.classList.toggle("collapsed");
-  }
-</script>

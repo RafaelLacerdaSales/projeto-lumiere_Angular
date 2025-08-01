@@ -1,4 +1,5 @@
-body {
+body,
+html {
   background-color: #25d366;
 }
 .container_header {

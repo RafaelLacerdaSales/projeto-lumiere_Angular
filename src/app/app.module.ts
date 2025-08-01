@@ -18,6 +18,7 @@ import { AlunoComponent } from './pages/aluno/aluno.component';
 import { AulasComponent } from './pages/aulas/aulas.component';
 import { WorkshopComponent } from './pages/workshop/workshop.component';
 import { CarrinhoComponent } from './pages/carrinho/carrinho.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { CarrinhoComponent } from './pages/carrinho/carrinho.component';
     CarouselWorkshopModule,
     FooterModule,
     LoginModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

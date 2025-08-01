@@ -6,6 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent {
+  corFundo = '#25d366';
   abrirModal(_$event: MouseEvent) {
     throw new Error('Method not implemented.');
   }

@@ -16,14 +16,12 @@ body {
 }
 
 .container {
-  position: relative;
   display: flex;
-  justify-content: center;
   align-items: center;
-  height: 36.5vw;
+  justify-content: center;
+  height: 46vw;
   width: 100vw;
 }
-
 .btn-home {
   display: flex;
   padding: 10px 16px;

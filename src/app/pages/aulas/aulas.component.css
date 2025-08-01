@@ -116,3 +116,6 @@ nav .links a:hover {
 .collapsed .arrow {
   transform: rotate(0deg);
 }
+.d-none {
+  display: none !important;
+}

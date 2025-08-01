@@ -9,29 +9,19 @@
 }
 
 body {
-  margin: 0;
   font-family: var(--font-secundaria);
   background-color: var(--cor-principal);
   color: #333;
 }
 
-header {
-  background-color: var(--cor-botao);
-  color: white;
-  padding: 20px 40px;
-  text-align: left;
-  font-family: var(--font-principal);
-  font-size: 28px;
-  font-weight: bold;
-}
-
 main {
   max-width: 600px;
-  margin: 60px auto;
-  background-color: #fff;
+  height: 720px;
+  background-color: transparent;
   border: 2px solid var(--cor-botao);
   border-radius: 12px;
   padding: 40px;
+  margin: 0 auto 2px;
 }
 
 h2 {
@@ -43,8 +33,6 @@ h2 {
 
 label {
   display: block;
-  margin-top: 20px;
-  margin-bottom: 5px;
   font-weight: bold;
 }
 
@@ -58,7 +46,6 @@ input {
 
 button {
   width: 100%;
-  margin-top: 30px;
   padding: 14px;
   background-color: var(--cor-botao);
   color: white;
@@ -70,14 +57,6 @@ button {
 
 button:hover {
   background-color: #5a4c39;
-}
-
-footer {
-  text-align: center;
-  background-color: #ccc;
-  padding: 20px;
-  font-size: 14px;
-  margin-top: 40px;
 }
 
 /* === MODAL === */
@@ -212,4 +191,34 @@ footer {
 .icone-header {
   width: 100px;
   height: auto;
+}
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 1050;
+}
+
+.modal-container {
+  max-width: 600px;
+  width: 90%;
+}
+
+.img_background {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("/assets/localdeestudo.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.4;
+  filter: blur(2px); /* menos desfocado */
+  z-index: -1;
 }

@@ -198,30 +198,20 @@
               required
             />
           </div>
+          <div class="mb-3">
+            <label for="videoTitle" class="form-label">Adicionar imagem</label>
+            <input
+              class="form-control"
+              type="file"
+              id="addImg"
+              name="imagem"
+              accept=".jpg,.png,.jpeg,.gif,.bmp"
+            />
+          </div>
 
           <button type="submit" class="btn btn-primary">Adicionar Vídeo</button>
         </form>
       </section>
     </main>
-
-    <script>
-      const cadastro = document.getElementById("Cadastro");
-      const videosWorkshop = document.getElementById("videosWorkshop");
-      const formCadastro = document.getElementById("formCadastro");
-      const containerAddVideios = document.getElementById(
-        "containerAddVideios"
-      );
-
-      videosWorkshop.addEventListener("click", (e) => {
-        e.preventDefault();
-        formCadastro.style.display = "none";
-        containerAddVideios.style.display = "block";
-      });
-      cadastro.addEventListener("click", (e) => {
-        e.preventDefault();
-        containerAddVideios.style.display = "none";
-        formCadastro.style.display = "block";
-      });
-    </script>
   </body>
 </html>

@@ -8,6 +8,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { AulasComponent } from './pages/aulas/aulas.component';
 import { CarrinhoComponent } from './pages/carrinho/carrinho.component';
 import { AdmComponent } from './pages/adm/adm.component';
+import { AlunoComponent } from './pages/aluno/aluno.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: 'aulas', component: AulasComponent },
   { path: 'pagar', component: CarrinhoComponent },
   { path: 'adm', component: AdmComponent },
+  { path: 'aluno', component: AlunoComponent },
 ];
 
 @NgModule({

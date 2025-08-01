@@ -1,108 +1,81 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Área do Aluno - Lumière Estética</title>
-    <link rel="stylesheet" href="/pages/css/aluno.css" />
-  </head>
+<div class="img_background"></div>
+<main class="container">
+  <h2 class="text-primary">Área do Aluno</h2>
 
-  <body id="paginaAluno">
-    <header>
-      <div class="header-content">
-        <span class="titulo-header">Lumière Estética</span>
-        <img src="/assets/img/icone (2).png" alt="" class="icone-header" />
-      </div>
-    </header>
-
-    <main>
-      <h2>Área do Aluno</h2>
-
-      <form>
-        <label for="email">Alterar E-mail</label>
-        <input
-          type="email"
-          id="email"
-          name="email"
-          placeholder="Seu novo e-mail"
-          required
-        />
-
-        <label for="senha">Alterar Senha</label>
-        <input
-          type="password"
-          id="senha"
-          name="senha"
-          placeholder="Nova senha"
-          required
-        />
-
-        <button type="submit">Salvar Alterações</button>
-      </form>
-
-      <hr style="margin: 40px 0; border: none; border-top: 1px solid #ddd" />
-
-      <h2>Certificado</h2>
-      <p>
-        Você pode gerar seu certificado de participação ou conclusão abaixo:
-      </p>
-      <button onclick="abrirModal()">Emitir Certificado</button>
-    </main>
-
-    <footer>
-      &copy; 2025 Lumière Estética. Todos os direitos reservados.
-      <p>
-        Para melhor atendê-lo disponibilizamos um canal exclusivo para
-        tratamento de reclamações, elogios e sugestões. Envie e-mail para :
-        faleconoscolumieregmail.com
-      </p>
-    </footer>
-
-    <!-- Modal -->
-    <div class="modal-overlay" id="modalCertificado">
-      <div class="modal">
-        <img
-          src="https://via.placeholder.com/350x240.png?text=Certificado+Lumi%C3%A8re"
-          alt="Certificado"
-        />
-        <div class="modal-content">
-          <h3>Opções de Certificado</h3>
-          <div class="modal-buttons">
-            <button onclick="window.print()">Imprimir</button>
-            <button onclick="baixarImagem()">Baixar Imagem</button>
-            <button onclick="compartilharCertificado()">Compartilhar</button>
-          </div>
-          <button class="close-modal" onclick="fecharModal()">Fechar</button>
-        </div>
+  <form
+    #form="ngForm"
+    (ngSubmit)="salvarAlteracoes(form)"
+    class="bg-white p-4 rounded shadow"
+  >
+    <div class="mb-3">
+      <label for="email" class="form-label">Alterar E-mail</label>
+      <input
+        type="email"
+        id="email"
+        name="email"
+        class="form-control"
+        [(ngModel)]="email"
+        placeholder="Seu novo e-mail"
+        required
+        #emailInput="ngModel"
+      />
+      <div *ngIf="emailInput.invalid && emailInput.touched" class="text-danger">
+        Campo de e-mail é obrigatório.
       </div>
     </div>
 
-    <script>
-      function abrirModal() {
-        document.getElementById("modalCertificado").style.display = "flex";
-      }
+    <div class="mb-3">
+      <label for="senha" class="form-label">Alterar Senha</label>
+      <input
+        type="password"
+        id="senha"
+        name="senha"
+        class="form-control"
+        [(ngModel)]="senha"
+        placeholder="Nova senha"
+        required
+        #senhaInput="ngModel"
+      />
+      <div *ngIf="senhaInput.invalid && senhaInput.touched" class="text-danger">
+        Campo de senha é obrigatório.
+      </div>
+    </div>
 
-      function fecharModal() {
-        document.getElementById("modalCertificado").style.display = "none";
-      }
+    <button type="submit" class="btn btn-primary w-100">
+      Salvar Alterações
+    </button>
+  </form>
 
-      function baixarImagem() {
-        alert("Função de download de imagem ainda não implementada.");
-      }
+  <hr class="my-5" />
 
-      function compartilharCertificado() {
-        if (navigator.share) {
-          navigator
-            .share({
-              title: "Certificado Lumière Estética",
-              text: "Confira meu certificado!",
-              url: window.location.href,
-            })
-            .catch(console.error);
-        } else {
-          alert("Compartilhamento não suportado neste navegador.");
-        }
-      }
-    </script>
-  </body>
-</html>
+  <h2 class="text-primary">Certificado</h2>
+  <p>Você pode gerar seu certificado de participação ou conclusão abaixo:</p>
+  <button class="btn btn-outline-primary" (click)="abrirModal()">
+    Gerar Certificado
+  </button>
+</main>
+
+<!-- Modal -->
+<div
+  *ngIf="modalAberto"
+  class="modal-overlay d-flex justify-content-center align-items-center"
+>
+  <div class="modal-container bg-white p-4 rounded shadow">
+    <h4 class="text-primary mb-3">Certificado Lumière Estética</h4>
+    <img
+      src="/assets/goldenflower.jpg"
+      alt="Certificado"
+      class="img-fluid rounded mb-3"
+    />
+    <div class="d-grid gap-2">
+      <button class="btn btn-primary" (click)="imprimir()">Imprimir</button>
+      <button class="btn btn-primary" (click)="baixarImagem()">
+        Baixar Imagem
+      </button>
+      <button class="btn btn-primary" (click)="compartilharCertificado()">
+        Compartilhar
+      </button>
+    </div>
+    <button class="btn btn-link mt-3" (click)="fecharModal()">Fechar</button>
+  </div>
+</div>

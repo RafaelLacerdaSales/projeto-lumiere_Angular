@@ -234,6 +234,13 @@ body {
   align-self: flex-start;
 }
 
+.display-5 {
+  font-weight: 300;
+}
+.lead {
+  font-weight: 500;
+}
+
 /* === FOOTER === */
 footer {
   padding: 20px 0;

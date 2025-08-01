@@ -2,9 +2,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: px;
   background-color: transparent;
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(30px);
 }
 
 .container_header img {
@@ -22,9 +21,16 @@
 
 .container_header nav ul li a {
   text-decoration: none;
-  color: #333;
-  font-weight: 500;
+  font-size: 25px;
+  color: var(--cor-titulo-destaque);
+  font-family: var(--font-principal), serif;
 }
+.container_header nav ul li a:hover {
+  color: var(--cor-titulo);
+  font-weight: 700;
+  transition: color 0.3s;
+}
+
 .btn-login_block {
   margin-left: auto;
   margin-right: 15px;
@@ -42,6 +48,12 @@
   color: transparent;
 }
 
-.btn-login_block:hover {
-  background-color: #0056b3;
+.modal-body {
+  color: var(--cor-titulo-destaque);
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.modal-title {
+  color: var(--cor-titulo);
 }

@@ -5,4 +5,12 @@
 }
 .procedures_txt h2 {
   font-family: var(--font-principal), serif;
+  color: var(--cor-titulo-destaque);
+  font-weight: 500;
+}
+
+.carousel-inner {
+  color: var(--cor-texto);
+  font-family: var(--font-principal), serif;
+  font-weight: 500;
 }

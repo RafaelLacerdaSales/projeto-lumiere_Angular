@@ -119,3 +119,29 @@ nav .links a:hover {
 .d-none {
   display: none !important;
 }
+
+.description h4 {
+  font-family: var(--font-principal);
+  font-weight: 700;
+  color: var(--cor-titulo);
+}
+
+.description p {
+  font-family: var(--font-principal);
+  color: var(--cor-texto);
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.comments-section h4 {
+  font-family: var(--font-principal);
+  font-weight: 700;
+  color: var(--cor-titulo);
+}
+
+.sidebar {
+  font-family: var(--font-principal);
+  font-weight: 700;
+  color: var(--cor-titulo);
+  font-size: 20px;
+}

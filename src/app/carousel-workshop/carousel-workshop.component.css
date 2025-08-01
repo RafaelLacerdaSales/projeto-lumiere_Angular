@@ -21,3 +21,18 @@
 .card-img-top {
   width: 30vw;
 }
+.Workshop_txt {
+  color: var(--cor-titulo-destaque);
+  font-family: var(--font-principal), serif;
+  font-weight: 500;
+}
+.card-title {
+  font-family: var(--font-principal), serif;
+  color: var(--cor-texto);
+  font-weight: 600;
+}
+.mb-1 {
+  font-family: var(--font-principal), serif;
+  color: var(--cor-texto);
+  font-weight: 600;
+}

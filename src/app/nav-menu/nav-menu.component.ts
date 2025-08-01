@@ -21,15 +21,16 @@ export class NavMenuComponent implements AfterViewInit {
     if (Btn_visible && btnLogin_block) {
       Btn_visible.addEventListener('click', function () {
         btnLogin_block.style.pointerEvents = 'auto';
-        btnLogin_block.style.backgroundColor = '#007bff';
+        btnLogin_block.style.backgroundColor = 'var(--cor-titulo-destaque)';
         btnLogin_block.style.color = 'white';
 
         btnLogin_block.addEventListener('mouseenter', () => {
-          btnLogin_block.style.backgroundColor = '#0056b3';
+          btnLogin_block.style.backgroundColor = 'var(--cor-titulo)';
+          btnLogin_block.style.color = 'white';
         });
 
         btnLogin_block.addEventListener('mouseleave', () => {
-          btnLogin_block.style.backgroundColor = '#007bff';
+          btnLogin_block.style.backgroundColor = 'var(--cor-titulo-destaque)';
         });
       });
     }

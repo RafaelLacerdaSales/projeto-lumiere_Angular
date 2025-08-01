@@ -10,12 +10,19 @@
   flex-wrap: wrap;
   max-width: 900px;
   margin: 0 auto;
-  font-style: italic;
-  color: #444;
+  font-style: var(--font-principal), italic;
+  font-size: 20px;
+  color: var(--cor-texto);
 }
 
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
   background-color: #00000088;
   border-radius: 50%;
+}
+
+.main_testimony h1 {
+  color: var(--cor-titulo-destaque);
+  font-family: var(--font-principal), serif;
+  font-weight: 500;
 }

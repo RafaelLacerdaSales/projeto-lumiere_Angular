@@ -14,7 +14,7 @@ export class NavMenuComponent implements AfterViewInit {
   ngAfterViewInit() {
     const Btn_visible = document.querySelector('.Btn_visible');
     const btnLogin_block = document.querySelector(
-      '.btn-login_block'
+      '.btn-login_block',
     ) as HTMLElement;
     const BtnNoneVisible = document.querySelector('.BtnNoneVisible');
 

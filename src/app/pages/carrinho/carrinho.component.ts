@@ -15,7 +15,10 @@ import {
 export class CarrinhoComponent implements AfterViewInit {
   @ViewChild('modalContent', { static: false }) modalContentRef!: ElementRef;
 
-  constructor(private renderer: Renderer2, private el: ElementRef) {}
+  constructor(
+    private renderer: Renderer2,
+    private el: ElementRef,
+  ) {}
 
   ngAfterViewInit(): void {
     const form = document.getElementById('payment-form') as HTMLFormElement;
@@ -27,7 +30,7 @@ export class CarrinhoComponent implements AfterViewInit {
       e.preventDefault();
 
       const selected = document.querySelector(
-        'input[name="payment"]:checked'
+        'input[name="payment"]:checked',
       ) as HTMLInputElement;
 
       if (!selected) {

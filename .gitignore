@@ -40,3 +40,23 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+# Angular e NestJS
+node_modules/
+dist/
+build/
+coverage/
+
+# Arquivos temporários
+*.log
+.env
+.DS_Store
+*.tsbuildinfo
+
+# VS Code
+.vscode/
+
+# Gerado pelo Angular
+.angular/cache/
+
+# Gerado pelo Nest (caso esteja usando)
+npm-debug.log

@@ -1,16 +1,28 @@
-.carousel-item img {
-  width: 20vw;
-  height: auto;
-  border-radius: 10px;
-}
-.procedures_txt h2 {
-  font-family: var(--font-principal), serif;
-  color: var(--cor-titulo-destaque);
-  font-weight: 500;
+.procedimento-card {
+  border: none;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.carousel-inner {
-  color: var(--cor-texto);
-  font-family: var(--font-principal), serif;
-  font-weight: 500;
+.procedimento-card img {
+  height: 280px;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.procedimento-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 25px rgba(218, 165, 32, 0.5);
+}
+
+.procedimento-card:hover img {
+  transform: scale(1.05);
+}
+
+.procedimento-card .card-title {
+  font-family: "Playfair Display", serif;
+  font-size: 1.2rem;
+  color: goldenrod;
 }

@@ -127,20 +127,14 @@
   border-radius: 12px;
 }
 
-.texto-com-rolagem {
-  width: 40vw;
-  height: 20vw;
-  border-radius: 10px;
-  overflow: auto;
-  border: 1px solid #ccc;
-  padding: 10px;
-}
-
 .objective_txt h1 {
-  position: relative;
-  top: 16px;
-  font-size: 35px;
+  display: flex;
+  width: 15vw;
+  height: 25vw;
   text-align: center;
+  align-items: center;
+  justify-content: center;
+  font-size: 35px;
   background-color: var(--fundo-objetivo);
   color: var(--cor-titulo-destaque);
   font-family: var(--font-principal), serif;
@@ -234,61 +228,31 @@
   padding: 10px;
 }
 
-.location_txt h1 {
-  font-size: 2.5rem;
-  color: var(--cor-titulo-destaque);
-  font-family: var(--font-principal), serif;
-  background: var(--fundo-unidade);
+.unidade-section {
+  background: #faf6ef;
 }
-.container_location {
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-  flex-direction: row;
-  height: 30vw;
-  background: var(--fundo-unidade);
-  font-family: var(--font-secundaria), sans-serif;
+
+.text-golden {
+  color: goldenrod;
 }
-.container_location div {
-  display: grid;
-  text-align: left;
-  grid-template-columns: auto;
-  gap: 20px;
-}
-.container_location h3,
-.container_location p {
-  font-size: 23px;
-  color: var(--cor-texto);
-}
-.container_location button {
-  border: none;
-  display: flex;
-  align-items: center;
-  width: 14vw;
-  border: none;
-  gap: 1px;
-  padding: 15px;
-  font-size: 18px;
+
+.btn-whatsapp {
   background-color: #25d366;
   color: white;
-  border-radius: 100px;
-  font-family: var(--font-secundaria), sans-serif;
-  cursor: pointer;
+  padding: 12px 20px;
+  font-size: 1rem;
+  border-radius: 30px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
 }
 
-.container_location button:hover {
-  transition: 0.3s;
-  transform: scale(1.05);
+.btn-whatsapp:hover {
+  background-color: #1ebe5d;
+  color: white;
 }
 
-.container_location img {
-  display: block;
-  text-align: center;
-  position: relative;
-  top: 3px;
-  left: 10px;
-  width: 30px;
-}
-.location_txt {
-  text-align: center;
+.map-container {
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }

@@ -43,36 +43,34 @@
         </div>
       </div>
     </div>
+<!-- Barra lateral -->
+<div class="col-lg-4">
+  <div class="sidebar-full">
+    <div class="modulo">
+      <h2 class="modulo-header" onclick="toggleModulo(this)">
+        Módulo 1: Introdução <span class="arrow">▶</span>
+      </h2>
+      <ul class="modulo-lista d-none">
+        <li><span class="aula-num">1</span> Boas-vindas</li>
+        <li><span class="aula-num">2</span> Apresentação do Curso</li>
+        <li><span class="aula-num">3</span> Como usar a plataforma</li>
+      </ul>
+    </div>
 
-    <!-- Barra lateral -->
-    <div class="col-lg-4">
-      <div class="sidebar">
-        <div class="modulo">
-          <h2 class="modulo-header" style="cursor: pointer">
-            Módulo 1: Introdução <span class="arrow">▶</span>
-          </h2>
-          <ul class="modulo-lista d-none">
-            <li>
-              <label
-                ><input type="checkbox" class="form-check-input me-2" /> Aula 1
-                - Boas-vindas</label
-              >
-            </li>
-            <li>
-              <label
-                ><input type="checkbox" class="form-check-input me-2" /> Aula 2
-                - Apresentação do Curso</label
-              >
-            </li>
-            <li>
-              <label
-                ><input type="checkbox" class="form-check-input me-2" /> Aula 3
-                - Como usar a plataforma</label
-              >
-            </li>
-          </ul>
-        </div>
-      </div>
+    <div class="barra-modulo"></div> <!-- barra separadora -->
+
+    <div class="modulo">
+      <h2 class="modulo-header" onclick="toggleModulo(this)">
+        Módulo 2: Avançado <span class="arrow">▶</span>
+      </h2>
+      <ul class="modulo-lista d-none">
+        <li><span class="aula-num">1</span> Aula 4</li>
+        <li><span class="aula-num">2</span> Aula 5</li>
+      </ul>
     </div>
   </div>
 </div>
+
+  </div>
+</div>
+<app-footer></app-footer>

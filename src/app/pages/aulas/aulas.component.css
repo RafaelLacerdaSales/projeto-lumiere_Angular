@@ -1,6 +1,6 @@
 body {
   font-family: var(--font-secundaria);
-  background-color: var(--cor-principal);
+  background-color: aliceblue;
   color: var(--cor-texto);
   padding-top: 80px;
 }
@@ -140,8 +140,54 @@ nav .links a:hover {
 }
 
 .sidebar {
-  font-family: var(--font-principal);
-  font-weight: 700;
-  color: var(--cor-titulo);
-  font-size: 20px;
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 8px;
+  height: 100%; /* ocupa todo o espaço vertical da coluna */
+}
+
+/* Sidebar ocupa toda a altura da coluna direita */
+.sidebar-full {
+  background-color: #8E744C; /* mesma cor da box */
+  border-radius: 8px;
+  padding: 20px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Cada módulo */
+.modulo {
+  margin-bottom: 15px; /* espaçamento antes da barra */
+}
+
+/* Cabeçalho do módulo */
+.modulo-header {
+  cursor: pointer;
+  font-size: 1.1rem;
+  margin-bottom: 10px;
+}
+
+/* Lista de aulas dentro do módulo */
+.modulo-lista {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.modulo-lista li {
+  padding: 5px 0;
+}
+
+/* Número da aula */
+.aula-num {
+  font-weight: bold;
+  margin-right: 8px;
+}
+
+/* Barra separadora entre módulos */
+.barra-modulo {
+  height: 1px;
+  background-color: #ccc;
+  margin: 10px 0; /* espaçamento acima e abaixo da barra */
 }

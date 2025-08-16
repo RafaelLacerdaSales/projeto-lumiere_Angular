@@ -7,17 +7,22 @@
   --font-secundaria: "Open Sans", sans-serif;
 }
 .img_background {
-  background-image: url(/assets/goldenflower.jpg);
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  width: 100vw;
-  height: 100vh;
   position: fixed;
   top: 0;
   left: 0;
+  width: 100vw;
+  height: 100vh;
   z-index: -1;
+  background-image: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), 
+                    url(/assets/goldenflower.jpg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  filter: blur(8px); /* desfoque mais forte */
 }
+
+
+
 body {
   background-size: cover;
   background-position: center;
@@ -52,14 +57,15 @@ header {
 .container {
   display: flex;
   justify-content: center;
-  align-items: center;
-  height: 90vh;
+  align-items: flex-start;
+  height: auto;
+  padding-top: 120px; /* afastar do header */
   padding-bottom: 50px;
   gap: 20px;
 }
 
 .card {
-  background-color: var(--fundo-caixas-workshop);
+  background-color: rgba(250, 247, 243, 0.95); /* cor mais sólida */
   border-radius: 12px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
   padding: 30px;
@@ -167,6 +173,7 @@ header {
   flex-direction: column;
   gap: 20px;
   height: fit-content;
+  margin-top: 5px; /* levemente mais para cima */
 }
 
 .summary h3 {
@@ -260,7 +267,7 @@ header {
 @media (max-width: 960px) {
   .container {
     flex-direction: column;
-    padding: 100px 15px 30px 15px;
+    padding: 120px 15px 30px 15px; /* ajustado */
   }
   .card,
   .summary {

@@ -34,36 +34,19 @@ body {
   line-height: 1.6;
 }
 
-/* === SEARCH BAR === */
+/* === TITULO ALINHAMENTO === */
 .container_center {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.search-bar input {
-  border: 1px solid var(--cor-titulo);
-}
 
-.search-bar input:focus {
-  border-color: var(--cor-dourado);
-  box-shadow: 0 0 0 0.2rem rgba(247, 215, 116, 0.25);
-}
-
-.search-bar button {
-  border-color: var(--cor-titulo);
-  color: var(--cor-titulo);
-}
-
-.search-bar button:hover {
-  background-color: var(--cor-dourado);
-  color: var(--cor-hover);
-}
 
 /* === CURSOS DESTAQUES === */
 .texto {
   font-family: var(--font-principal);
-  color: #a68c5b;
+  color: #5C4033;
 }
 
 .bg-primary2 {
@@ -71,178 +54,213 @@ body {
 }
 
 .bg-primary2 h1 {
-  color: #a68c5b;
+  color: #5C4033;
   font-family: var(--font-principal), serif;
   text-align: center !important;
 }
 
 .bg-primary2 p {
-  color: #a68c5b;
+  color: #5C4033;
   font-family: var(--font-principal), serif;
   text-align: center !important;
 }
 
-/* === GRID DE CARDS VERTICAIS === */
-.course-card {
-  background-color: var(--cor-card);
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-  transition:
-    transform 0.3s ease,
-    box-shadow 0.3s ease;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-}
-
-.course-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
-}
-
-.course-card img {
-  width: 100%;
-  height: 300px;
-  object-fit: cover;
-}
-
-.course-card-body {
-  padding: 16px;
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-}
-
-.course-card-title {
-  font-family: "Cormorant Garamond", serif;
-  font-size: 1.25rem;
-  color: var(--cor-primaria);
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-  text-align: center;
-}
-
-.course-card-text {
-  color: var(--cor-primaria);
-  font-size: 0.95rem;
-  margin-bottom: 1rem;
-  flex-grow: 1;
-  text-align: center;
-}
-
-.course-card .btn {
-  background-color: var(--cor-primaria);
-  color: #fffaf0;
-  display: block;
-  width: 100%;
-  padding: 10px 0;
-  text-align: center;
-  font-size: 0.9rem;
-  font-weight: 600;
-  border-radius: 4px;
-  text-decoration: none;
-  transition: background-color 0.3s ease;
-}
-
-.course-card .btn:hover {
-  background-color: var(--cor-hover);
-  color: whitesmoke;
-}
-
-/* === LISTA DE CARDS HORIZONTAIS (estilo Udemy search) === */
-.course-list {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  max-width: 900px;
-  margin: 2rem auto;
-  padding: 0 1rem;
-}
-
-.course-list-item {
-  display: flex;
-  border: 1px solid var(--cor-borda);
-  border-radius: 8px;
-  background-color: var(--cor-card);
-  overflow: hidden;
-  transition:
-    box-shadow 0.2s ease,
-    transform 0.2s ease;
-}
-
-.course-list-item:hover {
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-  transform: translateY(-2px);
-  background-color: var(--cor-hover-claro);
-}
-
-.course-list-item img {
-  width: 400px;
-  height: 100%;
-  object-fit: cover;
-}
-
-.course-list .btn {
-  display: block;
-  background-color: var(--cor-primaria);
-  color: #fffaf0;
-  padding: 0.75rem 1rem;
-  text-decoration: none;
-  text-align: center;
-  border-radius: 4px;
-  transition: background-color 0.3s ease;
-}
-
-.course-info {
-  flex: 1;
-  padding: 1rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.course-info h3 {
-  font-family: "Cormorant Garamond", serif;
-  font-size: 1.2rem;
-  font-weight: 600;
-  color: var(--cor-primaria);
-  margin-bottom: 0.5rem;
-}
-
-.course-info .author {
-  color: var(--cor-texto);
-  font-size: 0.9rem;
-  margin-bottom: 0.75rem;
-}
-
-.course-meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  font-size: 0.9rem;
-  color: var(--cor-texto);
-  margin-bottom: 0.75rem;
-}
-
-.course-meta .rating {
-  color: var(--cor-rating);
-  font-weight: 600;
-}
-
-.course-info .price {
-  font-size: 1rem;
-  font-weight: 700;
-  color: var(--cor-hover);
-  margin-top: auto;
-  align-self: flex-start;
-}
 
 .display-5 {
   font-weight: 300;
 }
 .lead {
   font-weight: 500;
+}
+
+/* ==== Layout 2 colunas fixo (sidebar esquerda) ==== */
+.courses-layout{
+  display: grid !important;
+  grid-template-columns: 260px minmax(0,1fr) !important;
+  gap: 24px !important;
+  align-items: start !important;
+}
+
+/* Remova o empilhamento em telas pequenas;
+   Se quiser empilhar no mobile, descomente o bloco abaixo. */
+/*
+@media (max-width: 600px){
+  .courses-layout{
+    grid-template-columns: 1fr !important;
+  }
+}
+*/
+
+/* Container geral dos filtros */
+.filters {
+  width: 250px;
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  font-family: "Segoe UI", Tahoma, sans-serif;
+  margin-bottom: 20px;
+}
+
+/* Título */
+.filters .filter-title {
+  font-size: 16px;
+  font-weight: bold;
+  color: #5C4033;
+  margin-bottom: 15px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 8px;
+}
+
+/* Checkboxes + texto */
+.filters label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 8px 0;
+  font-size: 14px;
+  color: #444;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.filters label:hover {
+  color: #5C4033;
+}
+
+/* Custom checkbox */
+.filters input[type="checkbox"] {
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border: 2px solid #5C4033;
+  border-radius: 4px;
+  cursor: pointer;
+  position: relative;
+  transition: background 0.2s ease, border 0.2s ease;
+}
+
+.filters input[type="checkbox"]:checked {
+  background-color: #5C4033;
+  border-color: #5C4033;
+}
+
+.filters input[type="checkbox"]:checked::after {
+  content: "✔";
+  position: absolute;
+  color: #fff;
+  font-size: 12px;
+  top: -2px;
+  left: 2px;
+}
+
+.tag-btn{
+  background: #f2f2f2;
+  border: 1px solid #ccc;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background .2s, border-color .2s;
+  text-align: left;
+  font-size: 14px;
+}
+
+.tag-btn:hover{ background: #ddd; }
+.tag-btn.active{
+  background: #5c4525;
+  border-color: #201a01;
+  font-weight: 600;
+}
+
+/* ==== Lista de cursos (coluna direita) ==== */
+.course-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 colunas fixas */
+  gap: 30px; /* espaço entre os cards */
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto; /* centraliza o grid na tela */
+}
+
+/* Título */
+.course-section .texto {
+  font-size: 28px;
+  font-weight: bold;
+  color: #5C4033;
+  margin-bottom: 30px;
+  text-align: center; /* Centraliza o título */
+  padding: 20px 0;
+}
+
+/* Cada card do curso */
+.course-list-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 300px;   /* aumenta o tamanho */
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+  padding: 15px;
+  transition: transform 0.3s;
+}
+
+.course-list-item:hover {
+  transform: scale(1.05); /* leve zoom ao passar o mouse */
+}
+
+
+/* Imagem do curso */
+.course-list-item img {
+  width: 100%;
+  height: 200px;   /* deixa imagens maiores */
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+/* Info dentro do card */
+.course-info {
+  text-align: center;
+  margin-top: 12px;
+}
+
+.course-info h3 {
+  color: #5C4033;
+  font-size: 20px;
+  margin-bottom: 8px;
+}
+
+.course-info p {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 10px;
+}
+
+.price {
+  display: block;
+  font-size: 18px;
+  font-weight: bold;
+  color: #5C4033;
+  margin-bottom: 12px;
+}
+/* Botão de compra */
+.buy-btn {
+  display: inline-block;
+  margin-top: 5px;
+  padding: 12px 20px;
+  background-color: #5C4033; /* marrom */
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.buy-btn:hover {
+  background-color: #3e2a21; /* marrom mais escuro no hover */
 }
 
 /* === FOOTER === */

@@ -1,134 +1,119 @@
-<router-outlet></router-outlet>
-
-<!-- <section class="bg-primary2 container_center">
-  <div class="container">
-    <h1 class="display-5">Aprenda com as Melhores!</h1>
-    <p class="lead">
+<section class="bg-primary2 container_center">
+    <div class="container">
+    <!--h1 class="display-5">Aprenda com as Melhores!</!--h1>
+    <p-- class="lead">
       Desenvolva tudo oque aprender para melhorar sua estetica!
-    </p>
+    </p-->
     <form
       class="search-bar d-flex justify-content-center align-items-center"
       role="search"
     >
-      <input
+
+      <!-- <input
         class="form-control me-2 w-50 p-1"
         type="search"
         placeholder="Buscar cursos"
         aria-label="Search"
       />
-      <button class="btn p-1" type="submit">Buscar</button>
+    <button class="btn p-1" type="submit">Buscar</button> === -->
     </form>
   </div>
-</section> -->
+</section>
 <app-carousel-workshop></app-carousel-workshop>
-<!-- === LISTA HORIZONTAL (tipo Search Udemy) === -->
 
 <section class="template">
   <div>
-     <h1>O site certo para um up na sua cliníca</h1>
+     <h1></h1>
   </div>
+
+     <section class="course-section">
+        <h2 class="texto">-----Todos os Cursos-----</h2>
+
+
+    <div class="courses-layout">
+      <!-- Sidebar de filtros -->
+    <section class="filters">
+      <h3 class="filter-title">Categorias</h3>
+
+  <label><input type="checkbox" value="todos" checked >Todos</label>
+  <label><input type="checkbox" value="maquiagem"> Maquiagem</label>
+  <label><input type="checkbox" value="massagem"> Massagem</label>
+  <label><input type="checkbox" value="cilios"> Cílios</label>
+  <label><input type="checkbox" value="pele"> Pele</label>
+  <label><input type="checkbox" value="skincare"> Skincare</label>
+
 </section>
-<section class="course-list">
-  <h2 class="texto text-center">Todos os Cursos</h2>
-  <div class="course-list-item">
-    <img
-      src="/assets/img_Maquiagem.png"
-      alt="Modern JavaScript From The Beginning"
-    />
-    <div class="course-info">
-      <h3>Maquiagem</h3>
-      <p class="author">
-        Domine a arte da maquiagem em todos os estilos, do social ao editorial.
-        Desenvolva habilidades para realçar a beleza, corrigir imperfeições e
-        criar visuais marcantes que impressionam.
-      </p>
-      <a href="#" target="btn" class="btn">Detalhes do curso</a>
-      <div class="course-meta">
-        <span class="rating">⭐ 4.7 (202,721)</span>
-        <span class="details">21.5 Total de Horas</span>
-      </div>
-      <div class="price">R$18.99</div>
-    </div>
-  </div>
 
-  <div class="course-list-item">
-    <img src="/assets/img_Massagem.png" alt="The Modern JavaScript Bootcamp" />
-    <div class="course-info">
-      <h3>Massagem</h3>
-      <p class="author">
-        Aprenda manobras de massagem relaxante e terapêutica para aliviar
-        tensões, melhorar a circulação e promover o bem-estar integral dos seus
-        clientes com um toque profissional.
-      </p>
-      <a href="#" target="btn" class="btn">Detalhes do curso</a>
-      <div class="course-meta">
-        <span class="rating">⭐ 4.8 (49,435)</span>
-        <span class="details">29.5 Total de Horas</span>
-      </div>
-      <div class="price">R$23.99</div>
-    </div>
-  </div>
 
-  <div class="course-list-item">
-    <img src="/assets/img_cilios.png" alt="The Modern JavaScript Bootcamp" />
-    <div class="course-info">
-      <h3>Alongamento de Cílios</h3>
-      <p class="author">
-        Domine o fio a fio, volume russo e híbrido para resultados impecáveis.
-      </p>
-      <a href="#" target="btn" class="btn">Detalhes do curso</a>
-      <div class="course-meta">
-        <span class="rating">⭐ 4.8 (49,435)</span>
-        <span class="details">29.5 Total de Horas</span>
-      </div>
-      <div class="price">R$23.99</div>
-    </div>
-  </div>
+      <!-- Lista de cursos -->
+      <div class="course-list">
 
-  <div class="course-list-item">
-    <img src="/assets/img_pele.png" alt="The Modern JavaScript Bootcamp" />
-    <div class="course-info">
-      <h3>Limpeza de Pele Profunda</h3>
-      <p class="author">
-        Técnicas passo a passo para uma pele renovada e saudável.
-      </p>
-      <a href="#" target="btn" class="btn">Detalhes do curso</a>
-      <div class="course-meta">
-        <span class="rating">⭐ 4.8 (49,435)</span>
-        <span class="details">29.5 Total de Horas</span>
-      </div>
-      <div class="price">R$23.99</div>
-    </div>
-  </div>
 
-  <div class="course-list-item">
-    <img src="/assets/img_Skincare.png" alt="The Modern JavaScript Bootcamp" />
-    <div class="course-info">
-      <h3>Técnica suave para eliminar toxinas e reduzir inchaços.</h3>
-      <p class="author">
-        Técnica suave para eliminar toxinas e reduzir inchaços.
-      </p>
-      <a href="#" target="btn" class="btn">Detalhes do curso</a>
-      <div class="course-meta">
-        <span class="rating">⭐ 4.8 (49,435)</span>
-        <span class="details">29.5 Total de Horas</span>
-      </div>
-      <div class="price">R$23.99</div>
-    </div>
-  </div>
 
-  <div class="course-list-item">
-    <img src="/assets/img_peeling.png" alt="The Modern JavaScript Bootcamp" />
-    <div class="course-info">
-      <h3>Peeling Químico e Mecânico</h3>
-      <p class="author">Aprenda a renovar a pele com segurança e eficácia.</p>
-      <a href="#" target="btn" class="btn">Detalhes do curso</a>
-      <div class="course-meta">
-        <span class="rating">⭐ 4.8 (49,435)</span>
-        <span class="details">29.5 Total de Horas</span>
+        <div class="course-list-item" data-category="maquiagem">
+          <img src="/assets/img_Maquiagem.png" alt="Curso de Maquiagem">
+          <div class="course-info">
+            <h3>Curso de Maquiagem</h3>
+            <p class="course-meta">Aprenda técnicas modernas de maquiagem profissional.</p>
+            <span class="price">R$ 299,00</span>
+            <button class="buy-btn">Comprar</button>
+          </div>
+        </div>
+
+        <div class="course-list-item" data-category="massagem">
+          <img src="/assets/img_Massagem.png" alt="Curso de Massagem">
+          <div class="course-info">
+            <h3>Curso de Massagem Relaxante</h3>
+            <p class="course-meta">Domine técnicas de massagem para bem-estar e relaxamento.</p>
+            <span class="price">R$ 349,00</span>
+            <button class="buy-btn">Comprar</button>
+          </div>
+        </div>
+
+        <div class="course-list-item" data-category="cilios">
+          <img src="/assets/img_cilios.png" alt="Curso de Cílios">
+          <div class="course-info">
+            <h3>Curso de Alongamento de Cílios</h3>
+            <p class="course-meta">Aprenda a aplicar cílios fio a fio e volume russo.</p>
+            <span class="price">R$ 399,00</span>
+            <button class="buy-btn">Comprar</button>
+          </div>
+        </div>
+
+        <div class="course-list-item" data-category="pele">
+          <img src="/assets/img_pele.png" alt="Curso de Cuidados com a Pele">
+          <div class="course-info">
+            <h3>Curso de Cuidados com a Pele</h3>
+            <p class="course-meta">Técnicas para manter a pele saudável e bonita.</p>
+            <span class="price">R$ 279,00</span>
+            <button class="buy-btn">Comprar</button>
+          </div>
+        </div>
+
+        <div class="course-list-item" data-category="skincare">
+          <img src="/assets/img_Skincare.png" alt="Curso de Skincare">
+          <div class="course-info">
+            <h3>Curso de Skincare</h3>
+            <p class="course-meta">Aprenda a criar rotinas de skincare personalizadas.</p>
+            <span class="price">R$ 259,00</span>
+            <button class="buy-btn">Comprar</button>
+          </div>
+        </div>
+
+        <div class="course-list-item" data-category="peeling">
+          <img src="/assets/img_peeling.png" alt="Curso de Peeling Facial">
+          <div class="course-info">
+            <h3>Curso de Peeling Facial</h3>
+            <p class="course-meta">Conheça os diferentes tipos de peeling e sua aplicação.</p>
+            <span class="price">R$ 329,00</span>
+            <button class="buy-btn">Comprar</button>
+          </div>
+        </div>
+
       </div>
-      <div class="price">R$23.99</div>
     </div>
-  </div>
-</section>
+  </section>
 <app-footer></app-footer>
+
+
+

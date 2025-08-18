@@ -22,7 +22,7 @@
   width: 30vw;
 }
 .Workshop_txt {
-  color: var(--cor-titulo-destaque);
+  color: #5C4033;
   font-family: var(--font-principal), serif;
   font-weight: 500;
 }

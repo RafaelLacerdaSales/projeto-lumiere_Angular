@@ -19,6 +19,7 @@ import { AulasComponent } from './pages/aulas/aulas.component';
 import { WorkshopComponent } from './pages/workshop/workshop.component';
 import { CarrinhoComponent } from './pages/carrinho/carrinho.component';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { FormsModule } from '@angular/forms';
     FooterModule,
     LoginModule,
     FormsModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

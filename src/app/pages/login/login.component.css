@@ -1,5 +1,7 @@
 body {
   font-family: var(--font-secundaria);
+  margin: 0;
+  padding: 0;
 }
 
 .img_background {
@@ -17,18 +19,12 @@ body {
 
 .container {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 46vw;
+  align-items: center; /* centraliza verticalmente */
+  justify-content: center; /* centraliza horizontalmente */
+  min-height: 100vh; /* ocupa toda a altura da tela */
   width: 100vw;
-}
-.btn-home {
-  display: flex;
-  padding: 10px 16px;
-  color: white;
-  font-weight: bold;
-  text-decoration: none;
-  border-radius: 8px;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
 .card {
@@ -36,8 +32,11 @@ body {
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
   padding: 20px;
   width: 400px;
-  background-color: transparent;
+  background-color: rgba(0, 0, 0, 0.4);
   backdrop-filter: blur(10px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .card-header {
@@ -49,10 +48,14 @@ body {
   color: white;
   padding: 10px;
   border-radius: 8px;
+  width: 100%;
 }
 
 .form-label {
-  font-weight: bold;
+  font-family: var(--font-principal);
+  color: white;
+  font-size: 20px;
+  font-weight: 500;
 }
 
 .btn {
@@ -61,6 +64,7 @@ body {
   padding: 10px;
   border-radius: 8px;
   transition: 0.3s;
+  width: 100%;
 }
 
 .btn:hover {
@@ -71,51 +75,20 @@ body {
   color: white;
   text-decoration: none;
   transition: 0.3s;
+  cursor: pointer;
 }
 
 .text-center a:hover {
   text-decoration: underline;
 }
 
-.textlumiere {
-  flex-wrap: wrap;
-  display: flex;
-  width: 45%;
+input.form-control {
+  margin-bottom: 10px;
 }
 
-#Lumiere_login {
-  font-family: var(--font-principal);
-  color: #d5bb77;
-  font-size: 3cm;
-  text-shadow: 2px 2px 5px #a38f75;
-  position: relative;
-  overflow: hidden;
-}
-
-.img_login img {
-  width: 80%;
-  height: auto;
-  display: flex;
-}
-
-.text_login {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  gap: 15px;
-}
-
-.text_inferior {
-  background-color: var(--cor-titulo);
-  height: 5vw;
-  display: flex;
-  justify-content: center;
-}
-
-.form-label {
-  font-family: var(--font-principal);
-  color: white;
-  font-size: 20px;
-  font-weight: 500;
+small.text-danger {
+  display: block;
+  margin-top: -8px;
+  margin-bottom: 8px;
+  font-size: 14px;
 }

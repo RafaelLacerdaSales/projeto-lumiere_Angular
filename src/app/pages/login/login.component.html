@@ -1,117 +1,121 @@
 <div class="img_background"></div>
 
 <div class="container">
-  <div class="row justify-content-center">
-    <div>
-      <!-- Login -->
-      <div *ngIf="sectionAtual === 'login'" class="card">
-        <div class="card-header text-center">
-          <img src="/assets/icone-2.png" alt="Logo" class="mb-2" width="100" />
-          <h4>Login</h4>
-        </div>
-        <div class="card-body">
-          <form>
-            <div class="mb-3">
-              <label for="email" class="form-label">E-mail</label>
-              <input type="email" class="form-control" id="email" required />
-            </div>
-            <div class="mb-3">
-              <label for="senha" class="form-label">Senha</label>
-              <input type="password" class="form-control" id="senha" required />
-            </div>
-            <button type="submit" class="btn btn-primary w-100">Entrar</button>
-          </form>
-          <div class="text-center mt-3">
-            <a (click)="mudarSection('recuperar')">Esqueci minha senha</a>
-            |
-            <a (click)="mudarSection('cadastro')">Cadastrar-se</a>
-          </div>
+  <div class="col-md-6">
+    <!-- LOGIN -->
+    <div *ngIf="sectionAtual === 'login'" class="card">
+      <div class="card-header">
+        <h4>Login</h4>
+      </div>
+      <div class="card-body">
+        <form (ngSubmit)="onLogin()">
+          <label class="form-label">E-mail</label>
+          <input
+            type="email"
+            class="form-control"
+            [(ngModel)]="loginData.email"
+            name="email"
+            required
+          />
+          <label class="form-label">Senha</label>
+          <input
+            type="password"
+            class="form-control"
+            [(ngModel)]="loginData.senha"
+            name="senha"
+            required
+          />
+          <button type="submit" class="btn btn-primary">Entrar</button>
+        </form>
+        <div class="text-center mt-3">
+          <a (click)="mudarSection('recuperar')">Esqueci minha senha</a> |
+          <a (click)="mudarSection('cadastro')">Cadastrar-se</a>
         </div>
       </div>
+    </div>
 
-      <!-- Cadastro -->
-      <div *ngIf="sectionAtual === 'cadastro'" class="card">
-        <div class="card-header text-center">
-          <h4>Cadastro</h4>
-        </div>
-        <div class="card-body">
-          <form>
-            <div class="mb-3">
-              <label for="nome" class="form-label">Nome Completo</label>
-              <input type="text" class="form-control" id="nome" required />
-            </div>
-            <div class="mb-3">
-              <label for="cpf" class="form-label">CPF</label>
-              <input type="text" class="form-control" id="cpf" required />
-            </div>
-            <div class="mb-3">
-              <label for="data_nascimento" class="form-label"
-                >Data de Nascimento</label
-              >
-              <input
-                type="date"
-                class="form-control"
-                id="data_nascimento"
-                required
-              />
-            </div>
-            <div class="mb-3">
-              <label for="telefone" class="form-label">Telefone</label>
-              <input type="tel" class="form-control" id="telefone" required />
-            </div>
-            <div class="mb-3">
-              <label for="email_cadastro" class="form-label">E-mail</label>
-              <input
-                type="email"
-                class="form-control"
-                id="email_cadastro"
-                required
-              />
-            </div>
-            <div class="mb-3">
-              <label for="senha_cadastro" class="form-label">Senha</label>
-              <input
-                type="password"
-                class="form-control"
-                id="senha_cadastro"
-                required
-              />
-            </div>
-            <button type="submit" class="btn btn-success w-100">
-              Cadastrar
-            </button>
-          </form>
-          <div class="text-center mt-3">
-            <a (click)="mudarSection('login')">Já tenho uma conta</a>
-          </div>
+    <!-- CADASTRO -->
+    <div *ngIf="sectionAtual === 'cadastro'" class="card">
+      <div class="card-header">
+        <h4>Cadastro</h4>
+      </div>
+      <div class="card-body">
+        <form (ngSubmit)="onCadastro()">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Nome"
+            [(ngModel)]="cadastroData.nome"
+            name="nome"
+            required
+          />
+          <input
+            type="text"
+            class="form-control"
+            placeholder="CPF"
+            [(ngModel)]="cadastroData.cpf"
+            name="cpf"
+            required
+          />
+          <input
+            type="date"
+            class="form-control"
+            placeholder="Data de Nascimento"
+            [(ngModel)]="cadastroData.data_nascimento"
+            name="data_nascimento"
+            required
+          />
+          <input
+            type="tel"
+            class="form-control"
+            placeholder="Telefone"
+            [(ngModel)]="cadastroData.telefone"
+            name="telefone"
+            required
+          />
+          <input
+            type="email"
+            class="form-control"
+            placeholder="E-mail"
+            [(ngModel)]="cadastroData.email"
+            name="email"
+            required
+          />
+          <input
+            type="password"
+            class="form-control"
+            placeholder="Senha"
+            [(ngModel)]="cadastroData.senha"
+            name="senha"
+            required
+          />
+          <button type="submit" class="btn btn-success">Cadastrar</button>
+        </form>
+        <div class="text-center mt-3">
+          <a (click)="mudarSection('login')">Já tenho uma conta</a>
         </div>
       </div>
+    </div>
 
-      <!-- Recuperar Senha -->
-      <div *ngIf="sectionAtual === 'recuperar'" class="card">
-        <div class="card-header text-center">
-          <h4>Recuperar Senha</h4>
-        </div>
-        <div class="card-body">
-          <form>
-            <div class="mb-3">
-              <label for="email_recuperar" class="form-label"
-                >E-mail cadastrado</label
-              >
-              <input
-                type="email"
-                class="form-control"
-                id="email_recuperar"
-                required
-              />
-            </div>
-            <button type="submit" class="btn btn-warning w-100">
-              Redefinir Senha
-            </button>
-          </form>
-          <div class="text-center mt-3">
-            <a (click)="mudarSection('login')">Voltar ao login</a>
-          </div>
+    <!-- RECUPERAR SENHA -->
+    <div *ngIf="sectionAtual === 'recuperar'" class="card">
+      <div class="card-header">
+        <h4>Recuperar Senha</h4>
+      </div>
+      <div class="card-body">
+        <form (ngSubmit)="onRecuperar()">
+          <input
+            type="email"
+            class="form-control"
+            placeholder="Digite seu e-mail"
+            [(ngModel)]="recuperarData.email_recuperar"
+            name="email_recuperar"
+            required
+          />
+          <button type="submit" class="btn btn-warning">Redefinir Senha</button>
+        </form>
+        <div class="text-center mt-3">
+          <a (click)="mudarSection('login')">Voltar ao login</a>
         </div>
       </div>
     </div>

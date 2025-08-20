@@ -4,6 +4,9 @@
   <div class="col-md-6">
     <!-- LOGIN -->
     <div *ngIf="sectionAtual === 'login'" class="card">
+      <div class="logo-container">
+        <img src="/assets/icone-2.png" alt="Logo da Empresa" class="logo" />
+      </div>
       <div class="card-header">
         <h4>Login</h4>
       </div>
@@ -25,7 +28,7 @@
             name="senha"
             required
           />
-          <button type="submit" class="btn btn-primary">Entrar</button>
+          <button type="submit" class="btn btn-primary mt-3">Entrar</button>
         </form>
         <div class="text-center mt-3">
           <a (click)="mudarSection('recuperar')">Esqueci minha senha</a> |
@@ -34,63 +37,92 @@
       </div>
     </div>
 
-    <!-- CADASTRO -->
-    <div *ngIf="sectionAtual === 'cadastro'" class="card">
-      <div class="card-header">
+    <div
+      *ngIf="sectionAtual === 'cadastro'"
+      class="card shadow-lg border-0 rounded-4"
+    >
+      <div class="card-header text-center text-white">
+        <img
+          src="assets/icone-2.png"
+          alt="Logo da Empresa"
+          class="mb-2"
+          style="max-width: 80px"
+        />
         <h4>Cadastro</h4>
       </div>
-      <div class="card-body">
+      <div class="card-body p-4">
         <form (ngSubmit)="onCadastro()">
-          <input
-            type="text"
-            class="form-control"
-            placeholder="Nome"
-            [(ngModel)]="cadastroData.nome"
-            name="nome"
-            required
-          />
-          <input
-            type="text"
-            class="form-control"
-            placeholder="CPF"
-            [(ngModel)]="cadastroData.cpf"
-            name="cpf"
-            required
-          />
-          <input
-            type="date"
-            class="form-control"
-            placeholder="Data de Nascimento"
-            [(ngModel)]="cadastroData.data_nascimento"
-            name="data_nascimento"
-            required
-          />
-          <input
-            type="tel"
-            class="form-control"
-            placeholder="Telefone"
-            [(ngModel)]="cadastroData.telefone"
-            name="telefone"
-            required
-          />
+          <div class="row">
+            <div class="col-md-8">
+              <input
+                type="text"
+                class="form-control mb-3"
+                placeholder="Nome Completo"
+                [(ngModel)]="cadastroData.nome"
+                name="nome"
+                required
+              />
+            </div>
+            <div class="col-md-4">
+              <input
+                type="text"
+                class="form-control mb-3"
+                placeholder="CPF"
+                [(ngModel)]="cadastroData.cpf"
+                name="cpf"
+                required
+              />
+            </div>
+          </div>
+
+          <!-- Data de Nascimento e Telefone -->
+          <div class="row">
+            <div class="col-md-6">
+              <input
+                type="date"
+                class="form-control mb-3"
+                [(ngModel)]="cadastroData.data_nascimento"
+                name="data_nascimento"
+                required
+              />
+            </div>
+            <div class="col-md-6">
+              <input
+                type="tel"
+                class="form-control mb-3"
+                placeholder="Telefone"
+                [(ngModel)]="cadastroData.telefone"
+                name="telefone"
+                required
+              />
+            </div>
+          </div>
+
+          <!-- Email -->
           <input
             type="email"
-            class="form-control"
+            class="form-control mb-3"
             placeholder="E-mail"
             [(ngModel)]="cadastroData.email"
             name="email"
             required
           />
+
+          <!-- Senha -->
           <input
             type="password"
-            class="form-control"
+            class="form-control mb-3"
             placeholder="Senha"
             [(ngModel)]="cadastroData.senha"
             name="senha"
             required
           />
-          <button type="submit" class="btn btn-success">Cadastrar</button>
+
+          <button type="submit" class="btn btn-primary w-100 mt-2">
+            Cadastrar
+          </button>
         </form>
+
         <div class="text-center mt-3">
           <a (click)="mudarSection('login')">Já tenho uma conta</a>
         </div>
@@ -112,7 +144,9 @@
             name="email_recuperar"
             required
           />
-          <button type="submit" class="btn btn-warning">Redefinir Senha</button>
+          <button type="submit" class="btn btn-warning mt-3">
+            Redefinir Senha
+          </button>
         </form>
         <div class="text-center mt-3">
           <a (click)="mudarSection('login')">Voltar ao login</a>

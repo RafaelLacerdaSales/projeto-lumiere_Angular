@@ -30,8 +30,7 @@
               "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
               "node_modules/aos/dist/aos.js"
             ],
-            "allowedCommonJsDependencies": ["aos"],
-            "baseHref": "/"
+            "allowedCommonJsDependencies": ["aos"]
           },
           "configurations": {
             "production": {

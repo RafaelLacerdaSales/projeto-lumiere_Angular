@@ -22,7 +22,7 @@
   width: 30vw;
 }
 .Workshop_txt {
-  color: #5C4033;
+  color: #5c4033;
   font-family: var(--font-principal), serif;
   font-weight: 500;
 }
@@ -35,4 +35,15 @@
   font-family: var(--font-principal), serif;
   color: var(--cor-texto);
   font-weight: 600;
+}
+.card-grande {
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.card-grande:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.carousel {
+  height: 26vw;
 }

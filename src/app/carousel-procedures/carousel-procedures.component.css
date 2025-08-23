@@ -4,6 +4,7 @@
   overflow: hidden;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
 }
 
 .procedimento-card img {
@@ -23,6 +24,13 @@
 
 .procedimento-card .card-title {
   font-family: "Playfair Display", serif;
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   color: goldenrod;
+}
+
+.text-center {
+  font-family: var(--font-principal), serif;
+  color: var(--cor-titulo-destaque);
+  font-size: 30px;
+  font-weight: 600;
 }

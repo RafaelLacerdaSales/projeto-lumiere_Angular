@@ -16,7 +16,7 @@
           <input
             type="email"
             class="form-control"
-            [(ngModel)]="loginData.email"
+            [(ngModel)]="email"
             name="email"
             required
           />
@@ -24,7 +24,7 @@
           <input
             type="password"
             class="form-control"
-            [(ngModel)]="loginData.senha"
+            [(ngModel)]="senha"
             name="senha"
             required
           />
@@ -51,14 +51,14 @@
         <h4>Cadastro</h4>
       </div>
       <div class="card-body p-4">
-        <form (ngSubmit)="onCadastro()">
+        <form (ngSubmit)="submitUser()">
           <div class="row">
             <div class="col-md-8">
               <input
                 type="text"
                 class="form-control mb-3"
                 placeholder="Nome Completo"
-                [(ngModel)]="cadastroData.nome"
+                [(ngModel)]="nome"
                 name="nome"
                 required
               />
@@ -68,7 +68,7 @@
                 type="text"
                 class="form-control mb-3"
                 placeholder="CPF"
-                [(ngModel)]="cadastroData.cpf"
+                [(ngModel)]="cpf"
                 name="cpf"
                 required
               />
@@ -81,7 +81,7 @@
               <input
                 type="date"
                 class="form-control mb-3"
-                [(ngModel)]="cadastroData.data_nascimento"
+                [(ngModel)]="data_nascimento"
                 name="data_nascimento"
                 required
               />
@@ -91,7 +91,7 @@
                 type="tel"
                 class="form-control mb-3"
                 placeholder="Telefone"
-                [(ngModel)]="cadastroData.telefone"
+                [(ngModel)]="telefone"
                 name="telefone"
                 required
               />
@@ -103,7 +103,7 @@
             type="email"
             class="form-control mb-3"
             placeholder="E-mail"
-            [(ngModel)]="cadastroData.email"
+            [(ngModel)]="email"
             name="email"
             required
           />
@@ -113,7 +113,7 @@
             type="password"
             class="form-control mb-3"
             placeholder="Senha"
-            [(ngModel)]="cadastroData.senha"
+            [(ngModel)]="senha"
             name="senha"
             required
           />

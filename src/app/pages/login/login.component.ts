@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { LumiereService } from 'src/app/LoginService/lumiere.service';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -9,87 +11,69 @@ import { HttpClient } from '@angular/common/http';
 export class LoginComponent {
   sectionAtual: 'login' | 'cadastro' | 'recuperar' = 'login';
 
-  loginData = { email: '', senha: '' };
-  cadastroData = {
-    nome: '',
-    cpf: '',
-    data_nascimento: '',
-    telefone: '',
-    email: '',
-    senha: '',
-  };
+  constructor (private lumiereService: LumiereService, private fb: FormBuilder) {}
+
+    nome: String = '';
+    cpf: number = 0;
+    data_nascimento: String = '';
+    telefone: String = '';
+    email: String = '';
+    senha: String = '';
+
+    submitUser(){
+
+    const user = {
+      nome: this.nome,
+      cpf: this.cpf,
+      data_nascimento: this.data_nascimento,
+      telefone: this.telefone,
+      email: this.email,
+      senha: this.senha
+    }
+
+    this.lumiereService.cadastrarUser(user).subscribe({
+      next: (response) => {
+        if(response.sucesso){
+          alert(response.sucesso)
+        }
+      },
+      error: (err) => {
+        if(err.error){
+            alert(err.error.error )
+        }
+      }
+    })
+  }
+  
+
   recuperarData = { email_recuperar: '' };
 
   mudarSection(section: 'login' | 'cadastro' | 'recuperar') {
     this.sectionAtual = section;
   }
-
-  constructor(private http: HttpClient) {}
+  
   onLogin() {
-    if (this.loginData.email && this.loginData.senha) {
-      console.log('Login enviado:', this.loginData);
-
-      const loginJson = JSON.stringify(this.loginData);
-
-      // duvida se é post ou get
-      this.http.post('http://localhost:8080/login', loginJson).subscribe({
-        next: (res) => {
-          console.log('Login enviado com sucesso!', res);
-        },
-        error: (err) => {
-          console.error('Erro ao enviar login:', err);
-        },
-        complete: () => {
-          console.log('Requisição finalizada.');
-        },
-      });
-    } else {
-      console.warn('Email e senha são obrigatórios!');
+   const user = {
+      email: this.email,
+      senha: this.senha
     }
-  }
 
-  onCadastro() {
-    const { nome, cpf, data_nascimento, telefone, email, senha } =
-      this.cadastroData;
-    if (nome && cpf && data_nascimento && telefone && email && senha) {
-      console.log('Cadastro enviado:', this.cadastroData);
-
-      const cadastroJson = JSON.stringify(this.cadastroData);
-      this.http.post('http://localhost:8080/cadastro', cadastroJson).subscribe({
-        next: (res) => {
-          console.log('Cadastro enviado com sucesso!', res);
-        },
-        error: (err) => {
-          console.error('Erro ao enviar cadastro:', err);
-        },
-        complete: () => {
-          console.log('Requisição finalizada.');
-        },
-      });
-    } else {
-      console.warn('Todos os campos são obrigatórios!');
-    }
+    this.lumiereService.validarUser(user).subscribe({
+      next: (response) => {
+         if(response.aceito){
+          alert(response.aceito)
+        }
+      },
+      error: (error) => {
+        if(error.error){
+          alert(error.error.error)
+        }
+      }
+    })
   }
 
   onRecuperar() {
     if (this.recuperarData.email_recuperar) {
-      console.log('Recuperar senha:', this.recuperarData);
-      const recuperarJson = JSON.stringify(this.recuperarData);
-      this.http
-        .post('http://localhost:8080/recuperar', recuperarJson)
-        .subscribe({
-          next: (res) => {
-            console.log('Pedido de recuperação enviado com sucesso!', res);
-          },
-          error: (err) => {
-            console.error('Erro ao enviar pedido de recuperação:', err);
-          },
-          complete: () => {
-            console.log('Requisição finalizada.');
-          },
-        });
-    } else {
-      console.warn('Email é obrigatório!');
-    }
+      console.log("estou aqui")
   }
-}
+  }}

@@ -4,7 +4,6 @@
 
 # Eclipse
 .metadata/
-.project
 .settings/
 bin/
 target/
@@ -25,7 +24,6 @@ build/
 .apt_generated
 .classpath
 .factorypath
-.project
 .settings/
 .springBeans
 .sts4-cache

@@ -22,41 +22,65 @@ yarn-error.log
 
 # Visual Studio Code
 .vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
-.history/*
-
-# Miscellaneous
-/.angular/cache
-.sass-cache/
-/connect.lock
-/coverage
-/libpeerconnection.log
-testem.log
-/typings
-
-# System files
-.DS_Store
-Thumbs.db
-# Angular e NestJS
+# =====================
+# Angular / Node
+# =====================
 node_modules/
 dist/
 build/
 coverage/
-
-# Arquivos temporários
-*.log
-.env
-.DS_Store
+.angular/cache/
+npm-debug.log
+yarn-error.log
 *.tsbuildinfo
+.env
+
+# =====================
+# Java / Maven / Eclipse / IDEs
+# =====================
+# Build e classes
+target/
+build/
+*.class
+
+# Maven wrapper
+.mvn/wrapper/maven-wrapper.jar
+
+# Eclipse
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings/
+.springBeans
+.sts4-cache
+
+# IntelliJ IDEA
+.idea/
+*.iws
+*.iml
+*.ipr
+
+# NetBeans
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
 
 # VS Code
 .vscode/
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
 
-# Gerado pelo Angular
-.angular/cache/
-
-# Gerado pelo Nest (caso esteja usando)
-npm-debug.log
+# =====================
+# Arquivos temporários / sistema
+# =====================
+*.log
+.DS_Store
+Thumbs.db
+/connect.lock
+libpeerconnection.log
+testem.log

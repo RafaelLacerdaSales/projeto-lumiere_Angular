@@ -1,0 +1,46 @@
+package com.lumiere.project.entities;
+
+import jakarta.validation.constraints.NotBlank;
+
+public class LoginEntities {
+	private long idLogin;
+	@NotBlank
+	private String email;
+	@NotBlank
+	private String Senha;
+
+	public LoginEntities() {}
+
+	public LoginEntities(long idLogin, @NotBlank String email, @NotBlank String senha) {
+		super();
+		this.idLogin = idLogin;
+		this.email = email;
+		Senha = senha;
+	}
+
+	public long getIdLogin() {
+		return idLogin;
+	}
+
+	public void setIdLogin(long idLogin) {
+		this.idLogin = idLogin;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getSenha() {
+		return Senha;
+	}
+
+	public void setSenha(String senha) {
+		Senha = senha;
+	}
+	
+	
+}

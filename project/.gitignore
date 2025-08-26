@@ -1,0 +1,56 @@
+# =====================
+# Java / Maven / Eclipse / IDEs
+# =====================
+
+# Eclipse
+.metadata/
+.project
+.settings/
+bin/
+target/
+
+# Arquivos zip ou temporários
+*.zip
+
+# Build e classes
+target/
+build/
+*.class
+
+# Maven wrapper
+.mvn/wrapper/maven-wrapper.jar
+
+# Eclipse
+.metadata/
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings/
+.springBeans
+.sts4-cache
+
+# IntelliJ IDEA
+.idea/
+*.iws
+*.iml
+*.ipr
+
+# NetBeans
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+# VS Code
+.vscode/
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# Arquivos temporários / logs / sistema
+*.log
+.DS_Store
+Thumbs.db

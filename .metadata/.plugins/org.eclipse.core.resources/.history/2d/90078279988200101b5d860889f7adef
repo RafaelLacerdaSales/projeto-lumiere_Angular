@@ -1,0 +1,12 @@
+package com.lumiere.project.repositories;
+
+import java.util.Optional;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.lumiere.project.entities.LoginEntities;
+
+public interface LoginRepositories extends JpaRepository<LoginEntities, Long>{
+	Optional<LoginEntities> findByEmail(String email);
+
+}

@@ -1,0 +1,9 @@
+package com.lumiere.project.repositories;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.lumiere.project.entities.UsersEntities;
+
+public interface UsersRepositories extends JpaRepository<UsersEntities, Long>{
+
+}

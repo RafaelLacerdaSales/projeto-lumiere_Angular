@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { LumiereService } from 'src/app/LoginService/lumiere.service';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -8,38 +11,69 @@ import { Component } from '@angular/core';
 export class LoginComponent {
   sectionAtual: 'login' | 'cadastro' | 'recuperar' = 'login';
 
-  loginData = { email: '', senha: '' };
-  cadastroData = {
-    nome: '',
-    cpf: '',
-    data_nascimento: '',
-    telefone: '',
-    email: '',
-    senha: '',
-  };
+  constructor (private lumiereService: LumiereService, private fb: FormBuilder) {}
+
+    nome: String = '';
+    cpf: number = 0;
+    data_nascimento: String = '';
+    telefone: String = '';
+    email: String = '';
+    senha: String = '';
+
+    submitUser(){
+
+    const user = {
+      nome: this.nome,
+      cpf: this.cpf,
+      data_nascimento: this.data_nascimento,
+      telefone: this.telefone,
+      email: this.email,
+      senha: this.senha
+    }
+
+    this.lumiereService.cadastrarUser(user).subscribe({
+      next: (response) => {
+        if(response.sucesso){
+          alert(response.sucesso)
+        }
+      },
+      error: (err) => {
+        if(err.error){
+            alert(err.error.error )
+        }
+      }
+    })
+  }
+  
+
   recuperarData = { email_recuperar: '' };
 
   mudarSection(section: 'login' | 'cadastro' | 'recuperar') {
     this.sectionAtual = section;
   }
-
+  
   onLogin() {
-    if (this.loginData.email && this.loginData.senha) {
-      console.log('Login enviado:', this.loginData);
+   const user = {
+      email: this.email,
+      senha: this.senha
     }
-  }
 
-  onCadastro() {
-    const { nome, cpf, data_nascimento, telefone, email, senha } =
-      this.cadastroData;
-    if (nome && cpf && data_nascimento && telefone && email && senha) {
-      console.log('Cadastro enviado:', this.cadastroData);
-    }
+    this.lumiereService.validarUser(user).subscribe({
+      next: (response) => {
+         if(response.aceito){
+          alert(response.aceito)
+        }
+      },
+      error: (error) => {
+        if(error.error){
+          alert(error.error.error)
+        }
+      }
+    })
   }
 
   onRecuperar() {
     if (this.recuperarData.email_recuperar) {
-      console.log('Recuperar senha:', this.recuperarData);
-    }
+      console.log("estou aqui")
   }
-}
+  }}

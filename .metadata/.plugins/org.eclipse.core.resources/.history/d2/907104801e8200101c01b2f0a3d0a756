@@ -1,0 +1,42 @@
+package com.lumiere.project.Controllers;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.lumiere.project.entities.UsersEntities;
+import com.lumiere.project.repositories.UsersRepositories;
+
+@RestController
+@RequestMapping("/cadastro")
+public class UsersControllers {
+
+    @Autowired
+    private UsersRepositories repository;
+
+    @GetMapping
+    public List<UsersEntities> listUsers() {
+        return repository.findAll();
+    }
+
+    @PostMapping
+    public ResponseEntity<String> criarUsuario(@RequestBody  UsersEntities user) {
+       try {
+           UsersEntities novoUser = repository.save(user);
+           // retorno 201 Created + mensagem
+           return ResponseEntity.status(HttpStatus.CREATED).body("Usuário cadastrado com sucesso: " + novoUser.getIdUser());
+       } catch (Exception e) {
+           // retorno 400 Bad Request + mensagem do erro
+           return ResponseEntity
+                   .status(HttpStatus.BAD_REQUEST)
+                   .body("Não foi possível cadastrar o usuário: " + e.getMessage());
+       }
+}
+}

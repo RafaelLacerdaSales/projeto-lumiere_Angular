@@ -17,7 +17,7 @@ const routes: Routes = [
   { path: 'contact', component: ContactComponent },
   { path: 'login', component: LoginComponent },
   { path: 'aulas', component: AulasComponent },
-  { path: 'pagar', component: CarrinhoComponent },
+  { path: 'compras', component: CarrinhoComponent },
   { path: 'adm', component: AdmComponent },
   { path: 'aluno', component: AlunoComponent },
 ];

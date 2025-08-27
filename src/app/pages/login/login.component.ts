@@ -60,11 +60,13 @@ export class LoginComponent {
 
     this.lumiereService.validarUser(user).subscribe({
       next: (response) => {
+        console.log("foi")
          if(response.aceito){
-          alert(response.aceito)
+         alert(response.aceito)
         }
       },
       error: (error) => {
+         console.log("não foi")
         if(error.error){
           alert(error.error.error)
         }

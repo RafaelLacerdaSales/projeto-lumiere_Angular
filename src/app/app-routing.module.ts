@@ -9,15 +9,16 @@ import { AulasComponent } from './pages/aulas/aulas.component';
 import { CarrinhoComponent } from './pages/carrinho/carrinho.component';
 import { AdmComponent } from './pages/adm/adm.component';
 import { AlunoComponent } from './pages/aluno/aluno.component';
+import { alunoGuard } from './validacao/aluno-guard.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
   { path: 'workshop', component: WorkshopComponent },
-  { path: 'contact', component: ContactComponent },
+  { path: 'contact', component: ContactComponent},
   { path: 'login', component: LoginComponent },
-  { path: 'aulas', component: AulasComponent },
-  { path: 'pagar', component: CarrinhoComponent },
+  { path: 'aulas', component: AulasComponent, canActivate:[alunoGuard]  },
+  { path: 'pagar', component: CarrinhoComponent, canActivate:[alunoGuard]  },
   { path: 'adm', component: AdmComponent },
   { path: 'aluno', component: AlunoComponent },
 ];

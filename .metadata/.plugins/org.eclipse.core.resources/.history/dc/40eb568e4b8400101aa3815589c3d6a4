@@ -1,0 +1,23 @@
+package com.lumiere.project.infra;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
+
+import com.auth0.jwt.algorithms.Algorithm;
+import com.lumiere.project.entities.UsersEntities;
+
+@Service
+public class TokenService {
+	@Value("&{api.security.token.secret}")
+	private String secret;
+	
+	public String geradorToken(UsersEntities user) {
+		try {
+			Algorithm algorithm = Algorithm.HMAC256();
+			} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+	}
+
+}

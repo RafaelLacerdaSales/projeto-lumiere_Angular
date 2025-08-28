@@ -3,10 +3,11 @@ package com.lumiere.project.Controllers;
 import java.util.List;
 import java.util.Map;
 
+import javax.xml.crypto.Data;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,8 +17,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.lumiere.project.entities.CadastrarDTO;
 import com.lumiere.project.entities.UsersEntities;
 import com.lumiere.project.repositories.UsersRepositories;
+
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/usuario")
@@ -26,31 +30,27 @@ public class UsersControllers {
 	@Autowired
 	private UsersRepositories repository;
 
-	@GetMapping
+	@GetMapping("/buscar")
 	public List<UsersEntities> listUsers() {
 		return repository.findAll();
 	}
 
 	@CrossOrigin(origins = "http://localhost:4200")
-	@PostMapping
-	public ResponseEntity<Map<String, String>> criarUsuario(@RequestBody UsersEntities user) {
-		try {
-			repository.save(user);
-			return ResponseEntity.status(HttpStatus.CREATED).body(Map.of("sucesso", "Usuário cadastrado com sucesso"));
-
-		} catch (DataIntegrityViolationException e) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("error", "verifica os campos."));
-		} catch (Exception e) {
-			// CAPTURA OUTROS ERROS INESPERADOS
-
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Map.of("Erro", "ERRO desconhecido"));
+	@PostMapping("/cadastrar")
+	public ResponseEntity<Map<String, String>> criarUsuario(@RequestBody @Valid CadastrarDTO user) {
+		if (this.repository.findByEmail(user.email()) != null || this.repository.findByCpf(user.cpf()) != null
+				|| this.repository.findByTelefone(user.telefone()) != null) {
+			return ResponseEntity.badRequest().build();
 		}
-
+		String encryptedPassword = new BCryptPasswordEncoder().encode(user.senha());
+		UsersEntities newUser = new UsersEntities(user.nome(), user.cpf(), user.data_nascimento(), user.telefone(),user.email(), encryptedPassword, user.role());
+		this.repository.save(newUser);
+		return ResponseEntity.ok().build();
 	}
 
 	@CrossOrigin(origins = "http://localhost:4200")
 	@DeleteMapping("/{id}")
-	public String deletarUsuario(@PathVariable Long id) {
+	public String deletarUsuario(@PathVariable String id) {
 		try {
 			repository.deleteById(id);
 			return "Usuario deletado com sucesso";
@@ -59,16 +59,4 @@ public class UsersControllers {
 		}
 	}
 
-	//@CrossOrigin(origins = "http://localhost:4200")
-	//@PostMapping("/validar")
-	//public ResponseEntity<Map<String, String>> validarLogin(@RequestBody UsersEntities user) {
-
-	//UsersEntities use = repository.findByEmail(user.getEmail()).orElse(null);
-		
-	//	if (use != null && user.getSenha().equals(use.getSenha())) {
-	//	return ResponseEntity.status(HttpStatus.ACCEPTED).body(Map.of("aceito", "login aceito"));
-			//	}
-	//return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("error", "login ou senha invalidos."));
-
-	//}
 }

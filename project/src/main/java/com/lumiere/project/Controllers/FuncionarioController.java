@@ -26,7 +26,7 @@ public class FuncionarioController {
  
 	
 	@CrossOrigin(origins = "http://localhost:4200")
-	@PostMapping("/cadastrar")
+	@PostMapping("/cadastrarFuncionario")
 	public ResponseEntity<Map<String, String>> cadastroFuncionar(@RequestBody FuncionarioEntities funcionario) {
 		try {
 			repository.save(funcionario);

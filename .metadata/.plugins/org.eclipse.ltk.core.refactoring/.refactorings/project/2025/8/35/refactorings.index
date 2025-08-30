@@ -2,3 +2,10 @@
 1756224097530	Rename type 'CadastroEntities'
 1756225183372	Delete element
 1756243552287	Rename compilation unit 'FuncionariEntities.java'
+1756393414838	Rename type 'LoginEntities'
+1756401473720	Copy package
+1756401484641	Delete element
+1756402641904	Rename type 'Security'
+1756409420561	Rename type 'CadastrarDTO'
+1756409431289	Rename type 'LoginDTO'
+1756409435707	Rename type 'CadastraAS'

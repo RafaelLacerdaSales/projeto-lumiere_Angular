@@ -1,109 +1,166 @@
 package com.lumiere.project.entities;
 
 import java.time.LocalDate;
+import java.util.Collection;
+import java.util.List;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import com.lumiere.project.enums.EnumsLumiere;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotBlank;
 
 @Entity
-public class UsersEntities {
+public class UsersEntities implements UserDetails {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idUser;
+	@Id
+	@GeneratedValue(strategy = GenerationType.UUID)
+	private String idUser;
 
-    @NotBlank(message = "Nome é obrigatório")
-    @Column(nullable = false, unique = true)
-    private String nome;
+	@NotBlank(message = "Nome é obrigatório")
+	@Column(nullable = false)
+	private String nome;
 
-    @NotBlank(message = "Cpf é obrigatório") //foi necessário trazer outra dependencia para usar o notblank
-    @Column(nullable = false, unique = true)
-    private String cpf;
+	@NotBlank(message = "Cpf é obrigatório") // foi necessário trazer outra dependencia para usar o notblank
+	@Column(nullable = false, unique = true)
+	private String cpf;
 
-  
-    @Column(nullable = false)
-    private LocalDate data_nascimento;
+	@Column(nullable = false)
+	private LocalDate data_nascimento;
 
-    @NotBlank(message = "Telefone é obrigatório")
-    @Column(nullable = false, unique = true)
-    private String telefone;
+	@NotBlank(message = "Telefone é obrigatório")
+	@Column(nullable = false, unique = true)
+	private String telefone;
 
-    @NotBlank(message = "Email é obrigatório")
-    @Column(nullable = false, unique = true)
-    private String email;
-    
-    @NotBlank(message = "Senha é obrigatório")
-    @Column(nullable = false, unique = true)
-    private String senha;
+	@NotBlank(message = "Email é obrigatório")
+	@Column(nullable = false, unique = true)
+	private String email;
 
-    public UsersEntities() {}
+	@NotBlank(message = "Senha é obrigatório")
+	@Column(nullable = false)
+	private String senha;
 
-    public UsersEntities(Long idUser, String nome, String cpf, LocalDate data_nascimento, String telefone, String email, String senha) {
-        this.idUser = idUser;
-        this.nome = nome;
-        this.cpf = cpf;
-        this.data_nascimento = data_nascimento;
-        this.telefone = telefone;
-        this.email = email;
-        this.senha = senha;
-    }
+	@Enumerated(EnumType.STRING)
+	@Column(nullable = false)
+	private EnumsLumiere role;
 
-    public Long getIdUser() {
-        return idUser;
-    }
+	public UsersEntities() {
+	}
 
-    public void setIdUser(Long idUser) {
-        this.idUser = idUser;
-    }
+	public UsersEntities(String nome, String cpf, LocalDate data_nascimento, String telefone, String email,
+			String senha, EnumsLumiere role) {
+		this.nome = nome;
+		this.cpf = cpf;
+		this.data_nascimento = data_nascimento;
+		this.telefone = telefone;
+		this.email = email;
+		this.senha = senha;
+		this.role = role;
+	}
 
-    public String getNome() {
-        return nome;
-    }
+	public String getIdUser() {
+		return idUser;
+	}
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
+	public void setIdUser(String idUser) {
+		this.idUser = idUser;
+	}
 
-    public String getCpf() {
-        return cpf;
-    }
+	public String getNome() {
+		return nome;
+	}
 
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
 
-    public LocalDate getData_nascimento() {
-        return data_nascimento;
-    }
+	public String getCpf() {
+		return cpf;
+	}
 
-    public void setData_nascimento(LocalDate data_nascimento) {
-        this.data_nascimento = data_nascimento;
-    }
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
 
-    public String getTelefone() {
-        return telefone;
-    }
+	public LocalDate getData_nascimento() {
+		return data_nascimento;
+	}
 
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
-    }
+	public void setData_nascimento(LocalDate data_nascimento) {
+		this.data_nascimento = data_nascimento;
+	}
 
-    public String getEmail() {
-        return email;
-    }
+	public String getTelefone() {
+		return telefone;
+	}
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
+	}
 
-    public String getSenha() {
-        return senha;
-    }
+	public String getEmail() {
+		return email;
+	}
 
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		if (this.role == EnumsLumiere.ADMIN)
+			return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_USER"));
+		else
+			return List.of(new SimpleGrantedAuthority("ROLE_USER"));
+	}
+
+	@Override
+	public String getPassword() {
+		// TODO Auto-generated method stub
+		return senha;
+	}
+
+	@Override
+	public String getUsername() {
+		// TODO Auto-generated method stub
+		return email;
+	}
+	
+	@Override
+	public boolean isAccountNonExpired() {
+	    return  true;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+	    return  true;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+	    return  true; 
+	}
+
+	@Override
+	public boolean isEnabled() {
+	    return true; 
+	}
+
+}

@@ -1,114 +1,103 @@
-/* HEADER ESTILOS - Logo próxima ao Home mas não colada */
 .container_header {
-    display: flex;
-    align-items: center;
-    background-color: rgba(130, 101, 56, 0.9);
-    backdrop-filter: blur(30px);
-    padding: 15px 20px;
-    border-radius: 8px;
-    width: 100%;
-    position: relative;
-    overflow: hidden;
-    justify-content: space-between;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: rgba(130, 101, 56, 0.9); /* nova cor mais viva, com 90% opacidade */
+  backdrop-filter: blur(30px);
 }
 
-.header-blur {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(130, 101, 56, 0.7);
-    backdrop-filter: blur(10px);
-    z-index: -1;
-}
 
-/* LOGO PRÓXIMA AO HOME MAS NÃO COLADA */
 .container_header img {
-    height: 6rem !important;
-    width: auto;
-    flex-shrink: 0;
-    z-index: 1;
-    margin-left: 30px;
-    margin-right: 10px !important; /* Pouco espaço entre logo e Home */
+  height: 5rem;
+  margin-right: 30px;
 }
 
-/* Menu mais à esquerda para aproximar da logo */
-.navbar {
-    display: flex;
-    flex-grow: 1;
-    padding: 0;
-    z-index: 1;
-    justify-content: flex-start;
-    margin-left: 10px;
+.container_header nav ul {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 20px;
 }
 
-.navbar-nav {
-    display: flex;
-    list-style: none;
-    gap: 30px;
-    padding: 0;
-    margin: 0;
-    flex-wrap: nowrap;
+.container_header nav ul li a {
+  text-decoration: none;
+  font-size: 20px;
+  color:#fff9e7;
+  font-family: var(--font-principal), serif;
+}
+.container_header nav ul li a:hover {
+  color: #ffffff;
+  font-weight: 700;
+  transition: color 0.3s;
 }
 
-.nav-item {
-    flex-shrink: 0;
-    white-space: nowrap;
+.btn-login_block {
+  margin-left: auto;
+  margin-right: 15px;
+  padding: 8px 16px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+.btn-login {
+  pointer-events: none;
+  background-color: transparent;
+  color: transparent;
 }
 
-.nav-link {
-    text-decoration: none;
-    font-size: 22px;
-    color: #fff9e7 !important;
-    font-weight: 500;
-    padding: 10px 15px;
-    display: block;
-    border-radius: 5px;
-    transition: all 0.3s ease;
-    background: transparent !important;
+.modal-body {
+  color: var(--cor-titulo-destaque);
+  font-size: 20px;
+  font-weight: 600;
 }
 
-.nav-link:hover {
-    color: #ffffff !important;
-    background-color: rgba(255, 255, 255, 0.15) !important;
-    font-weight: 600;
+.modal-title {
+  color: var(--cor-titulo);
 }
+/* APENAS MEDIA QUERIES - Respeitando o Bootstrap existente */
 
-/* Media Queries para responsividade */
-@media (max-width: 1200px) {
-    .container_header img {
-        height: 5.5rem !important;
-        margin-right: 8px !important;
+/* Layout padrão para desktop (acima de 768px) */
+@media (min-width: 768px) {
+    .container_header {
+        display: flex;
+        align-items: center;
+        padding: 15px 20px;
     }
     
-    .navbar {
-        margin-left: 8px;
+    .container_header img {
+        height: 5rem;
+        margin-right: 10px;
     }
     
     .navbar-nav {
+        display: flex;
         gap: 25px;
+        flex-wrap: nowrap;
+    }
+    
+    .nav-item {
+        white-space: nowrap;
     }
     
     .nav-link {
         font-size: 20px;
-        padding: 9px 13px;
+        padding: 10px 15px;
     }
 }
 
-@media (max-width: 992px) {
+/* Tablets (768px a 992px) */
+@media (max-width: 992px) and (min-width: 769px) {
     .container_header {
         padding: 12px 18px;
     }
     
     .container_header img {
-        height: 5rem !important;
-        margin-right: 7px !important;
-        margin-left: 25px;
-    }
-    
-    .navbar {
-        margin-left: 7px;
+        height: 4.5rem;
+        margin-right: 8px;
     }
     
     .navbar-nav {
@@ -121,23 +110,19 @@
     }
 }
 
-@media (max-width: 768px) {
+/* Tablets menores (576px a 768px) */
+@media (max-width: 768px) and (min-width: 577px) {
     .container_header {
         padding: 10px 15px;
     }
     
     .container_header img {
-        height: 4.5rem !important;
-        margin-right: 6px !important;
-        margin-left: 20px;
-    }
-    
-    .navbar {
-        margin-left: 6px;
+        height: 4rem;
+        margin-right: 6px;
     }
     
     .navbar-nav {
-        gap: 18px;
+        gap: 15px;
     }
     
     .nav-link {
@@ -146,23 +131,19 @@
     }
 }
 
-@media (max-width: 576px) {
+/* Mobile grande (400px a 576px) */
+@media (max-width: 576px) and (min-width: 401px) {
     .container_header {
         padding: 8px 12px;
     }
     
     .container_header img {
-        height: 4rem !important;
-        margin-right: 5px !important;
-        margin-left: 15px;
-    }
-    
-    .navbar {
-        margin-left: 5px;
+        height: 3.5rem;
+        margin-right: 5px;
     }
     
     .navbar-nav {
-        gap: 15px;
+        gap: 12px;
     }
     
     .nav-link {
@@ -171,76 +152,96 @@
     }
 }
 
+/* Mobile pequeno (até 400px) */
 @media (max-width: 400px) {
     .container_header {
         padding: 6px 10px;
     }
     
     .container_header img {
-        height: 3.5rem !important;
-        margin-right: 4px !important;
-        margin-left: 10px;
-    }
-    
-    .navbar {
-        margin-left: 4px;
+        height: 3rem;
+        margin-right: 4px;
     }
     
     .navbar-nav {
-        gap: 12px;
+        gap: 10px;
+        flex-wrap: wrap;
+        justify-content: center;
     }
     
     .nav-link {
-        font-size: 15px;
+        font-size: 14px;
         padding: 5px 8px;
     }
 }
 
-/* Garantia EXTRA para telas muito pequenas */
+/* Mobile muito pequeno (até 320px) */
 @media (max-width: 320px) {
     .container_header {
         padding: 5px 8px;
     }
     
     .container_header img {
-        height: 3rem !important;
-        margin-right: 3px !important;
-        margin-left: 8px;
+        height: 2.5rem;
+        margin-right: 3px;
     }
     
-    .navbar {
-        margin-left: 3px;
+    .navbar-nav {
+        gap: 8px;
     }
     
+    .nav-link {
+        font-size: 13px;
+        padding: 4px 7px;
+    }
+}/* SOLUÇÃO ESPECÍFICA - Itens lado a lado em todas as telas */
+@media (min-width: 1px) {
+    .navbar-nav {
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: nowrap !important;
+        gap: 20px;
+    }
+    
+    .nav-item {
+        white-space: nowrap;
+        flex-shrink: 0;
+    }
+}
+
+/* Ajustes progressivos de espaçamento para telas menores */
+@media (max-width: 992px) {
+    .navbar-nav {
+        gap: 15px;
+    }
+}
+
+@media (max-width: 768px) {
+    .navbar-nav {
+        gap: 12px;
+    }
+}
+
+@media (max-width: 576px) {
     .navbar-nav {
         gap: 10px;
     }
     
     .nav-link {
-        font-size: 14px;
-        padding: 4px 7px;
+        padding: 5px 8px !important;
+        font-size: 14px !important;
     }
 }
 
-/* Remover estilos padrão do Bootstrap */
-.navbar-expand-lg .navbar-nav {
-    flex-direction: row !important;
+@media (max-width: 400px) {
+    .navbar-nav {
+        gap: 8px;
+    }
+    
+    .nav-link {
+        padding: 4px 6px !important;
+        font-size: 13px !important;
+    }
 }
 
-.navbar-nav .nav-link {
-    padding-right: 0;
-    padding-left: 0;
-}
 
-
-input[type="button"].btn-login, 
-input[type="button"].btn-login_block,
-input[routerLink="/login"] {
-    display: none !important;
-    visibility: hidden !important;
-    width: 0 !important;
-    height: 0 !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    border: none !important;
-}

@@ -12,7 +12,7 @@ export class LoginComponent {
   sectionAtual: 'login' | 'cadastro' | 'recuperar' = 'login';
 
   constructor (private lumiereService: LumiereService, private fb: FormBuilder) {}
-
+    chaveInicial: boolean = false;
     nome: String = '';
     cpf: number = 0;
     data_nascimento: String = '';
@@ -54,21 +54,19 @@ export class LoginComponent {
   
   onLogin() {
    const user = {
+      loginValidar: this.chaveInicial,
       email: this.email,
       senha: this.senha
     }
 
     this.lumiereService.validarUser(user).subscribe({
       next: (response) => {
-        console.log("foi")
-         if(response.aceito){
-         alert(response.aceito)
-        }
-      },
+         if(response.loginValidar){
+        localStorage.setItem("token", "validado")
+      }},
       error: (error) => {
-         console.log("não foi")
         if(error.error){
-          alert(error.error.error)
+          alert("Login invalido"); 
         }
       }
     })

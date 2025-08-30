@@ -6,7 +6,11 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class LumiereService {
+  chaveLogin(){
+  }
 
+
+  //requisicoes http
   private readonly baseUrl = 'http://localhost:8080';
 
   private readonly httpOptions = {
@@ -17,7 +21,8 @@ export class LumiereService {
 
   constructor(private httpClient: HttpClient) { }
 
-  cadastrarUser(user : any): Observable<any>{                       //nota, o repsonseType text é para quando quer receber uma STRING
+  cadastrarUser(user : any): Observable<any>{                      
+     //nota, o repsonseType text é para quando quer receber uma STRING
     return this.httpClient.post(`${this.baseUrl}/usuario`, user, this.httpOptions )
   }
 

@@ -1,0 +1,5 @@
+package com.lumiere.project.enums.copy;
+
+public enum EnumsLumiere {
+
+}

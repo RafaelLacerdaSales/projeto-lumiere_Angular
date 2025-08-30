@@ -58,3 +58,190 @@
 .modal-title {
   color: var(--cor-titulo);
 }
+/* APENAS MEDIA QUERIES - Respeitando o Bootstrap existente */
+
+/* Layout padrão para desktop (acima de 768px) */
+@media (min-width: 768px) {
+    .container_header {
+        display: flex;
+        align-items: center;
+        padding: 15px 20px;
+    }
+    
+    .container_header img {
+        height: 5rem;
+        margin-right: 10px;
+    }
+    
+    .navbar-nav {
+        display: flex;
+        gap: 25px;
+        flex-wrap: nowrap;
+    }
+    
+    .nav-item {
+        white-space: nowrap;
+    }
+    
+    .nav-link {
+        font-size: 20px;
+        padding: 10px 15px;
+    }
+}
+
+/* Tablets (768px a 992px) */
+@media (max-width: 992px) and (min-width: 769px) {
+    .container_header {
+        padding: 12px 18px;
+    }
+    
+    .container_header img {
+        height: 4.5rem;
+        margin-right: 8px;
+    }
+    
+    .navbar-nav {
+        gap: 20px;
+    }
+    
+    .nav-link {
+        font-size: 18px;
+        padding: 8px 12px;
+    }
+}
+
+/* Tablets menores (576px a 768px) */
+@media (max-width: 768px) and (min-width: 577px) {
+    .container_header {
+        padding: 10px 15px;
+    }
+    
+    .container_header img {
+        height: 4rem;
+        margin-right: 6px;
+    }
+    
+    .navbar-nav {
+        gap: 15px;
+    }
+    
+    .nav-link {
+        font-size: 17px;
+        padding: 7px 10px;
+    }
+}
+
+/* Mobile grande (400px a 576px) */
+@media (max-width: 576px) and (min-width: 401px) {
+    .container_header {
+        padding: 8px 12px;
+    }
+    
+    .container_header img {
+        height: 3.5rem;
+        margin-right: 5px;
+    }
+    
+    .navbar-nav {
+        gap: 12px;
+    }
+    
+    .nav-link {
+        font-size: 16px;
+        padding: 6px 9px;
+    }
+}
+
+/* Mobile pequeno (até 400px) */
+@media (max-width: 400px) {
+    .container_header {
+        padding: 6px 10px;
+    }
+    
+    .container_header img {
+        height: 3rem;
+        margin-right: 4px;
+    }
+    
+    .navbar-nav {
+        gap: 10px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .nav-link {
+        font-size: 14px;
+        padding: 5px 8px;
+    }
+}
+
+/* Mobile muito pequeno (até 320px) */
+@media (max-width: 320px) {
+    .container_header {
+        padding: 5px 8px;
+    }
+    
+    .container_header img {
+        height: 2.5rem;
+        margin-right: 3px;
+    }
+    
+    .navbar-nav {
+        gap: 8px;
+    }
+    
+    .nav-link {
+        font-size: 13px;
+        padding: 4px 7px;
+    }
+}/* SOLUÇÃO ESPECÍFICA - Itens lado a lado em todas as telas */
+@media (min-width: 1px) {
+    .navbar-nav {
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: nowrap !important;
+        gap: 20px;
+    }
+    
+    .nav-item {
+        white-space: nowrap;
+        flex-shrink: 0;
+    }
+}
+
+/* Ajustes progressivos de espaçamento para telas menores */
+@media (max-width: 992px) {
+    .navbar-nav {
+        gap: 15px;
+    }
+}
+
+@media (max-width: 768px) {
+    .navbar-nav {
+        gap: 12px;
+    }
+}
+
+@media (max-width: 576px) {
+    .navbar-nav {
+        gap: 10px;
+    }
+    
+    .nav-link {
+        padding: 5px 8px !important;
+        font-size: 14px !important;
+    }
+}
+
+@media (max-width: 400px) {
+    .navbar-nav {
+        gap: 8px;
+    }
+    
+    .nav-link {
+        padding: 4px 6px !important;
+        font-size: 13px !important;
+    }
+}
+
+

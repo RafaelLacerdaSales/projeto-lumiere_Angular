@@ -26,11 +26,18 @@ public class SecurityConfig {
 		return httpSecurity
 				.csrf(csrf -> csrf.disable())
 				.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-				.authorizeHttpRequests(auth -> auth
+				.authorizeHttpRequests(authorize -> authorize
 				.requestMatchers(HttpMethod.POST, "/usuario/cadastrar").permitAll()
-				.requestMatchers(HttpMethod.POST, "/login/validar").permitAll()
-	            .requestMatchers(HttpMethod.POST, "/funcionario/cadastrarFuncionario").hasRole("ADMIN")
-	            .anyRequest().authenticated())
+				.requestMatchers(HttpMethod.GET, "/usuario/buscar").permitAll()
+				.requestMatchers(HttpMethod.POST, "/workshop/cadastrar").permitAll()
+				.requestMatchers(HttpMethod.PUT, "/workshop/atualizarTitulo/{id}").permitAll()
+				.requestMatchers(HttpMethod.PUT, "/workshop/atualizarCapa/{id}").permitAll()
+				.requestMatchers(HttpMethod.PUT, "/workshop/atualizarPreco/{id}").permitAll()
+				.requestMatchers(HttpMethod.GET, "/workshop/buscar").permitAll()
+				.requestMatchers(HttpMethod.DELETE, "/workshop/{id}").permitAll()
+	            .requestMatchers(HttpMethod.POST, "/funcionario/cadastrar").hasRole("ADMIN")
+	            .anyRequest().authenticated()
+	            )
 				.addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
 				.build();
 	}

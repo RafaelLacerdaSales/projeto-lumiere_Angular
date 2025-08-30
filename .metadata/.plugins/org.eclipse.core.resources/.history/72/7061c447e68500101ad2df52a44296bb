@@ -1,0 +1,80 @@
+package com.lumiere.project.entities;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotBlank;
+
+@Entity
+public class WorkshopEntities {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	@NotBlank
+	@Column(nullable = false)
+	private String tituloDoCurso;
+	@NotBlank
+	@Column(nullable = false)
+	private String descicao;
+	@NotBlank
+	@Column(nullable = false)
+	private Double preco;
+	@NotBlank
+	@Column(nullable = false)
+	private String caminhoDaCapa;
+
+	public WorkshopEntities() {
+	}
+
+	public WorkshopEntities(Long id, String tituloDoCurso, String descicao, Double preco, String caminhoDaCapa) {
+		this.id = id;
+		this.tituloDoCurso = tituloDoCurso;
+		this.descicao = descicao;
+		this.preco = preco;
+		this.caminhoDaCapa = caminhoDaCapa;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getTituloDoCurso() {
+		return tituloDoCurso;
+	}
+
+	public void setTituloDoCurso(String tituloDoCurso) {
+		this.tituloDoCurso = tituloDoCurso;
+	}
+
+	public String getDescicao() {
+		return descicao;
+	}
+
+	public void setDescicao(String descicao) {
+		this.descicao = descicao;
+	}
+
+	public Double getPreco() {
+		return preco;
+	}
+
+	public void setPreco(Double preco) {
+		this.preco = preco;
+	}
+
+	public String getCaminhoDaCapa() {
+		return caminhoDaCapa;
+	}
+
+	public void setCaminhoDaCapa(String caminhoDaCapa) {
+		this.caminhoDaCapa = caminhoDaCapa;
+	}
+
+}

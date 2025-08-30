@@ -43,7 +43,7 @@
               role="tab"
               aria-selected="false"
             >
-              vídeos workshop
+              adicionar curso
             </button>
           </li>
           <li class="nav-item" role="presentation">
@@ -169,7 +169,7 @@
         <h2 class="mb-4">Adicionar Vídeos</h2>
         <form>
           <div class="mb-3">
-            <label for="videoTitle" class="form-label">Título do Vídeo</label>
+            <label for="videoTitle" class="form-label">Título do curso</label>
             <input
               type="text"
               class="form-control"
@@ -179,7 +179,7 @@
             />
           </div>
           <div class="mb-3">
-            <label for="videoTitle" class="form-label">Descrição</label>
+            <label for="videoTitle" class="form-label">Descrição do curso</label>
             <textarea
               class="form-control"
               name="descricao"
@@ -189,17 +189,18 @@
           </div>
 
           <div class="mb-3">
-            <label for="videoUrl" class="form-label">URL do Vídeo</label>
+            <label for="videoUrl" class="form-label">Preço</label>
             <input
               type="url"
               class="form-control"
               id="videoUrl"
               name="videoUrl"
+              placeholder="00,00"
               required
             />
           </div>
           <div class="mb-3">
-            <label for="videoTitle" class="form-label">Adicionar imagem</label>
+            <label for="videoTitle" class="form-label">Adicionar capa do curso</label>
             <input
               class="form-control"
               type="file"
@@ -209,7 +210,7 @@
             />
           </div>
 
-          <button type="submit" class="btn btn-primary">Adicionar Vídeo</button>
+          <button type="submit" class="btn btn-primary">Adicionar novo curso</button>
         </form>
       </section>
     </main>

@@ -1,0 +1,14 @@
+package com.lumiere.project.repositories;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import com.lumiere.project.entities.UsersEntities;
+
+public interface UsersRepositories extends JpaRepository<UsersEntities, String> {
+
+	UserDetails findByTelefoneAndEmailAndCpf(String telefone, String email, String cpf);
+	UserDetails findByEmail(String email);
+	UserDetails findByRg(String rg);
+	
+}

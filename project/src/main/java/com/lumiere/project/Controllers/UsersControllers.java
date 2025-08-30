@@ -3,10 +3,10 @@ package com.lumiere.project.Controllers;
 import java.util.List;
 import java.util.Map;
 
-import javax.xml.crypto.Data;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -17,8 +17,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.lumiere.project.entities.CadastrarDTO;
+import com.lumiere.prject.DTO.CadastrarDTO;
+import com.lumiere.prject.DTO.FuncionarioDTO;
+import com.lumiere.prject.DTO.LoginDTO;
+import com.lumiere.prject.DTO.LoginResponseDTO;
 import com.lumiere.project.entities.UsersEntities;
+import com.lumiere.project.infra.TokenService;
 import com.lumiere.project.repositories.UsersRepositories;
 
 import jakarta.validation.Valid;
@@ -30,20 +34,28 @@ public class UsersControllers {
 	@Autowired
 	private UsersRepositories repository;
 
+	@Autowired
+	TokenService tokenService;
+
+	@Autowired
+	private AuthenticationManager authenticationManager;
+
+	@CrossOrigin(origins = "http://localhost:4200")
 	@GetMapping("/buscar")
 	public List<UsersEntities> listUsers() {
 		return repository.findAll();
 	}
 
+	// cadastrar usuario padrão
 	@CrossOrigin(origins = "http://localhost:4200")
 	@PostMapping("/cadastrar")
 	public ResponseEntity<Map<String, String>> criarUsuario(@RequestBody @Valid CadastrarDTO user) {
-		if (this.repository.findByEmail(user.email()) != null || this.repository.findByCpf(user.cpf()) != null
-				|| this.repository.findByTelefone(user.telefone()) != null) {
+		if (this.repository.findByTelefoneAndEmailAndCpf(user.telefone(), user.email(), user.cpf()) != null) {
 			return ResponseEntity.badRequest().build();
 		}
 		String encryptedPassword = new BCryptPasswordEncoder().encode(user.senha());
-		UsersEntities newUser = new UsersEntities(user.nome(), user.cpf(), user.data_nascimento(), user.telefone(),user.email(), encryptedPassword, user.role());
+		UsersEntities newUser = new UsersEntities(user.nome(), user.cpf(), user.data_nascimento(), user.telefone(),
+				user.email(), encryptedPassword, user.role());
 		this.repository.save(newUser);
 		return ResponseEntity.ok().build();
 	}

@@ -21,6 +21,7 @@ import jakarta.validation.constraints.NotBlank;
 
 @Entity
 public class UsersEntities implements UserDetails {
+	private static final long serialVersionUID = 1;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.UUID)
@@ -45,9 +46,14 @@ public class UsersEntities implements UserDetails {
 	@Column(nullable = false, unique = true)
 	private String email;
 
-	@NotBlank(message = "Senha é obrigatório")
 	@Column(nullable = false)
 	private String senha;
+	
+	@Column(unique = true)
+	private String rg;
+	
+	@Column 
+	private String caminhoDoArquivo;
 
 	@Enumerated(EnumType.STRING)
 	@Column(nullable = false)
@@ -56,6 +62,20 @@ public class UsersEntities implements UserDetails {
 	public UsersEntities() {
 	}
 
+
+	public UsersEntities(String nome, String cpf, LocalDate data_nascimento, String telefone, String email,
+			String senha, EnumsLumiere role, String rg, String CaminhoDoArquivo) {
+		this.nome = nome;
+		this.cpf = cpf;
+		this.data_nascimento = data_nascimento;
+		this.telefone = telefone;
+		this.email = email;
+		this.senha = senha;
+		this.role = role;
+		this.rg = rg;
+		this.caminhoDoArquivo = CaminhoDoArquivo;
+	}
+	
 	public UsersEntities(String nome, String cpf, LocalDate data_nascimento, String telefone, String email,
 			String senha, EnumsLumiere role) {
 		this.nome = nome;
@@ -142,25 +162,25 @@ public class UsersEntities implements UserDetails {
 		// TODO Auto-generated method stub
 		return email;
 	}
-	
+
 	@Override
 	public boolean isAccountNonExpired() {
-	    return  true;
+		return true;
 	}
 
 	@Override
 	public boolean isAccountNonLocked() {
-	    return  true;
+		return true;
 	}
 
 	@Override
 	public boolean isCredentialsNonExpired() {
-	    return  true; 
+		return true;
 	}
 
 	@Override
 	public boolean isEnabled() {
-	    return true; 
+		return true;
 	}
 
 }

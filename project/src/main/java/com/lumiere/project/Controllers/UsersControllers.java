@@ -1,12 +1,14 @@
-package com.lumiere.project.Controllers;
+package com.lumiere.project.controllers;
 
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -17,10 +19,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.lumiere.prject.DTO.CadastrarDTO;
-import com.lumiere.prject.DTO.FuncionarioDTO;
-import com.lumiere.prject.DTO.LoginDTO;
-import com.lumiere.prject.DTO.LoginResponseDTO;
+import com.lumiere.project.dto.CadastrarDTO;
+import com.lumiere.project.dto.LoginDTO;
+import com.lumiere.project.dto.LoginResponseDTO;
 import com.lumiere.project.entities.UsersEntities;
 import com.lumiere.project.infra.TokenService;
 import com.lumiere.project.repositories.UsersRepositories;
@@ -58,6 +59,35 @@ public class UsersControllers {
 				user.email(), encryptedPassword, user.role());
 		this.repository.save(newUser);
 		return ResponseEntity.ok().build();
+	}
+
+	@CrossOrigin(origins = "http://localhost:4200")
+	@PostMapping("/validar")
+	public ResponseEntity login(@RequestBody @Valid LoginDTO data) {
+		try {
+			// 1. Cria o token de autenticação com email e senha.
+			var usernamePassword = new UsernamePasswordAuthenticationToken(data.email(), data.senha());
+
+			// 2. O Spring Security faz a MÁGICA aqui.
+			// Ele vai automaticamente:
+			// - Buscar o usuário no banco pelo email.
+			// - Comparar a senha enviada (data.senha()) com a senha HASHED no banco.
+			// - Se o login ou senha estiverem errados, ele LANÇA UMA EXCEÇÃO e o código
+			// pula para o 'catch'.
+			var auth = this.authenticationManager.authenticate(usernamePassword);
+
+			// 3. Se a linha acima NÃO deu exceção, o login foi um SUCESSO.
+			// Agora, geramos o token JWT para o usuário autenticado.
+			var token = tokenService.generateToken((UsersEntities) auth.getPrincipal());
+
+			// 4. Retornamos o status 200 OK com o token no corpo da resposta.
+			return ResponseEntity.ok(new LoginResponseDTO(token));
+
+		} catch (AuthenticationException e) {
+			// 5. Se o authenticate() falhou, o código cai AQUI.
+			// Retornamos um erro 401 Unauthorized, que é o correto para falha de login.
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("error", "Login ou senha inválidos."));
+		}
 	}
 
 	@CrossOrigin(origins = "http://localhost:4200")

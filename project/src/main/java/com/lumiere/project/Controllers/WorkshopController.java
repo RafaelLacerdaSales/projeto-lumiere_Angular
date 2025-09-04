@@ -1,4 +1,4 @@
-package com.lumiere.project.Controllers;
+package com.lumiere.project.controllers;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.lumiere.prject.DTO.CursoDTO;
+import com.lumiere.project.dto.CursoDTO;
 import com.lumiere.project.entities.WorkshopEntities;
 import com.lumiere.project.repositories.WorkShopRepositories;
 
@@ -35,7 +35,6 @@ public class WorkshopController {
 		return ResponseEntity.ok().build();
 	}
 
-	@CrossOrigin(origins = "http://localhost:4200")
 	@GetMapping("/buscar")
 	public List<CursoDTO> listUsers() {
 		return repository.findAll().stream()

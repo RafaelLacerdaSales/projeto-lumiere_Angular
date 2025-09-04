@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { LumiereService } from 'src/app/LoginService/lumiere.service';
+import { LumiereService } from 'src/app/Service/lumiere.service';
 import { FormBuilder } from '@angular/forms';
 
 @Component({
@@ -21,7 +21,6 @@ export class LoginComponent {
     senha: String = '';
 
     submitUser(){
-
     const user = {
       nome: this.nome,
       cpf: this.cpf,

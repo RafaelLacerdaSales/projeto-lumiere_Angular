@@ -19,6 +19,7 @@ export class LoginComponent {
     telefone: String = '';
     email: String = '';
     senha: String = '';
+    role: String =  'USER';
 
     submitUser(){
     const user = {
@@ -27,7 +28,8 @@ export class LoginComponent {
       data_nascimento: this.data_nascimento,
       telefone: this.telefone,
       email: this.email,
-      senha: this.senha
+      senha: this.senha,
+      role: this.role
     }
 
     this.lumiereService.cadastrarUser(user).subscribe({

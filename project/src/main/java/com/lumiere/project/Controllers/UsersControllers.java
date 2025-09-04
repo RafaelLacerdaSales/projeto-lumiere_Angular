@@ -58,7 +58,7 @@ public class UsersControllers {
 		UsersEntities newUser = new UsersEntities(user.nome(), user.cpf(), user.data_nascimento(), user.telefone(),
 				user.email(), encryptedPassword, user.role());
 		this.repository.save(newUser);
-		return ResponseEntity.ok().build();
+		return ResponseEntity.ok().body(Map.of("sucesso", "cadastro concluido"));
 	}
 
 	@CrossOrigin(origins = "http://localhost:4200")

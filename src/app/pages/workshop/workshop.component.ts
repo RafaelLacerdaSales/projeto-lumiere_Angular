@@ -21,17 +21,14 @@ export class WorkshopComponent {
     this.carregarCursosNoCard();
   }
 
+
   carregarCursosNoCard() {
     const dadosCursos = sessionStorage.getItem("dados");
-
     if (dadosCursos) {
       console.log("Os dados existem no cache! Carregando...");
-      // CORREÇÃO 2: A LINHA MAIS IMPORTANTE QUE FALTAVA!
-      // Transforme o texto do cache de volta em um array e coloque na sua variável.
       this.cursosParaOsCard = JSON.parse(dadosCursos);
     } else {
       console.log("Cache vazio. Buscando da API...");
-      // (Ajustei o tipo para 'Curso[]' como combinamos)
       this.workshopService.buscarCursos().subscribe((dadosRecebidos: cursosInterface[]) => {
         console.log("Dados recebidos da API!");
         this.cursosParaOsCard = dadosRecebidos;

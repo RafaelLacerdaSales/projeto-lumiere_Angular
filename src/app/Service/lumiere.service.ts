@@ -23,7 +23,7 @@ export class LumiereService {
 
   cadastrarUser(user : any): Observable<any>{                      
      //nota, o repsonseType text é para quando quer receber uma STRING
-    return this.httpClient.post(`${this.baseUrl}/usuario`, user, this.httpOptions )
+    return this.httpClient.post(`${this.baseUrl}/usuario/cadastrar`, user, this.httpOptions )
   }
 
   validarUser(user : any): Observable<any>{

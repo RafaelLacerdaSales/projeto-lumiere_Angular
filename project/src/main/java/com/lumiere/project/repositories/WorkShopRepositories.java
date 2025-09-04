@@ -11,4 +11,5 @@ import java.util.Optional;
 @Repository
 public interface WorkShopRepositories extends JpaRepository<WorkshopEntities, Long>{
 	List<String> findByTituloDoCursoAndDescricaoAndPrecoAndCaminhoDaCapa(String tituloDoCurso, String descricao, String preco, String caminhoDaCapa);
+	List<WorkshopEntities> findByTituloDoCurso(String tituloDoCurso);
 }

@@ -18,9 +18,8 @@ export class WorkshopServiceService {
       }) //usado quando quer receber um json para usá-lo
     };
   
-    cadastrarCurso(cursos: any): Observable<any> {
-      //nota, o repsonseType text é para quando quer receber uma STRING
-      return this.httpClient.post(`${this.baseUrl}/funcionario/cadastrar`, cursos, this.httpOptions)
+    cadastrarCurso(cursos: any ): Observable<any> {
+      return this.httpClient.post(`${this.baseUrl}/workshop/cadastrar`, cursos, this.httpOptions)
     }
 
     buscarCursos(): Observable<cursosInterface[]> {

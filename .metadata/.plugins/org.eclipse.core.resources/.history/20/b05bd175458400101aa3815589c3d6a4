@@ -1,9 +1,0 @@
-package com.lumiere.project.entities;
-
-import java.time.LocalDate;
-
-import com.lumiere.project.enums.EnumsLumiere;
-
-
-public record LoginDTO(String nome, String cpf, String telefone, String senha, String email, EnumsLumiere role, LocalDate data_nascimento){
-}

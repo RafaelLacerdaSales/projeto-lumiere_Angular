@@ -22,9 +22,11 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { SharedModule } from './shared/shared.module';
 import { CommonModule } from '@angular/common';
+import { AdmComponent } from './pages/adm/adm.component';
 
 @NgModule({
   declarations: [
+    AdmComponent,
     AppComponent,
     HomeComponent,
     ContactComponent,

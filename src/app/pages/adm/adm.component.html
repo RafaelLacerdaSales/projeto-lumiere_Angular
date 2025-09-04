@@ -166,14 +166,15 @@
       </div>
       <!--descrição=======================================-->
       <section id="containerAddVideios" class="mx-auto w-50 mt-5">
-        <h2 class="mb-4">Adicionar Vídeos</h2>
-        <form>
+        <h2 class="mb-4">Adicionar Cursos</h2>
+        <form (ngSubmit)="cadastrarCursos()">
           <div class="mb-3">
             <label for="videoTitle" class="form-label">Título do curso</label>
             <input
               type="text"
               class="form-control"
               id="titleVideo"
+              [(ngModel)]="tituloDoCurso"
               name="videoTitle"
               required
             />
@@ -182,6 +183,7 @@
             <label for="videoTitle" class="form-label">Descrição do curso</label>
             <textarea
               class="form-control"
+              [(ngModel)]="descricao"
               name="descricao"
               id="descricao"
               rows="5"
@@ -193,6 +195,7 @@
             <input
               type="url"
               class="form-control"
+               [(ngModel)]="preco"
               id="videoUrl"
               name="videoUrl"
               placeholder="00,00"
@@ -204,6 +207,7 @@
             <input
               class="form-control"
               type="file"
+               [(ngModel)]="caminhoDaCapa"
               id="addImg"
               name="imagem"
               accept=".jpg,.png,.jpeg,.gif,.bmp"

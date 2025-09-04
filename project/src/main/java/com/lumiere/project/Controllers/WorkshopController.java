@@ -1,6 +1,7 @@
 package com.lumiere.project.controllers;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +33,7 @@ public class WorkshopController {
 		WorkshopEntities wk = new WorkshopEntities(curso.tituloDoCurso(), curso.descricao(), curso.preco(),
 				curso.caminhoDaCapa());
 		repository.save(wk);
-		return ResponseEntity.ok().build();
+		return ResponseEntity.ok().body(Map.of("sucesso", "curso concluido"));
 	}
 
 	@GetMapping("/buscar")

@@ -18,7 +18,7 @@ import com.lumiere.project.repositories.UsersRepositories;
 @RestController
 @RequestMapping("/funcionario")
 public class FuncionarioController {
-	
+
 	@Autowired
 	UsersRepositories repository;
 

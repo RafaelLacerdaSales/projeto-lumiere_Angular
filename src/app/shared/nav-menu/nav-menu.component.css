@@ -51,7 +51,7 @@
   background-color: rgba(255, 255, 255, 0.1);
 }
 
-/* BOTÃO LOGIN (lado direito) */
+/* BOTÃO LOGIN (lado direito) - CORREÇÃO APLICADA AQUI */
 .header-right {
   display: flex;
   align-items: center;
@@ -60,7 +60,7 @@
 .btn-login_block {
   margin-left: 15px;
   padding: 8px 16px;
-  background-color: #007bff;
+  background-color: #826538; /* Alterado para marrom */
   color: white;
   border: none;
   border-radius: 6px;
@@ -71,14 +71,16 @@
 }
 
 .btn-login_block:hover {
-  background-color: #0069d9;
+  background-color: #6b5330; /* Tom mais escuro de marrom para hover */
   transform: translateY(-1px);
 }
 
+/* CLASSE CORRIGIDA - removidas as propriedades que escondiam o botão */
 .btn-login {
-  pointer-events: none;
-  background-color: transparent;
-  color: transparent;
+  /* As propriedades problemáticas foram removidas */
+  background-color: #826538; /* Marrom para combinar com o header */
+  color: white;
+  pointer-events: auto;
 }
 
 .modal-body {

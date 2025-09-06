@@ -15,15 +15,15 @@ const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
   { path: 'workshop', component: WorkshopComponent },
-  { path: 'contact', component: ContactComponent},
+  { path: 'contact', component: ContactComponent },
   { path: 'login', component: LoginComponent },
-<<<<<<< HEAD
+
   { path: 'aulas', component: AulasComponent },
   { path: 'compras', component: CarrinhoComponent },
-=======
-  { path: 'aulas', component: AulasComponent, canActivate:[alunoGuard]  },
-  { path: 'pagar', component: CarrinhoComponent, canActivate:[alunoGuard]  },
->>>>>>> 50d396fbbd8907ddd97307a36a4af20ea79e6610
+
+  { path: 'aulas', component: AulasComponent, canActivate: [alunoGuard] },
+  { path: 'pagar', component: CarrinhoComponent, canActivate: [alunoGuard] },
+
   { path: 'adm', component: AdmComponent },
   { path: 'aluno', component: AlunoComponent },
 ];
@@ -32,4 +32,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

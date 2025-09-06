@@ -1,4 +1,4 @@
-import { Component, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import * as bootstrap from 'bootstrap';
@@ -8,40 +8,46 @@ import * as bootstrap from 'bootstrap';
   templateUrl: './nav-menu.component.html',
   styleUrls: ['./nav-menu.component.css'],
 })
-export class NavMenuComponent implements AfterViewInit {
+export class NavMenuComponent implements OnInit, AfterViewInit {
+  isAuthenticated = false;
+  isWorkshopRoute: boolean = false;
   modalContato: bootstrap.Modal | undefined;
 
+  constructor(private router: Router) {}
+
+  ngOnInit(): void {
+    this.checkAuthentication();
+    this.router.events
+      .pipe(filter((event) => event instanceof NavigationEnd))
+      .subscribe(() => {
+        this.checkCurrentRoute();
+      });
+
+    window.addEventListener('storage', (event) => {
+      if (event.key === 'token') {
+        this.checkAuthentication();
+      }
+    });
+  }
+
+  private checkAuthentication(): void {
+    this.isAuthenticated = localStorage.getItem('token') === 'validado';
+  }
+
+  private checkCurrentRoute(): void {
+    this.isWorkshopRoute = this.router.url.includes('/workshop');
+  }
+  redirectToLogin() {
+    this.router.navigate(['/login']);
+  }
+
+  logout() {
+    localStorage.removeItem('token');
+    this.isAuthenticated = false;
+    this.router.navigate(['/home']);
+  }
+
   ngAfterViewInit() {
-    const Btn_visible = document.querySelector('.Btn_visible');
-    const btnLogin_block = document.querySelector(
-      '.btn-login_block',
-    ) as HTMLElement;
-    const BtnNoneVisible = document.querySelector('.BtnNoneVisible');
-
-    if (Btn_visible && btnLogin_block) {
-      Btn_visible.addEventListener('click', function () {
-        btnLogin_block.style.pointerEvents = 'auto';
-        btnLogin_block.style.backgroundColor = 'var(--cor-titulo-destaque)';
-        btnLogin_block.style.color = 'white';
-
-        btnLogin_block.addEventListener('mouseenter', () => {
-          btnLogin_block.style.backgroundColor = 'var(--cor-titulo)';
-          btnLogin_block.style.color = 'white';
-        });
-
-        btnLogin_block.addEventListener('mouseleave', () => {
-          btnLogin_block.style.backgroundColor = 'var(--cor-titulo-destaque)';
-        });
-      });
-    }
-    if (BtnNoneVisible && btnLogin_block) {
-      BtnNoneVisible.addEventListener('click', function () {
-        btnLogin_block.style.pointerEvents = 'none';
-        btnLogin_block.style.backgroundColor = 'transparent';
-        btnLogin_block.style.color = 'transparent';
-      });
-    }
-
     const modalElement = document.getElementById('modalContato');
     if (modalElement) {
       this.modalContato = new bootstrap.Modal(modalElement);

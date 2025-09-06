@@ -3,20 +3,20 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  padding: 12px 4%; /* Reduzido de 15px */
+  padding: 8px 3%; /* Menor */
   font-family: var(--font-secundaria), sans-serif;
   color: #fff9e7;
   width: 100%;
-  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.03); /* Sombra mais suave */
+  box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.02); /* Mais leve */
 }
 
 .container_footer h2 {
   color: #fff9e7;
   font-family: var(--font-principal), serif;
-  font-size: 0.9rem; /* Reduzido de 1rem */
-  margin-bottom: 6px; /* Reduzido de 8px */
+  font-size: 0.82rem; /* Menor */
+  margin-bottom: 4px;
   font-weight: 600;
-  letter-spacing: 0.3px; /* Reduzido de 0.5px */
+  letter-spacing: 0.2px;
 }
 
 .container_footer ul {
@@ -26,65 +26,34 @@
 
 .container_footer li {
   list-style: none;
-  font-size: 0.78rem; /* Reduzido de 0.85rem */
-  margin-bottom: 2px; /* Reduzido de 3px */
+  font-size: 0.7rem; /* Menor */
+  margin-bottom: 2px;
   opacity: 0.9;
-  line-height: 1.3; /* Adicionado para melhor espaçamento */
+  line-height: 1.2;
 }
 
 .container_footer p {
-  font-size: 0.78rem; /* Reduzido de 0.85rem */
+  font-size: 0.7rem; /* Menor */
   margin: 0;
-  line-height: 1.3; /* Reduzido de 1.4 */
+  line-height: 1.2;
   opacity: 0.9;
 }
 
 .container_footer img {
-  width: 50px; /* Reduzido de 60px */
+  width: 38px; /* Menor */
   height: auto;
-  opacity: 0.95;
+  opacity: 0.9;
 }
 
-/* Layout mais compacto */
 .Procedures_footer,
 .about_company,
 .operation {
   flex: 1;
-  max-width: 180px; /* Reduzido de 200px */
+  max-width: 150px; /* Menor */
 }
 
 .operation {
-  max-width: 160px; /* Reduzido de 180px */
-}
-
-/* Media Queries para versões ainda mais compactas */
-
-/* Tablets grandes (1024px) */
-@media (max-width: 1024px) {
-  .container_footer {
-    padding: 10px 3%; /* Mais compacto */
-  }
-  
-  .container_footer h2 {
-    font-size: 0.85rem; /* Mais compacto */
-    margin-bottom: 5px;
-  }
-  
-  .container_footer li, 
-  .container_footer p {
-    font-size: 0.75rem; /* Mais compacto */
-    line-height: 1.25;
-  }
-  
-  .container_footer img {
-    width: 45px; /* Mais compacto */
-  }
-  
-  .Procedures_footer,
-  .about_company,
-  .operation {
-    max-width: 160px; /* Mais compacto */
-  }
+  max-width: 130px;
 }
 
 /* Tablets (768px) */
@@ -93,154 +62,64 @@
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-around;
-    padding: 10px 8px; /* Mais compacto */
-    gap: 12px; /* Reduzido de 15px */
+    padding: 8px 6px;
+    gap: 10px;
   }
 
   .container_footer > div {
     flex: 1;
-    min-width: 120px; /* Reduzido de 140px */
+    min-width: 110px;
     text-align: center;
-    margin-bottom: 8px; /* Reduzido de 10px */
+    margin-bottom: 6px;
   }
   
   .container_footer h2 {
-    font-size: 0.82rem; /* Mais compacto */
-    margin-bottom: 5px; /* Reduzido de 6px */
-    letter-spacing: 0.2px;
+    font-size: 0.78rem;
   }
   
   .container_footer li, 
   .container_footer p {
-    font-size: 0.72rem; /* Mais compacto */
-    line-height: 1.2;
+    font-size: 0.66rem;
+    line-height: 1.15;
   }
 
   .container_footer img {
-    width: 40px; /* Mais compacto */
-    order: 0;
-    margin: 0 auto;
+    width: 32px;
   }
   
   .Procedures_footer,
   .about_company,
   .operation {
-    max-width: 140px; /* Mais compacto */
+    max-width: 120px;
   }
 }
 
-/* Mobile Grande (480px) */
+/* Mobile (480px) */
 @media (max-width: 480px) {
   .container_footer {
-    padding: 8px 4px; /* Mais compacto */
-    gap: 10px; /* Reduzido de 12px */
+    padding: 6px 4px;
+    gap: 8px;
   }
   
   .container_footer > div {
-    min-width: 100px; /* Reduzido de 120px */
-    margin-bottom: 6px; /* Reduzido de 8px */
-  }
-  
-  .container_footer h2 {
-    font-size: 0.78rem; /* Mais compacto */
+    min-width: 90px;
     margin-bottom: 4px;
   }
   
+  .container_footer h2 {
+    font-size: 0.72rem;
+  }
+  
   .container_footer li, 
   .container_footer p {
-    font-size: 0.68rem; /* Mais compacto */
-    line-height: 1.15;
+    font-size: 0.62rem;
   }
   
   .container_footer img {
-    width: 35px; /* Mais compacto */
+    width: 28px;
   }
   
-  .Procedures_footer,
-  .about_company,
-  .operation {
-    max-width: 120px; /* Mais compacto */
-  }
-  
-  /* Esconder a seção de procedimentos em mobile muito pequeno */
   .Procedures_footer {
-    display: none;
-  }
-}
-
-/* Mobile Pequeno (320px) - Versão ultra compacta */
-@media (max-width: 320px) {
-  .container_footer {
-    padding: 6px 3px; /* Ultra compacto */
-    gap: 8px; /* Mais compacto */
-  }
-  
-  .container_footer > div {
-    min-width: 90px; /* Ultra compacto */
-    margin-bottom: 4px; /* Mais compacto */
-  }
-  
-  .container_footer h2 {
-    font-size: 0.74rem; /* Ultra compacto */
-    margin-bottom: 3px;
-    letter-spacing: 0.1px;
-  }
-  
-  .container_footer li, 
-  .container_footer p {
-    font-size: 0.64rem; /* Ultra compacto */
-    line-height: 1.1;
-  }
-  
-  .container_footer img {
-    width: 30px; /* Ultra compacto */
-  }
-  
-  .Procedures_footer,
-  .about_company,
-  .operation {
-    max-width: 100px; /* Ultra compacto */
-  }
-}
-
-/* Modo paisagem em mobile */
-@media (max-height: 500px) and (orientation: landscape) {
-  .container_footer {
-    padding: 6px 3%;
-  }
-  
-  .container_footer > div {
-    min-width: 110px;
-  }
-}
-
-/* Otimização para telas muito grandes (acima de 1440px) */
-@media (min-width: 1440px) {
-  .container_footer {
-    padding: 12px 8%;
-  }
-  
-  .container_footer h2 {
-    font-size: 0.95rem;
-  }
-  
-  .container_footer li, 
-  .container_footer p {
-    font-size: 0.8rem;
-  }
-}
-
-/* Melhorias de acessibilidade para aumento de texto */
-@media (prefers-reduced-motion: reduce) {
-  .container_footer {
-    transition: none;
-  }
-}
-
-/* Modo escuro adicional */
-@media (prefers-color-scheme: dark) {
-  .container_footer {
-    background-color: rgba(100, 78, 43, 0.95);
-    box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
+    display: none; /* Esconde em telas pequenas */
   }
 }

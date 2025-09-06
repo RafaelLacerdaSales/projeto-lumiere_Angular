@@ -1,44 +1,37 @@
-package com.lumiere.project.Controllers;
+package com.lumiere.project.controllers;
 
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.lumiere.project.entities.FuncionarioEntities;
-import com.lumiere.project.repositories.FuncionarioRepositories;
+import com.lumiere.project.dto.FuncionarioDTO;
+import com.lumiere.project.entities.UsersEntities;
+import com.lumiere.project.repositories.UsersRepositories;
 
 @RestController
 @RequestMapping("/funcionario")
 public class FuncionarioController {
 
-
 	@Autowired
-	FuncionarioRepositories repository;
+	UsersRepositories repository;
 
- 
-	
+	//cadastrar usuario admin
 	@CrossOrigin(origins = "http://localhost:4200")
-	@PostMapping("/cadastrarFuncionario")
-	public ResponseEntity<Map<String, String>> cadastroFuncionar(@RequestBody FuncionarioEntities funcionario) {
-		try {
-			repository.save(funcionario);
-			return ResponseEntity.status(HttpStatus.CREATED).body(Map.of("sucesso", "Usuário cadastrado com sucesso"));
-
-		} catch (DataIntegrityViolationException e) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("error", "verifica os campos."));
-		} catch (Exception e) {
-			// CAPTURA OUTROS ERROS INESPERADOS
-
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Map.of("Erro", "ERRO desconhecido"));
+	@PostMapping("/cadastrar")
+	public ResponseEntity<Map<String, String>> cadastroFuncionario(@RequestBody FuncionarioDTO funcionario) {
+		if (this.repository.findByTelefoneAndEmailAndCpf(funcionario.telefone(), funcionario.email(), funcionario.cpf()) != null ) {
+			return ResponseEntity.badRequest().build();
 		}
+		String encryptedPassword = new BCryptPasswordEncoder().encode(funcionario.senha());
+		UsersEntities newUser = new UsersEntities(funcionario.nome(), funcionario.cpf(), funcionario.data_nascimento(), funcionario.telefone(), funcionario.email(), encryptedPassword, funcionario.role(), funcionario.RG(), funcionario.caminhoDoArquivo());
+		this.repository.save(newUser);
+		return ResponseEntity.ok().build();
 	}
-
 }

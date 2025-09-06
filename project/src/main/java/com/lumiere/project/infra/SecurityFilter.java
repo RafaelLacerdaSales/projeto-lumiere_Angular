@@ -1,6 +1,7 @@
 package com.lumiere.project.infra;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -19,34 +20,54 @@ import jakarta.servlet.http.HttpServletResponse;
 @Component
 public class SecurityFilter extends OncePerRequestFilter {
 
-	@Autowired
-	TokenService tokenService;
+    @Autowired
+    private TokenService tokenService;
 
-	@Autowired
-	UsersRepositories userRepository;
+    @Autowired
+    private UsersRepositories userRepository;
 
-	@Override
-	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
-			throws ServletException, IOException {
-		var token = this.recoverToken(request);
-		if (token != null) {
+    // Lista de endpoints públicos que não precisam de token
+    private static final List<String> PUBLIC_ENDPOINTS = List.of(
+        "/login/validar",
+        "/usuario/cadastrar"
+    );
 
-			var email = tokenService.validateToken(token);
-			UserDetails user = userRepository.findByEmail(email);
+    @Override
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
+            throws ServletException, IOException {
 
-			var authentication = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
-			SecurityContextHolder.getContext().setAuthentication(authentication);
+        String path = request.getRequestURI();
 
-		}
-		filterChain.doFilter(request, response);
+        // Ignora endpoints públicos
+        if (PUBLIC_ENDPOINTS.contains(path)) {
+            filterChain.doFilter(request, response);
+            return;
+        }
 
-	}
+        String token = recoverToken(request);
+        if (token != null && !token.isBlank()) {
+            String email = tokenService.validateToken(token);
 
-	private String recoverToken(HttpServletRequest request) {
-		var authHeader = request.getHeader("Authorization");
-		if (authHeader == null)
-			return null;
-		return authHeader.replace("Bearer", "");
-	}
+            if (!email.isBlank()) {
+                UserDetails user = userRepository.findByEmail(email);
+                if (user != null) {
+                    UsernamePasswordAuthenticationToken authentication =
+                        new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
+                    SecurityContextHolder.getContext().setAuthentication(authentication);
+                }
+            }
+        }
 
+        filterChain.doFilter(request, response);
+    }
+
+    private String recoverToken(HttpServletRequest request) {
+        String authHeader = request.getHeader("Authorization");
+        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+            return null;
+        }
+        return authHeader.substring(7); // Remove "Bearer "
+    }
 }
+
+

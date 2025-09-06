@@ -4,14 +4,26 @@
   justify-content: space-between;
   background-color: rgba(130, 101, 56, 0.9);
   backdrop-filter: blur(30px);
-  padding: 10px 20px; /* Reduzido o padding padrão */
-  transition: all 0.3s ease; /* Transição suave para todas as mudanças */
+  padding: 10px 20px;
+  transition: all 0.3s ease;
+}
+
+/* CONTÊINER PARA LOGO + MENU (lado esquerdo) */
+.header-left {
+  display: flex;
+  align-items: center;
+  flex: 1;
 }
 
 .container_header img {
-  height: 4rem; /* Reduzido de 5rem */
-  margin-right: 20px; /* Reduzido de 30px */
-  transition: height 0.3s ease; /* Transição suave para a imagem */
+  height: 4rem;
+  margin-right: 30px;
+  transition: height 0.3s ease;
+}
+
+/* MENU DE NAVEGAÇÃO */
+.container_header nav {
+  margin-right: auto;
 }
 
 .container_header nav ul {
@@ -19,28 +31,34 @@
   list-style: none;
   margin: 0;
   padding: 0;
-  gap: 15px; /* Reduzido de 20px */
+  gap: 15px;
 }
 
 .container_header nav ul li a {
   text-decoration: none;
-  font-size: 18px; /* Reduzido de 20px */
+  font-size: 18px;
   color: #fff9e7;
   font-family: var(--font-principal), serif;
-  padding: 8px 12px; /* Adicionado padding para melhor toque em mobile */
-  border-radius: 4px; /* Cantos levemente arredondados */
-  transition: all 0.2s ease; /* Transição suave para os links */
+  padding: 8px 12px;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  white-space: nowrap;
 }
 
 .container_header nav ul li a:hover {
   color: #ffffff;
   font-weight: 700;
-  background-color: rgba(255, 255, 255, 0.1); /* Fundo sutil no hover */
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* BOTÃO LOGIN (lado direito) */
+.header-right {
+  display: flex;
+  align-items: center;
 }
 
 .btn-login_block {
-  margin-left: auto;
-  margin-right: 15px;
+  margin-left: 15px;
   padding: 8px 16px;
   background-color: #007bff;
   color: white;
@@ -48,12 +66,13 @@
   border-radius: 6px;
   cursor: pointer;
   font-weight: bold;
-  transition: all 0.2s ease; /* Transição suave para o botão */
+  transition: all 0.2s ease;
+  white-space: nowrap;
 }
 
 .btn-login_block:hover {
-  background-color: #0069d9; /* Efeito hover no botão */
-  transform: translateY(-1px); /* Leve elevação no hover */
+  background-color: #0069d9;
+  transform: translateY(-1px);
 }
 
 .btn-login {
@@ -64,7 +83,7 @@
 
 .modal-body {
   color: var(--cor-titulo-destaque);
-  font-size: 18px; /* Reduzido de 20px */
+  font-size: 18px;
   font-weight: 600;
 }
 
@@ -72,22 +91,69 @@
   color: var(--cor-titulo);
 }
 
-/* Media Queries para telas menores */
-@media (max-width: 1200px) {
+/* ========== MEDIA QUERIES AJUSTADAS ========== */
+
+/* Desktop Grande (1200px+) */
+@media (min-width: 1200px) {
+  .container_header {
+    padding: 12px 25px;
+  }
+  
+  .container_header img {
+    height: 4.5rem;
+    margin-right: 35px;
+  }
+  
+  .container_header nav ul {
+    gap: 20px;
+  }
+  
   .container_header nav ul li a {
-    font-size: 17px;
-    padding: 7px 10px;
+    font-size: 19px;
+    padding: 9px 14px;
+  }
+  
+  .btn-login_block {
+    padding: 10px 20px;
+    font-size: 16px;
   }
 }
 
-@media (max-width: 992px) {
+/* Tablets Horizontais (992px a 1199px) */
+@media (max-width: 1199px) and (min-width: 992px) {
+  .container_header {
+    padding: 10px 18px;
+  }
+  
+  .container_header img {
+    height: 4rem;
+    margin-right: 25px;
+  }
+  
+  .container_header nav ul {
+    gap: 14px;
+  }
+  
+  .container_header nav ul li a {
+    font-size: 17px;
+    padding: 7px 11px;
+  }
+  
+  .btn-login_block {
+    padding: 8px 16px;
+    font-size: 15px;
+  }
+}
+
+/* Tablets (768px a 991px) */
+@media (max-width: 991px) and (min-width: 768px) {
   .container_header {
     padding: 8px 15px;
   }
   
   .container_header img {
     height: 3.5rem;
-    margin-right: 15px;
+    margin-right: 20px;
   }
   
   .container_header nav ul {
@@ -96,78 +162,80 @@
   
   .container_header nav ul li a {
     font-size: 16px;
-    padding: 6px 9px;
+    padding: 6px 10px;
   }
   
   .btn-login_block {
     padding: 7px 14px;
     font-size: 14px;
+    margin-left: 10px;
   }
 }
 
-@media (max-width: 768px) {
+/* Tablets Pequenos e Mobile Grande (576px a 767px) */
+@media (max-width: 767px) and (min-width: 576px) {
   .container_header {
-    padding: 6px 12px;
+    padding: 7px 12px;
+    flex-wrap: nowrap;
+  }
+  
+  .header-left {
+    flex: 1;
+    justify-content: flex-start;
   }
   
   .container_header img {
-    height: 3rem;
-    margin-right: 12px;
+    height: 3.2rem;
+    margin-right: 15px;
   }
   
-  .container_header nav ul {
-    gap: 10px;
-  }
-  
-  .container_header nav ul li a {
-    font-size: 15px;
-    padding: 5px 8px;
-  }
-  
-  .modal-body {
-    font-size: 16px;
-  }
-}
-
-@media (max-width: 576px) {
-  .container_header {
-    padding: 5px 10px;
-    flex-wrap: wrap; /* Permite quebra de linha em mobile */
-  }
-  
-  .container_header img {
-    height: 2.8rem;
-    margin-right: 10px;
+  .container_header nav {
+    margin-right: 0;
+    flex: 1;
+    overflow-x: auto;
   }
   
   .container_header nav ul {
     gap: 8px;
-    justify-content: center;
-    width: 100%; /* Ocupa toda a largura */
-    margin-top: 8px; /* Espaço acima do menu */
+    padding: 2px 0;
   }
   
   .container_header nav ul li a {
     font-size: 14px;
-    padding: 4px 7px;
+    padding: 5px 8px;
+  }
+  
+  .header-right {
+    flex-shrink: 0;
   }
   
   .btn-login_block {
     padding: 6px 12px;
     font-size: 13px;
-    margin: 5px 0;
+    margin-left: 8px;
+  }
+  
+  /* Esconder scrollbar mas manter funcionalidade */
+  .container_header nav ul::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .container_header nav ul {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
 }
 
-/* Mobile muito pequeno (até 320px) */
-@media (max-width: 320px) {
+/* Mobile Médio (400px a 575px) */
+@media (max-width: 575px) and (min-width: 400px) {
   .container_header {
-    padding: 4px 8px;
+    padding: 6px 10px;
+    flex-wrap: nowrap;
   }
   
   .container_header img {
-    height: 2.5rem;
-    margin-right: 8px;
+    height: 2.8rem;
+    margin-right: 12px;
   }
   
   .container_header nav ul {
@@ -176,12 +244,127 @@
   
   .container_header nav ul li a {
     font-size: 13px;
-    padding: 3px 6px;
+    padding: 4px 7px;
   }
   
   .btn-login_block {
     padding: 5px 10px;
     font-size: 12px;
+    margin-left: 6px;
+  }
+}
+
+/* Mobile Pequeno (até 399px) */
+@media (max-width: 399px) {
+  .container_header {
+    padding: 5px 8px;
+    flex-wrap: nowrap;
+  }
+  
+  .container_header img {
+    height: 2.5rem;
+    margin-right: 10px;
+  }
+  
+  .container_header nav ul {
+    gap: 4px;
+  }
+  
+  .container_header nav ul li a {
+    font-size: 12px;
+    padding: 3px 6px;
+  }
+  
+  .btn-login_block {
+    padding: 4px 8px;
+    font-size: 11px;
+    margin-left: 5px;
+  }
+}
+
+/* Modo paisagem em mobile */
+@media (max-height: 500px) and (orientation: landscape) {
+  .container_header {
+    padding: 4px 10px;
+  }
+  
+  .container_header img {
+    height: 2.2rem;
+  }
+  
+  .container_header nav ul li a {
+    padding: 2px 5px;
+    font-size: 11px;
+  }
+  
+  .btn-login_block {
+    padding: 3px 7px;
+    font-size: 10px;
+  }
+}
+
+/* Ajustes para telas muito pequenas em altura */
+@media (max-height: 400px) {
+  .container_header {
+    padding: 3px 8px;
+  }
+  
+  .container_header img {
+    height: 2rem;
+  }
+  
+  .container_header nav ul li a {
+    padding: 2px 4px;
+    font-size: 10px;
+  }
+}
+
+/* Tablet com modo retrato (ajuste especial) */
+@media (max-width: 768px) and (orientation: portrait) {
+  .container_header nav ul {
+    gap: 10px;
+  }
+  
+  .container_header nav ul li a {
+    font-size: 14px;
+    padding: 6px 9px;
+  }
+}
+
+/* Melhorias de acessibilidade */
+@media (prefers-reduced-motion: reduce) {
+  .container_header,
+  .container_header img,
+  .container_header nav ul li a,
+  .btn-login_block {
+    transition: none;
+  }
+  
+  .btn-login_block:hover {
+    transform: none;
+  }
+}
+
+/* Modo alto contraste */
+@media (prefers-contrast: high) {
+  .container_header {
+    background-color: rgba(100, 78, 43, 0.95);
+    border-bottom: 2px solid #000;
+  }
+  
+  .container_header nav ul li a {
+    border: 1px solid #fff9e7;
+  }
+  
+  .btn-login_block {
+    border: 2px solid #000;
+  }
+}
+
+/* Suporte para navegadores que não suportam backdrop-filter */
+@supports not (backdrop-filter: blur(30px)) {
+  .container_header {
+    background-color: rgba(130, 101, 56, 0.98);
   }
 }
 

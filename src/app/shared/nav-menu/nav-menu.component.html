@@ -4,18 +4,42 @@
 
   <img src="/assets/icone-2.png" alt="logo" />
   <nav class="navbar navbar-expand-lg">
-  <ul class="navbar-nav gap-4"> <!-- gap-4 = 1.5rem -->
-    <li class="nav-item BtnNoneVisible"><a class="nav-link" routerLink="/home">Home</a></li>
-    <li class="nav-item Btn_visible"><a class="nav-link" routerLink="/workshop">Workshop</a></li>
-    <li class="nav-item"><a class="nav-link" href="#" (click)="abrirModalContato($event)">Canais</a></li>
-  </ul>
-</nav>
-  <input
-    class="btn-login btn-login_block"
-    routerLink="/login"
-    type="button"
-    value="Login"
-  />
+    <ul class="navbar-nav gap-4">
+      <!-- gap-4 = 1.5rem -->
+      <li class="nav-item BtnNoneVisible">
+        <a class="nav-link" routerLink="/home">Home</a>
+      </li>
+      <li class="nav-item Btn_visible">
+        <a class="nav-link" routerLink="/workshop">Workshop</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#" (click)="abrirModalContato($event)"
+          >Canais</a
+        >
+      </li>
+    </ul>
+  </nav>
+
+  <div *ngIf="isWorkshopRoute || isAuthenticated" class="auth-section">
+    <div *ngIf="!isAuthenticated && isWorkshopRoute">
+      <input
+        class="btn-login btn-login_block"
+        (click)="redirectToLogin()"
+        type="button"
+        value="Login"
+      />
+    </div>
+    <div *ngIf="isAuthenticated" class="user-logged">
+      <img
+        src="/assets/user.png"
+        alt="Usuário"
+        width="40"
+        height="40"
+        class="avatar"
+        (click)="logout()"
+      />
+    </div>
+  </div>
 </header>
 
 <div

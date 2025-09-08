@@ -40,6 +40,9 @@ body {
 #containerAddVideios {
   display: none;
 }
+#tabela_videios {
+  display: none;
+}
 
 .custom-nav {
   font-size: 1.1rem;

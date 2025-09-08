@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
@@ -10,7 +10,6 @@
       integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="/pages/css/ADM.css" />
   </head>
   <body>
     <header>
@@ -49,13 +48,13 @@
           <li class="nav-item" role="presentation">
             <button
               class="nav-link rounded-5"
-              id="contact-tab2"
+              id="tabela"
               data-bs-toggle="tab"
               type="button"
               role="tab"
               aria-selected="false"
             >
-              ADD depois
+              Tabela de cursos
             </button>
           </li>
         </ul>
@@ -180,7 +179,9 @@
             />
           </div>
           <div class="mb-3">
-            <label for="videoTitle" class="form-label">Descrição do curso</label>
+            <label for="videoTitle" class="form-label"
+              >Descrição do curso</label
+            >
             <textarea
               class="form-control"
               [(ngModel)]="descricao"
@@ -195,7 +196,7 @@
             <input
               type="url"
               class="form-control"
-               [(ngModel)]="preco"
+              [(ngModel)]="preco"
               id="videoUrl"
               name="videoUrl"
               placeholder="00,00"
@@ -203,20 +204,200 @@
             />
           </div>
           <div class="mb-3">
-            <label for="videoTitle" class="form-label">Adicionar capa do curso</label>
+            <label for="videoTitle" class="form-label"
+              >Adicionar capa do curso</label
+            >
             <input
               class="form-control"
               type="file"
-               [(ngModel)]="caminhoDaCapa"
+              [(ngModel)]="caminhoDaCapa"
               id="addImg"
               name="imagem"
               accept=".jpg,.png,.jpeg,.gif,.bmp"
             />
           </div>
 
-          <button type="submit" class="btn btn-primary">Adicionar novo curso</button>
+          <button type="submit" class="btn btn-primary">
+            Adicionar novo curso
+          </button>
         </form>
       </section>
+      <section id="tabela_videios">
+        <h2 class="mb-4 text-center">Tabela de Vídeos</h2>
+        <div class="table-responsive">
+          <table class="table table-bordered mx-auto w-75 text-center">
+            <thead class="table-light">
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Imagem</th>
+                <th scope="col">Título do Curso</th>
+                <th scope="col">Descrição</th>
+                <th scope="col">Preço</th>
+                <th scope="col">Ações</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>
+                  <img src="/assets/cillios.jpg" alt="" width="50" />
+                </td>
+                <td>.......r</td>
+                <td>........</td>
+                <td>R$ 99,00</td>
+                <td>
+                  <button
+                    class="btn btn-sm btn-warning me-2"
+                    onclick="Editar()"
+                    data-bs-toggle="modal"
+                    data-bs-target="#editarCursoModal"
+                  >
+                    Editar
+                  </button>
+                  <button class="btn btn-sm btn-danger" onclick="excluir()">
+                    Excluir
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>
+                  <img src="/assets/cillios.jpg" alt="" width="50" />
+                </td>
+                <td>.......</td>
+                <td>...........</td>
+                <td>R$ 90,00</td>
+                <td>
+                  <button
+                    class="btn btn-sm btn-warning me-2"
+                    onclick="editar()"
+                    data-bs-toggle="modal"
+                    data-bs-target="#editarCursoModal"
+                  >
+                    Editar
+                  </button>
+                  <button class="btn btn-sm btn-danger" onclick="excluir()">
+                    Excluir
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>
+                  <img src="/assets/cillios.jpg" alt="" width="50" />
+                </td>
+                <td>.......</td>
+                <td>.........</td>
+                <td>R$ 90,00</td>
+                <td>
+                  <button
+                    class="btn btn-sm btn-warning me-2"
+                    onclick="editar()"
+                    data-bs-toggle="modal"
+                    data-bs-target="#editarCursoModal"
+                  >
+                    Editar
+                  </button>
+                  <button class="btn btn-sm btn-danger" onclick="excluir()">
+                    Excluir
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <div
+        class="modal fade"
+        id="editarCursoModal"
+        tabindex="-1"
+        aria-labelledby="editarCursoModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="editarCursoModalLabel">
+                Editar Curso
+              </h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Fechar"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <form id="formEditarCurso">
+                <div class="mb-3 text-center">
+                  <img
+                    id="previewImagem"
+                    src="assets/angular.png"
+                    alt="Imagem do Curso"
+                    class="img-fluid mb-2"
+                    style="max-height: 100px"
+                  />
+                  <input
+                    class="form-control"
+                    type="file"
+                    id="imagemCurso"
+                    accept="image/*"
+                  />
+                </div>
+
+                <div class="mb-3">
+                  <label for="tituloCurso" class="form-label"
+                    >Título do Curso</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="tituloCurso"
+                    placeholder="Digite o título do curso"
+                  />
+                </div>
+                <!-- Descrição -->
+                <div class="mb-3">
+                  <label for="descricaoCurso" class="form-label"
+                    >Descrição</label
+                  >
+                  <textarea
+                    class="form-control"
+                    id="descricaoCurso"
+                    rows="3"
+                    placeholder="Digite a descrição do curso"
+                  ></textarea>
+                </div>
+                <!-- Preço -->
+                <div class="mb-3">
+                  <label for="precoCurso" class="form-label">Preço</label>
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="precoCurso"
+                    placeholder="Digite o preço"
+                    step="0.01"
+                    min="0"
+                  />
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Cancelar
+              </button>
+              <button type="button" class="btn btn-primary" id="salvarEdicao">
+                Salvar Alterações
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </main>
   </body>
 </html>

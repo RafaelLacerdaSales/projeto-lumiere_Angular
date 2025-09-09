@@ -24,6 +24,10 @@
   font-size: 1.8rem;
   margin-bottom: 1.5rem;
 }
+.card-body {
+  background-color: var(--Fundo-caixas-workshop);
+  border-radius: 5px;
+}
 
 .card-img-top {
   width: 100%;
@@ -39,14 +43,14 @@
 
 .card-title {
   font-family: var(--font-principal), serif;
-  color: var(--cor-texto);
+  color: black;
   font-weight: 600;
   font-size: 1.1rem;
 }
 
 .mb-1 {
   font-family: var(--font-principal), serif;
-  color: var(--cor-texto);
+  color: black;
   font-weight: 600;
   font-size: 0.95rem;
 }
@@ -82,13 +86,13 @@
   overflow-x: auto;
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
-  scrollbar-width: none; /* Firefox */
+  scrollbar-width: none;
   padding: 20px 0;
   scroll-snap-type: x mandatory;
 }
 
 .carousel::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, Edge */
+  display: none;
 }
 
 /* Botões de navegação do carrossel */
@@ -150,11 +154,11 @@
   .card-grande {
     width: 320px;
   }
-  
+
   .card-img-top {
     height: 220px;
   }
-  
+
   .Workshop_txt {
     font-size: 2.2rem;
   }
@@ -165,11 +169,11 @@
   .card-grande {
     width: 300px;
   }
-  
+
   .card-img-top {
     height: 200px;
   }
-  
+
   .Workshop_txt {
     font-size: 2rem;
   }
@@ -181,23 +185,23 @@
     width: 280px;
     margin-right: 12px;
   }
-  
+
   .card-img-top {
     height: 180px;
   }
-  
+
   .Workshop_txt {
     font-size: 1.8rem;
   }
-  
+
   .cards h3 {
     font-size: 1.2rem;
   }
-  
+
   .carousel-container {
     padding: 0 35px;
   }
-  
+
   .carousel-btn {
     width: 35px;
     height: 35px;
@@ -210,29 +214,29 @@
     width: 260px;
     margin-right: 10px;
   }
-  
+
   .card-img-top {
     height: 160px;
   }
-  
+
   .Workshop_txt {
     font-size: 1.6rem;
     margin-bottom: 1.2rem;
   }
-  
+
   .cards h3 {
     font-size: 1.1rem;
     margin: 8px 0;
   }
-  
+
   .card-title {
     font-size: 1rem;
   }
-  
+
   .carousel-container {
     padding: 0 30px;
   }
-  
+
   .carousel-btn {
     width: 32px;
     height: 32px;
@@ -245,38 +249,38 @@
     width: 240px;
     margin-right: 8px;
   }
-  
+
   .card-img-top {
     height: 150px;
   }
-  
+
   .Workshop_txt {
     font-size: 1.5rem;
     margin-bottom: 1rem;
   }
-  
+
   .cards h3 {
     font-size: 1.1rem;
     margin: 8px 0;
   }
-  
+
   .star-rating i {
     font-size: 0.9rem;
     margin: 0 1px;
   }
-  
+
   .card-title {
     font-size: 1rem;
   }
-  
+
   .mb-1 {
     font-size: 0.9rem;
   }
-  
+
   .carousel-container {
     padding: 0 25px;
   }
-  
+
   .carousel-btn {
     width: 30px;
     height: 30px;
@@ -289,43 +293,43 @@
     width: 220px;
     margin-right: 6px;
   }
-  
+
   .card-img-top {
     height: 140px;
   }
-  
+
   .Workshop_txt {
     font-size: 1.4rem;
     margin-bottom: 0.8rem;
   }
-  
+
   .cards h3 {
     font-size: 1rem;
     margin: 6px 0;
   }
-  
+
   .star-rating i {
     font-size: 0.8rem;
     margin: 0 1px;
   }
-  
+
   .card-title {
     font-size: 0.95rem;
   }
-  
+
   .mb-1 {
     font-size: 0.85rem;
   }
-  
+
   .carousel-container {
     padding: 0 20px;
   }
-  
+
   .carousel-btn {
     width: 28px;
     height: 28px;
   }
-  
+
   .card-grande:hover {
     transform: translateY(-3px);
   }
@@ -336,7 +340,7 @@
   .card-img-top {
     height: 120px;
   }
-  
+
   .card-grande {
     width: 200px;
   }
@@ -361,11 +365,11 @@
   .card-grande {
     transition: none;
   }
-  
+
   .card-grande:hover {
     transform: none;
   }
-  
+
   .carousel {
     scroll-behavior: auto;
   }
@@ -376,25 +380,25 @@
   .card-grande {
     background-color: #2a2a2a;
   }
-  
+
   .card-title,
   .mb-1 {
     color: #f0f0f0;
   }
-  
+
   .Workshop_txt {
     color: #d9b38c;
   }
-  
+
   .carousel-btn {
     background: rgba(42, 42, 42, 0.8);
     color: white;
   }
-  
+
   .carousel-btn:hover {
     background: rgba(42, 42, 42, 1);
   }
-  
+
   .card-grande:hover {
     box-shadow: 0 8px 16px rgba(255, 255, 255, 0.1);
   }

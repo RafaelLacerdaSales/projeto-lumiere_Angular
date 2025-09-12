@@ -72,12 +72,12 @@
     text-align: center;
     margin-bottom: 6px;
   }
-  
+
   .container_footer h2 {
     font-size: 0.78rem;
   }
-  
-  .container_footer li, 
+
+  .container_footer li,
   .container_footer p {
     font-size: 0.66rem;
     line-height: 1.15;
@@ -86,7 +86,7 @@
   .container_footer img {
     width: 32px;
   }
-  
+
   .Procedures_footer,
   .about_company,
   .operation {
@@ -100,25 +100,25 @@
     padding: 6px 4px;
     gap: 8px;
   }
-  
+
   .container_footer > div {
     min-width: 90px;
     margin-bottom: 4px;
   }
-  
+
   .container_footer h2 {
     font-size: 0.72rem;
   }
-  
-  .container_footer li, 
+
+  .container_footer li,
   .container_footer p {
     font-size: 0.62rem;
   }
-  
+
   .container_footer img {
     width: 28px;
   }
-  
+
   .Procedures_footer {
     display: none; /* Esconde em telas pequenas */
   }

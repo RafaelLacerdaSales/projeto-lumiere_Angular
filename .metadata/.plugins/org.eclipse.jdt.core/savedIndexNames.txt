@@ -18,7 +18,6 @@ INDEX VERSION 1.134+C:\Users\Hugo\Desktop\backup_lumiere_orignal\.metadata\.plug
 1877927552.index
 162005281.index
 148466602.index
-3581163120.index
 367782849.index
 4195015777.index
 941753307.index

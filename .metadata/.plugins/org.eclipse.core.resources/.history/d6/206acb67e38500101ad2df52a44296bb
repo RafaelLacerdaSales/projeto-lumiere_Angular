@@ -1,3 +1,0 @@
-package com.lumiere.prject.DTO;
-
-public record CadastrarCursoDTO (String tituloDoCurso, String descricao, Double price, String caminhoDaCapa){}

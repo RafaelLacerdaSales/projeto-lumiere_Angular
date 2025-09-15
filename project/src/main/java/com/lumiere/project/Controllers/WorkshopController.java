@@ -39,7 +39,7 @@ public class WorkshopController {
 	@GetMapping("/buscar")
 	public List<CursoDTO> listUsers() {
 		return repository.findAll().stream()
-				.map(u -> new CursoDTO(u.getTituloDoCurso(), u.getDescricao(), u.getPreco(), u.getCaminhoDaCapa()))
+				.map(u -> new CursoDTO(u.getId(), u.getTituloDoCurso(), u.getDescricao(), u.getPreco(), u.getCaminhoDaCapa()))
 				.toList();
 	}
 

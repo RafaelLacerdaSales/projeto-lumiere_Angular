@@ -63,25 +63,27 @@
     <main class="container_main">
       <div id="formCadastro" class="container mt-5">
         <h2 class="mb-4">Cadastro de Funcionário</h2>
-        <form>
+        <form (ngSubmit) = "cadastrarFuncionario()">
           <div class="row mb-3">
             <div class="col-md-6">
               <label for="nome" class="form-label">Nome</label>
               <input
                 type="text"
                 class="form-control"
+                 [(ngModel)]="nome"
                 id="nome"
                 name="nome"
                 required
               />
             </div>
             <div class="col-md-6">
-              <label for="sobrenome" class="form-label">Sobrenome</label>
+              <label for="nome" class="form-label">Telefone</label>
               <input
                 type="text"
                 class="form-control"
-                id="sobrenome"
-                name="sobrenome"
+                 [(ngModel)]="telefone"
+                id="nome"
+                name="nome"
                 required
               />
             </div>
@@ -92,6 +94,7 @@
             <input
               type="email"
               class="form-control"
+               [(ngModel)]="email"
               id="email"
               name="email"
               required
@@ -104,6 +107,7 @@
               type="password"
               class="form-control"
               id="senha"
+               [(ngModel)]="senha"
               name="senha"
               required
             />
@@ -117,6 +121,7 @@
               type="date"
               class="form-control"
               id="dataNascimento"
+              [(ngModel)]="data_nascimento"
               name="dataNascimento"
               required
             />
@@ -129,6 +134,7 @@
                 type="text"
                 class="form-control"
                 id="cpf"
+                 [(ngModel)]="cpf"
                 name="cpf"
                 maxlength="14"
                 required
@@ -140,6 +146,7 @@
                 type="text"
                 class="form-control"
                 id="rg"
+                [(ngModel)]="rg"
                 name="rg"
                 maxlength="12"
                 required
@@ -155,6 +162,7 @@
               class="form-control"
               type="file"
               id="certificado"
+               [(ngModel)]="caminhoDoArquivo"
               name="certificado"
               accept=".pdf,.jpg,.png"
             />
@@ -222,9 +230,9 @@
           </button>
         </form>
       </section>
-      <section id="tabela_videios">
-        <h2 class="mb-4 text-center">Tabela de Vídeos</h2>
-        <div class="table-responsive">
+      <section id="tabela_videios" >
+        <h2 class="mb-4 text-center">Tabela de cursos</h2>
+        <div class="table-responsive" *ngFor="let curso of buscarCursos">
           <table class="table table-bordered mx-auto w-75 text-center">
             <thead class="table-light">
               <tr>
@@ -238,57 +246,13 @@
             </thead>
             <tbody>
               <tr>
-                <td>1</td>
+                <td>{{curso.id}}</td>
                 <td>
                   <img src="/assets/cillios.jpg" alt="" width="50" />
                 </td>
-                <td>.......r</td>
-                <td>........</td>
-                <td>R$ 99,00</td>
-                <td>
-                  <button
-                    class="btn btn-sm btn-warning me-2"
-                    onclick="Editar()"
-                    data-bs-toggle="modal"
-                    data-bs-target="#editarCursoModal"
-                  >
-                    Editar
-                  </button>
-                  <button class="btn btn-sm btn-danger" onclick="excluir()">
-                    Excluir
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>
-                  <img src="/assets/cillios.jpg" alt="" width="50" />
-                </td>
-                <td>.......</td>
-                <td>...........</td>
-                <td>R$ 90,00</td>
-                <td>
-                  <button
-                    class="btn btn-sm btn-warning me-2"
-                    onclick="editar()"
-                    data-bs-toggle="modal"
-                    data-bs-target="#editarCursoModal"
-                  >
-                    Editar
-                  </button>
-                  <button class="btn btn-sm btn-danger" onclick="excluir()">
-                    Excluir
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <td>3</td>
-                <td>
-                  <img src="/assets/cillios.jpg" alt="" width="50" />
-                </td>
-                <td>.......</td>
-                <td>.........</td>
-                <td>R$ 90,00</td>
+                <td>{{curso.tituloDoCurso}}</td>
+                <td>{{curso.descricao}}</td>
+                <td>{{curso.preco}}</td>
                 <td>
                   <button
                     class="btn btn-sm btn-warning me-2"

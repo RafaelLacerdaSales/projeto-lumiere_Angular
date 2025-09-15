@@ -24,7 +24,7 @@ export class LoginComponent {
   telefone: String = '';
   email: String = '';
   senha: String = '';
-    role: String =  'USER';
+  role: String =  'USER';
 
   submitUser() {
     const user = {

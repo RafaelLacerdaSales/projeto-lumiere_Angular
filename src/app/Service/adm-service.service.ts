@@ -17,7 +17,7 @@ export class AdmServiceService {
     }) //usado quando quer receber um json para usá-lo
   };
 
-  cadastrarUser(funcionario: any): Observable<any> {
+  cadastrarFuncionario(funcionario: any): Observable<any> {
     //nota, o repsonseType text é para quando quer receber uma STRING
     return this.httpClient.post(`${this.baseUrl}/funcionario/cadastrar`, funcionario, this.httpOptions)
   }

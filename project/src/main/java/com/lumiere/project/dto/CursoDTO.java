@@ -1,3 +1,3 @@
 package com.lumiere.project.dto;
 
-public record CursoDTO (String tituloDoCurso, String descricao, String preco, String caminhoDaCapa){}
+public record CursoDTO (Long id, String tituloDoCurso, String descricao, String preco, String caminhoDaCapa){}

@@ -1,4 +1,4 @@
-package com.lumiere.project.Controllers;
+package com.lumiere.project.controllers;
 
 import java.util.Map;
 
@@ -27,11 +27,11 @@ public class FuncionarioController {
 	@PostMapping("/cadastrar")
 	public ResponseEntity<Map<String, String>> cadastroFuncionario(@RequestBody FuncionarioDTO funcionario) {
 		if (this.repository.findByTelefoneAndEmailAndCpf(funcionario.telefone(), funcionario.email(), funcionario.cpf()) != null ) {
-			return ResponseEntity.badRequest().build();
+			return ResponseEntity.badRequest().body(Map.of("error", "verifiquei os campos"));
 		}
 		String encryptedPassword = new BCryptPasswordEncoder().encode(funcionario.senha());
 		UsersEntities newUser = new UsersEntities(funcionario.nome(), funcionario.cpf(), funcionario.data_nascimento(), funcionario.telefone(), funcionario.email(), encryptedPassword, funcionario.role(), funcionario.RG(), funcionario.caminhoDoArquivo());
 		this.repository.save(newUser);
-		return ResponseEntity.ok().build();
+		return ResponseEntity.ok().body(Map.of("sucesso", "cadastro concluido"));
 	}
 }

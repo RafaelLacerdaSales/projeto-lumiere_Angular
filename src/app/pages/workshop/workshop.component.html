@@ -1,18 +1,6 @@
 <section class="bg-primary2 container_center">
   <div class="container">
-    <!--h1 class="display-5">Aprenda com as Melhores!</!--h1>
-    <p-- class="lead">
-      Desenvolva tudo oque aprender para melhorar sua estetica!
-    </p-->
     <form class="search-bar d-flex justify-content-center align-items-center" role="search">
-
-      <!-- <input
-        class="form-control me-2 w-50 p-1"
-        type="search"
-        placeholder="Buscar cursos"
-        aria-label="Search"
-      />
-    <button class="btn p-1" type="submit">Buscar</button> === -->
     </form>
   </div>
 </section>
@@ -24,16 +12,14 @@
   </div>
 
   <section class="course-section">
-    <h2 class="texto">-----Todos os Cursos-----</h2>
-
+    <h2 class="texto">📒Todos os Cursos Disponíveis📒</h2>
 
     <div class="courses-layout">
-      <!-- Sidebar de filtros -->
-
       <!-- Lista de cursos -->
       <div class="course-list">
         <div class="course-list-item" *ngFor="let curso of cursosParaOsCard">
           <img [src]="curso.caminhoDaCapa" [alt]="curso.tituloDoCurso">
+
           <div class="course-info">
             <h3>{{ curso.tituloDoCurso }}</h3>
             <p class="course-meta">{{ curso.descricao }}</p>
@@ -44,4 +30,16 @@
       </div>
     </div>
   </section>
+
+  <!-- Ícone do carrinho FIXO na parte inferior -->
+  <div class="cart-icon-container">
+    <a routerLink="/pagar" class="cart-link">
+      <svg class="cart-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
+        <path d="M0 24C0 10.7 10.7 0 24 0H69.5c22 0 41.5 12.8 50.6 32h411c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3H170.7l5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5H488c13.3 0 24 10.7 24 24s-10.7 24-24 24H199.7c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5H24C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z"/>
+      </svg>
+      <span class="cart-count" *ngIf="cartItemCount > 0">{{ cartItemCount }}</span>
+    </a>
+  </div>
+
   <app-footer></app-footer>
+</section>

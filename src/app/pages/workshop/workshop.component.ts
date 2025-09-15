@@ -9,18 +9,21 @@ import { WorkshopServiceService } from 'src/app/Service/workshop-service.service
 })
 export class WorkshopComponent {
   constructor(private workshopService: WorkshopServiceService) { }
+  
+  // Propriedades existentes
   id: number = 0;
   tituloDoCurso: String = ``;
   descricao: String = ``;
   preco: String = ``;
   caminhoDaCapa: String = ``;
-
   cursosParaOsCard: cursosInterface[] = [];
+
+  // Nova propriedade para o carrinho - valor fixo temporário
+  cartItemCount: number = 0; // Ou 3 para ver o contador funcionando
 
   ngOnInit(): void {
     this.carregarCursosNoCard();
   }
-
 
   carregarCursosNoCard() {
     const dadosCursos = sessionStorage.getItem("dados");

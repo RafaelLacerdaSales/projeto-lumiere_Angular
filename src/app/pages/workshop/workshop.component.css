@@ -41,36 +41,29 @@ body {
   align-items: center;
 }
 
-
-
 /* === CURSOS DESTAQUES === */
 .texto {
   font-family: var(--font-principal);
-  color: #5C4033;
+  color: #5c4033;
   letter-spacing: 0.5px;
   /* deixa mais “respirado” */
 }
-
-
-
-
 
 .bg-primary2 {
   background-color: var(white);
 }
 
 .bg-primary2 h1 {
-  color: #5C4033;
+  color: #5c4033;
   font-family: var(--font-principal), serif;
   text-align: center !important;
 }
 
 .bg-primary2 p {
-  color: #5C4033;
+  color: #5c4033;
   font-family: var(--font-principal), serif;
   text-align: center !important;
 }
-
 
 .display-5 {
   font-weight: 300;
@@ -79,24 +72,6 @@ body {
 .lead {
   font-weight: 500;
 }
-
-/* ==== Layout 2 colunas fixo (sidebar esquerda) ==== */
-.courses-layout {
-  display: grid !important;
-  grid-template-columns: 260px minmax(0, 1fr) !important;
-  gap: 24px !important;
-  align-items: start !important;
-}
-
-/* Remova o empilhamento em telas pequenas;
-   Se quiser empilhar no mobile, descomente o bloco abaixo. */
-/*
-@media (max-width: 600px){
-  .courses-layout{
-    grid-template-columns: 1fr !important;
-  }
-}
-*/
 
 /* Container geral dos filtros */
 .filters {
@@ -113,7 +88,7 @@ body {
 .filters .filter-title {
   font-size: 16px;
   font-weight: bold;
-  color: #5C4033;
+  color: #5c4033;
   margin-bottom: 15px;
   border-bottom: 1px solid #eee;
   padding-bottom: 8px;
@@ -132,7 +107,7 @@ body {
 }
 
 .filters label:hover {
-  color: #5C4033;
+  color: #5c4033;
 }
 
 /* Custom checkbox */
@@ -140,7 +115,7 @@ body {
   appearance: none;
   width: 18px;
   height: 18px;
-  border: 2px solid #5C4033;
+  border: 2px solid #5c4033;
   border-radius: 4px;
   cursor: pointer;
   position: relative;
@@ -148,8 +123,8 @@ body {
 }
 
 .filters input[type="checkbox"]:checked {
-  background-color: #5C4033;
-  border-color: #5C4033;
+  background-color: #5c4033;
+  border-color: #5c4033;
 }
 
 .filters input[type="checkbox"]:checked::after {
@@ -167,7 +142,7 @@ body {
   padding: 8px 14px;
   border-radius: 8px;
   cursor: pointer;
-  transition: background .2s, border-color .2s;
+  transition: background 0.2s, border-color 0.2s;
   text-align: left;
   font-size: 14px;
 }
@@ -199,7 +174,7 @@ body {
 .course-section .texto {
   font-size: 28px;
   font-weight: bold;
-  color: #5C4033;
+  color: #5c4033;
   margin-bottom: 30px;
   text-align: center;
   /* Centraliza o título */
@@ -226,7 +201,6 @@ body {
   /* leve zoom ao passar o mouse */
 }
 
-
 /* Imagem do curso */
 .course-list-item img {
   width: 100%;
@@ -243,7 +217,7 @@ body {
 }
 
 .course-info h3 {
-  color: #5C4033;
+  color: #5c4033;
   font-size: 20px;
   margin-bottom: 8px;
 }
@@ -258,7 +232,7 @@ body {
   display: block;
   font-size: 18px;
   font-weight: bold;
-  color: #5C4033;
+  color: #5c4033;
   margin-bottom: 12px;
 }
 
@@ -267,7 +241,7 @@ body {
   display: inline-block;
   margin-top: 5px;
   padding: 12px 20px;
-  background-color: #5C4033;
+  background-color: #5c4033;
   /* marrom */
   color: #fff;
   border: none;
@@ -325,7 +299,7 @@ footer {
 .cart-link {
   position: relative;
   display: inline-block;
-  background-color: #5C4033;
+  background-color: #5c4033;
   border-radius: 50%;
   padding: 15px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
@@ -367,16 +341,16 @@ footer {
     bottom: 20px;
     right: 20px;
   }
-  
+
   .cart-link {
     padding: 12px;
   }
-  
+
   .cart-icon {
     width: 30px;
     height: 30px;
   }
-  
+
   .cart-count {
     width: 20px;
     height: 20px;

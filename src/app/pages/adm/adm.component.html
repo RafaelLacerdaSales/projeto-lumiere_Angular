@@ -1,209 +1,338 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr"
+      crossorigin="anonymous"
+    />
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Document</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous" />
-</head>
-
-<body>
-  <header>
-    <div class="d-flex align-items-center justify-content-center flex-wrap gap-4">
-      <ul class="nav nav-pills nav-fill gap-2 p-1 small custom-nav rounded-5 w-50" id="pillNav2" role="tablist">
-        <li class="nav-item" role="presentation">
-          <button class="nav-link active rounded-5" id="Cadastro" data-bs-toggle="tab" type="button" role="tab"
-            aria-selected="true">
-            Cadastrar funcionário
-          </button>
-        </li>
-        <li class="nav-item" role="presentation">
-          <button class="nav-link rounded-5" id="videosWorkshop" data-bs-toggle="tab" type="button" role="tab"
-            aria-selected="false">
-            Adicionar curso
-          </button>
-        </li>
-        <li class="nav-item" role="presentation">
-          <button class="nav-link rounded-5" id="tabela" data-bs-toggle="tab" type="button" role="tab"
-            aria-selected="false">
-            Tabela de cursos
-          </button>
-        </li>
-      </ul>
-    </div>
-  </header>
-  <main class="container_main">
-    <div id="formCadastro" class="container mt-5">
-      <h2 class="mb-4">Cadastro de Funcionário</h2>
-      <form (ngSubmit)="cadastrarFuncionario()">
-        <div class="row mb-3">
-          <div class="col-md-6">
-            <label for="nome" class="form-label">Nome</label>
-            <input type="text" class="form-control" [(ngModel)]="nome" id="nome" name="nome" required />
-          </div>
-          <div class="col-md-6">
-            <label for="nome" class="form-label">Telefone</label>
-            <input type="text" class="form-control" [(ngModel)]="telefone" id="nome" name="telefone" required />
-          </div>
-        </div>
-
-        <div class="mb-3">
-          <label for="email" class="form-label">E-mail</label>
-          <input type="email" class="form-control" [(ngModel)]="email" id="email" name="email" required />
-        </div>
-
-        <div class="mb-3">
-          <label for="senha" class="form-label">Senha</label>
-          <input type="password" class="form-control" id="senha" [(ngModel)]="senha" name="senha" required />
-        </div>
-
-        <div class="mb-3">
-          <label for="dataNascimento" class="form-label">Data de Nascimento</label>
-          <input type="date" class="form-control" id="dataNascimento" [(ngModel)]="data_nascimento"
-            name="data_nascimento" required />
-        </div>
-
-        <div class="row mb-3">
-          <div class="col-md-6">
-            <label for="cpf" class="form-label">CPF</label>
-            <input type="text" class="form-control" id="cpf" [(ngModel)]="cpf" name="cpf" maxlength="14" required />
-          </div>
-          <div class="col-md-6">
-            <label for="rg" class="form-label">RG</label>
-            <input type="text" class="form-control" id="rg" [(ngModel)]="rg" name="rg" maxlength="12" required />
-          </div>
-        </div>
-
-        <div class="mb-3">
-          <label for="certificado" class="form-label">Enviar Certificado</label>
-          <input class="form-control" type="file" id="certificado" [(ngModel)]="caminhoDoArquivo" name="caminhoDoArquivo"
-            accept=".pdf,.jpg,.png" />
-        </div>
-
-        <button type="submit" class="btn btn-primary">Cadastrar</button>
-      </form>
-    </div>
-    <!--ADICIONAR CURSOS=======================================-->
-    <section id="containerAddVideios" class="mx-auto w-50 mt-5">
-      <h2 class="mb-4">Adicionar Cursos</h2>
-      <form (ngSubmit)="cadastrarCursos()">
-        <div class="mb-3">
-          <label for="videoTitle" class="form-label">Título do curso</label>
-          <input type="text" class="form-control" id="titleVideo" [(ngModel)]="tituloDoCurso" name="tituloDoCurso"
-            required />
-        </div>
-        <div class="mb-3">
-          <label for="videoTitle" class="form-label">Descrição do curso</label>
-          <textarea class="form-control" [(ngModel)]="descricao" name="descricao" id="descricao" rows="5"></textarea>
-        </div>
-
-        <div class="mb-3">
-          <label for="videoUrl" class="form-label">Preço</label>
-          <input type="url" class="form-control" [(ngModel)]="preco" name="preco" id="videoUrl" placeholder="00,00"
-            required />
-        </div>
-        <div class="mb-3">
-          <label for="videoTitle" class="form-label">Adicionar capa do curso</label>
-          <input class="form-control" type="file" (change)="caminhoDaCapa" id="addImg" name="caminhoDaCapa"
-            accept=".jpg,.png,.jpeg,.gif,.bmp" />
-        </div>
-
-        <button type="submit" class="btn btn-primary">
-          Adicionar novo curso
+  <body>
+    <header>
+      <div class="d-flex justify-content-end gap-3 my-4 nav-roll me-5">
+        <button class="btn px-4 py-2" id="Cadastro">
+          Cadastrar Funcionário
         </button>
-      </form>
-    </section>
-    <section id="tabela_videios">
-      <h2 class="mb-4 text-center">Tabela de cursos</h2>
-      <div class="table-responsive" *ngFor="let curso of buscarCursos">
-        <table class="table table-bordered mx-auto w-75 text-center">
-          <thead class="table-light">
-            <tr>
-              <th scope="col">ID</th>
-              <th scope="col">Imagem</th>
-              <th scope="col">Título do Curso</th>
-              <th scope="col">Descrição</th>
-              <th scope="col">Preço</th>
-              <th scope="col">Ações</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>{{curso.id}}</td>
-              <td>
-                <img src="/assets/cillios.jpg" alt="" width="50" />
-              </td>
-              <td>{{curso.tituloDoCurso}}</td>
-              <td>{{curso.descricao}}</td>
-              <td>{{curso.preco}}</td>
-              <td>
-                <button class="btn btn-sm btn-warning me-2" onclick="editar()" data-bs-toggle="modal"
-                  data-bs-target="#editarCursoModal">
-                  Editar
-                </button>
-                <button class="btn btn-sm btn-danger" onclick="excluir()">
-                  Excluir
-                </button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+        <button class="btn px-4 py-2" id="videosWorkshop">
+          Adicionar Curso
+        </button>
+        <button class="btn px-4 py-2" id="tabela">Tabela de Cursos</button>
       </div>
-    </section>
-<div class="modal fade" id="editarCursoModal" tabindex="-1" aria-labelledby="editarCursoModalLabel"
-  aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
+    </header>
+    <main class="container_main">
+      <div id="formCadastro" class="container mt-5 formCadastro">
+        <h2 class="mb-4">Cadastro de Funcionário</h2>
+        <form (ngSubmit)="cadastrarFuncionario()">
+          <div class="row mb-3">
+            <div class="col-md-6">
+              <label for="nome" class="form-label">Nome</label>
+              <input
+                type="text"
+                class="form-control"
+                [(ngModel)]="nome"
+                id="nome"
+                name="nome"
+                required
+              />
+            </div>
+            <div class="col-md-6">
+              <label for="nome" class="form-label">Telefone</label>
+              <input
+                type="text"
+                class="form-control"
+                [(ngModel)]="telefone"
+                id="nome"
+                name="telefone"
+                required
+              />
+            </div>
+          </div>
 
-      <div class="modal-header">
-        <h5 class="modal-title" id="editarCursoModalLabel">Editar Curso</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+          <div class="mb-3">
+            <label for="email" class="form-label">E-mail</label>
+            <input
+              type="email"
+              class="form-control"
+              [(ngModel)]="email"
+              id="email"
+              name="email"
+              required
+            />
+          </div>
+
+          <div class="mb-3">
+            <label for="senha" class="form-label">Senha</label>
+            <input
+              type="password"
+              class="form-control"
+              id="senha"
+              [(ngModel)]="senha"
+              name="senha"
+              required
+            />
+          </div>
+
+          <div class="mb-3">
+            <label for="dataNascimento" class="form-label"
+              >Data de Nascimento</label
+            >
+            <input
+              type="date"
+              class="form-control"
+              id="dataNascimento"
+              [(ngModel)]="data_nascimento"
+              name="data_nascimento"
+              required
+            />
+          </div>
+
+          <div class="row mb-3">
+            <div class="col-md-6">
+              <label for="cpf" class="form-label">CPF</label>
+              <input
+                type="text"
+                class="form-control"
+                id="cpf"
+                [(ngModel)]="cpf"
+                name="cpf"
+                maxlength="14"
+                required
+              />
+            </div>
+            <div class="col-md-6">
+              <label for="rg" class="form-label">RG</label>
+              <input
+                type="text"
+                class="form-control"
+                id="rg"
+                [(ngModel)]="rg"
+                name="rg"
+                maxlength="12"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="certificado" class="form-label"
+              >Enviar Certificado</label
+            >
+            <input
+              class="form-control"
+              type="file"
+              id="certificado"
+              [(ngModel)]="caminhoDoArquivo"
+              name="caminhoDoArquivo"
+              accept=".pdf,.jpg,.png"
+            />
+          </div>
+
+          <button type="submit" class="btn btn-primary">Cadastrar</button>
+        </form>
       </div>
-
-      <form id="formEditarCurso" (ngSubmit)="atualizarCursos()">
-
-        <div class="modal-body">
-          <div class="mb-3 text-center">
-            <img id="previewImagem" src="assets/angular.png" alt="Imagem do Curso" class="img-fluid mb-2"
-              style="max-height: 100px" />
-            <input class="form-control" type="file" id="imagemCurso" accept="image/*" />
+      <!--ADICIONAR CURSOS=======================================-->
+      <section
+        id="containerAddVideios"
+        class="mx-auto w-50 mt-5 containerAddVideios container"
+      >
+        <h2 class="mb-4">Adicionar Cursos</h2>
+        <form (ngSubmit)="cadastrarCursos()">
+          <div class="mb-3">
+            <label for="videoTitle" class="form-label">Título do curso</label>
+            <input
+              type="text"
+              class="form-control"
+              id="titleVideo"
+              [(ngModel)]="tituloDoCurso"
+              name="tituloDoCurso"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label for="videoTitle" class="form-label"
+              >Descrição do curso</label
+            >
+            <textarea
+              class="form-control"
+              [(ngModel)]="descricao"
+              name="descricao"
+              id="descricao"
+              rows="5"
+            ></textarea>
           </div>
 
           <div class="mb-3">
-            <label for="tituloCurso" class="form-label">Título do Curso</label>
-            <input type="text" class="form-control" id="tituloCurso" [(ngModel)]="tituloDoCurso"
-              placeholder="Digite o título do curso" />
+            <label for="videoUrl" class="form-label">Preço</label>
+            <input
+              type="url"
+              class="form-control"
+              [(ngModel)]="preco"
+              name="preco"
+              id="videoUrl"
+              placeholder="00,00"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label for="videoTitle" class="form-label"
+              >Adicionar capa do curso</label
+            >
+            <input
+              class="form-control"
+              type="file"
+              (change)="(caminhoDaCapa)"
+              id="addImg"
+              name="caminhoDaCapa"
+              accept=".jpg,.png,.jpeg,.gif,.bmp"
+            />
           </div>
 
-          <div class="mb-3">
-            <label for="descricaoCurso" class="form-label">Descrição</label>
-            <textarea class="form-control" id="descricaoCurso" rows="3" [(ngModel)]="descricao"
-              placeholder="Digite a descrição do curso"></textarea>
-          </div>
+          <button type="submit" class="btn btn-primary">
+            Adicionar novo curso
+          </button>
+        </form>
+      </section>
+      <section id="tabela_videios">
+        <h2 class="mb-4 text-center">Tabela de cursos</h2>
+        <div class="table-responsive" *ngFor="let curso of buscarCursos">
+          <table class="table table-bordered mx-auto w-75 text-center">
+            <thead class="table-light">
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Imagem</th>
+                <th scope="col">Título do Curso</th>
+                <th scope="col">Descrição</th>
+                <th scope="col">Preço</th>
+                <th scope="col">Ações</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{{ curso.id }}</td>
+                <td>
+                  <img src="/assets/cillios.jpg" alt="" width="50" />
+                </td>
+                <td>{{ curso.tituloDoCurso }}</td>
+                <td>{{ curso.descricao }}</td>
+                <td>{{ curso.preco }}</td>
+                <td>
+                  <button
+                    class="btn btn-sm btn-warning me-2"
+                    onclick="editar()"
+                    data-bs-toggle="modal"
+                    data-bs-target="#editarCursoModal"
+                  >
+                    Editar
+                  </button>
+                  <button class="btn btn-sm btn-danger" onclick="excluir()">
+                    Excluir
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <div
+        class="modal fade"
+        id="editarCursoModal"
+        tabindex="-1"
+        aria-labelledby="editarCursoModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="editarCursoModalLabel">
+                Editar Curso
+              </h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Fechar"
+              ></button>
+            </div>
 
-          <div class="mb-3">
-            <label for="precoCurso" class="form-label">Preço</label>
-            <input type="number" class="form-control" [(ngModel)]="preco" id="precoCurso" placeholder="Digite o preço"
-              step="0.01" min="0" />
+            <form id="formEditarCurso" (ngSubmit)="atualizarCursos()">
+              <div class="modal-body">
+                <div class="mb-3 text-center">
+                  <img
+                    id="previewImagem"
+                    src="assets/angular.png"
+                    alt="Imagem do Curso"
+                    class="img-fluid mb-2"
+                    style="max-height: 100px"
+                  />
+                  <input
+                    class="form-control"
+                    type="file"
+                    id="imagemCurso"
+                    accept="image/*"
+                  />
+                </div>
+
+                <div class="mb-3">
+                  <label for="tituloCurso" class="form-label"
+                    >Título do Curso</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="tituloCurso"
+                    [(ngModel)]="tituloDoCurso"
+                    placeholder="Digite o título do curso"
+                  />
+                </div>
+
+                <div class="mb-3">
+                  <label for="descricaoCurso" class="form-label"
+                    >Descrição</label
+                  >
+                  <textarea
+                    class="form-control"
+                    id="descricaoCurso"
+                    rows="3"
+                    [(ngModel)]="descricao"
+                    placeholder="Digite a descrição do curso"
+                  ></textarea>
+                </div>
+
+                <div class="mb-3">
+                  <label for="precoCurso" class="form-label">Preço</label>
+                  <input
+                    type="number"
+                    class="form-control"
+                    [(ngModel)]="preco"
+                    id="precoCurso"
+                    placeholder="Digite o preço"
+                    step="0.01"
+                    min="0"
+                  />
+                </div>
+              </div>
+
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-bs-dismiss="modal"
+                >
+                  Cancelar
+                </button>
+                <button type="submit" class="btn btn-primary" id="salvarEdicao">
+                  Salvar Alterações
+                </button>
+              </div>
+            </form>
           </div>
         </div>
-
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-            Cancelar
-          </button>
-          <button type="submit" class="btn btn-primary" id="salvarEdicao">
-            Salvar Alterações
-          </button>
-        </div>
-
-      </form>
       </div>
-  </div>
-</div>
-  </main>
-</body>
-
+    </main>
+  </body>
 </html>

@@ -13,10 +13,10 @@ export class AdmComponent {
   constructor(
     private workshopService: WorkshopServiceService,
     private fb: FormBuilder,
-    private admService: AdmServiceService,
+    private admService: AdmServiceService
   ) {}
   //para puxar os cursos
-   buscarCursos: cursosInterface[] = [];
+  buscarCursos: cursosInterface[] = [];
 
   // DADOS DOS CURSOS
   cursos: any[] = [];
@@ -70,17 +70,17 @@ export class AdmComponent {
       }
     });
   }
-    //REQUISIÇÕES!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    atualizarCursos(){
-      const dadosCursos = {
-        tituloDoCurso: this.tituloDoCurso,
+  //REQUISIÇÕES!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  atualizarCursos() {
+    const dadosCursos = {
+      tituloDoCurso: this.tituloDoCurso,
       descricao: this.descricao,
       preco: this.preco,
       caminhoDaCapa: this.caminhoDaCapa,
-      };
+    };
 
-      this.workshopService.atualizarCurso(dadosCursos).subscribe({
-          next: (response) => {
+    this.workshopService.atualizarCurso(dadosCursos).subscribe({
+      next: (response) => {
         console.log('entrei 2 etapa');
         if (response.sucesso) {
           console.log('entrei 3 etapa');
@@ -92,8 +92,7 @@ export class AdmComponent {
           alert(err.error.error);
         }
       },
-      })
-
+    });
   }
 
   cadastrarCursos() {
@@ -126,34 +125,36 @@ export class AdmComponent {
   }
 
   carregarCursosNaTabela() {
-      const dadosCursos = sessionStorage.getItem("dados");
-      if (dadosCursos) {
-        console.log("Os dados existem no cache! Carregando...");
-        this.buscarCursos = JSON.parse(dadosCursos);
-      } else {
-        console.log("Cache vazio. Buscando da API...");
-        this.workshopService.buscarCursos().subscribe((dadosRecebidos: cursosInterface[]) => {
-          console.log("Dados recebidos da API!");
+    const dadosCursos = sessionStorage.getItem('dados');
+    if (dadosCursos) {
+      console.log('Os dados existem no cache! Carregando...');
+      this.buscarCursos = JSON.parse(dadosCursos);
+    } else {
+      console.log('Cache vazio. Buscando da API...');
+      this.workshopService
+        .buscarCursos()
+        .subscribe((dadosRecebidos: cursosInterface[]) => {
+          console.log('Dados recebidos da API!');
           this.buscarCursos = dadosRecebidos;
-          sessionStorage.setItem("dados", JSON.stringify(this.buscarCursos));
-        })
-      };
+          sessionStorage.setItem('dados', JSON.stringify(this.buscarCursos));
+        });
     }
+  }
 
-  cadastrarFuncionario(){
+  cadastrarFuncionario() {
     const dadosFuncionarios = {
       nome: this.nome,
       cpf: this.cpf,
       telefone: this.telefone,
       senha: this.senha,
       email: this.email,
-      role : this.role,
+      role: this.role,
       data_nascimento: this.data_nascimento,
       rg: this.rg,
-      caminhoDoArquivo: this.caminhoDoArquivo
-    }
+      caminhoDoArquivo: this.caminhoDoArquivo,
+    };
     this.admService.cadastrarFuncionario(dadosFuncionarios).subscribe({
-       next: (response) => {
+      next: (response) => {
         console.log('entrei 2 etapa');
         if (response.sucesso) {
           console.log('entrei 3 etapa');
@@ -165,6 +166,6 @@ export class AdmComponent {
           alert(err.error.error);
         }
       },
-    })
+    });
   }
 }

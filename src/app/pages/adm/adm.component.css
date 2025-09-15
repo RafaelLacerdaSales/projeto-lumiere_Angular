@@ -15,6 +15,72 @@ body {
   font-size: 20px;
 }
 
+.formCadastro {
+  display: flex;
+  flex-direction: column;
+  background-color: #f8f8ff;
+  padding: 15px;
+  border-radius: 10px;
+  width: 50%;
+}
+.formCadastro h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+.formCadastro label {
+  display: block;
+  margin-bottom: 5px;
+}
+.formCadastro input {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 15px;
+  border: 1px solid #c2c0c0;
+  border-radius: 4px;
+}
+.formCadastro button {
+  width: 100%;
+  padding: 10px;
+  background-color: #6d5632;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.containerAddVideios {
+  display: flex;
+  flex-direction: column;
+  background-color: #f8f8ff;
+  padding: 15px;
+  border-radius: 10px;
+  width: 50%;
+}
+.containerAddVideios h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+.containerAddVideios label {
+  display: block;
+  margin-bottom: 5px;
+}
+.containerAddVideios input {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 15px;
+  border: 1px solid #c2c0c0;
+  border-radius: 4px;
+}
+.containerAddVideios button {
+  width: 100%;
+  padding: 10px;
+  background-color: #6d5632;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
 .container_nav a {
   color: #ffffff;
   text-decoration: none;
@@ -44,19 +110,26 @@ body {
   display: none;
 }
 
-.custom-nav {
-  font-size: 1.1rem;
-  background-color: #6d5632;
-  --bs-nav-link-color: #ffffff;
-  --bs-nav-pills-link-active-color: #4b4431;
-  --bs-nav-pills-link-active-bg: #a68c5b;
+.tabela_videios {
+  margin: 7vw;
 }
 
-.nav-link {
-  color: var(--bs-nav-link-color);
+.nav-roll button {
+  border-radius: 25px;
+  font-weight: 500;
+  transition: all 0.3s ease;
 }
-.nav-link:hover {
-  color: white;
+
+.nav-roll button:hover {
+  background-color: var(--cor-botao);
+  color: #fff;
+  transform: translateY(-2px);
+}
+.btn {
+  border: 1px solid #6d5632;
+}
+.container {
+  border: 2px solid #6d5632;
 }
 
 @media (max-width: 768px) {

@@ -18,7 +18,7 @@ export class AdmComponent {
   //para puxar os cursos
    buscarCursos: cursosInterface[] = [];
 
-  // CADASTRO DOS CURSOS
+  // DADOS DOS CURSOS
   cursos: any[] = [];
   id: number = 0;
   tituloDoCurso: String = ``;
@@ -26,7 +26,7 @@ export class AdmComponent {
   preco: String = ``;
   caminhoDaCapa: String = ``;
 
-  // CADASTRO DO FUNCIONÁRIO
+  // DADOS DO FUNCIONÁRIO
   nome: String = ``;
   cpf: String = ``;
   telefone: String = ``;
@@ -69,6 +69,31 @@ export class AdmComponent {
         tabela_videios.style.display = 'block';
       }
     });
+  }
+    //REQUISIÇÕES!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    atualizarCursos(){
+      const dadosCursos = {
+        tituloDoCurso: this.tituloDoCurso,
+      descricao: this.descricao,
+      preco: this.preco,
+      caminhoDaCapa: this.caminhoDaCapa,
+      };
+
+      this.workshopService.atualizarCurso(dadosCursos).subscribe({
+          next: (response) => {
+        console.log('entrei 2 etapa');
+        if (response.sucesso) {
+          console.log('entrei 3 etapa');
+          alert(response.sucesso);
+        }
+      },
+      error: (err) => {
+        if (err.error) {
+          alert(err.error.error);
+        }
+      },
+      })
+
   }
 
   cadastrarCursos() {

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.lumiere.project.dto.AtualizarCursoDTO;
 import com.lumiere.project.dto.CursoDTO;
 import com.lumiere.project.entities.WorkshopEntities;
 import com.lumiere.project.repositories.WorkShopRepositories;
@@ -55,48 +56,35 @@ public class WorkshopController {
 	}
 
 	@CrossOrigin(origins = "http://localhost:4200")
-	@PutMapping("/atualizarTitulo/{id}")
-	public ResponseEntity atualizarTitulo(@PathVariable Long id, @RequestBody CursoDTO curso) {
-		Optional<WorkshopEntities> optionalWorkshop = repository.findById(id); // o optional sempre verifica se existe
-																				// ou n
-		if (optionalWorkshop.isEmpty()) {
-			return ResponseEntity.badRequest().build();
-		}
-		WorkshopEntities workshop = optionalWorkshop.get();
-		workshop.setTituloDoCurso(curso.tituloDoCurso());
-		repository.save(workshop);
-
-		return ResponseEntity.ok(workshop);
-	}
-
-	@CrossOrigin(origins = "http://localhost:4200")
-	@PutMapping("/atualizarPreco/{id}")
-	public ResponseEntity atualizarPreco(@PathVariable Long id, @RequestBody CursoDTO curso) {
-		Optional<WorkshopEntities> optionalWorkshop = repository.findById(id); // o optional sempre verifica se existe
-																				// ou n
-		if (optionalWorkshop.isEmpty()) {
-			return ResponseEntity.badRequest().build();
-		}
-		WorkshopEntities workshop = optionalWorkshop.get();
-		workshop.setPreco(curso.preco());
-		repository.save(workshop);
-
-		return ResponseEntity.ok(workshop);
-	}
-
-	@CrossOrigin(origins = "http://localhost:4200")
-	@PutMapping("/atualizarCapa/{id}")
+	@PutMapping("/atualizar/{id}")
 	public ResponseEntity atualizarCapa(@PathVariable Long id, @RequestBody CursoDTO curso) {
 		Optional<WorkshopEntities> optionalWorkshop = repository.findById(id); // o optional sempre verifica se existe
 																				// ou n
 		if (optionalWorkshop.isEmpty()) {
 			return ResponseEntity.badRequest().build();
 		}
+		
 		WorkshopEntities workshop = optionalWorkshop.get();
-		workshop.setCaminhoDaCapa(curso.caminhoDaCapa());
+		
+		if (curso.tituloDoCurso() != null && !curso.tituloDoCurso().isBlank()) {
+			workshop.setTituloDoCurso(curso.tituloDoCurso());
+		}
+		
+		if (curso.preco() != null && !curso.preco().isBlank()) {
+			workshop.setPreco(curso.preco());
+		}
+		
+		if (curso.descricao() != null && !curso.descricao().isBlank()) {
+			workshop.setDescricao(curso.descricao());
+		}
+		
+		if (curso.caminhoDaCapa() != null && !curso.caminhoDaCapa().isBlank()) {
+			workshop.setCaminhoDaCapa(curso.caminhoDaCapa());
+		}
+			
 		repository.save(workshop);
 
-		return ResponseEntity.ok(workshop);
+		return ResponseEntity.ok().body(Map.of("sucesso", "curso atualizado"));
 	}
 
 }

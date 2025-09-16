@@ -66,8 +66,10 @@ export class LoginComponent {
 
     this.lumiereService.validarUser(user).subscribe({
       next: (response) => {
-        if (response.loginValidar) {
-          localStorage.setItem('token', 'validado');
+        if (response.response) {
+          localStorage.setItem('token', response.token);
+          sessionStorage.setItem('dadosUsuario', JSON.stringify(response.response))
+          console.log(response.response)
 
           window.dispatchEvent(new Event('storage'));
           this.router.navigate(['/workshop']);
@@ -75,7 +77,7 @@ export class LoginComponent {
       },
       error: (error) => {
         if (error.error) {
-          alert('Login invalido');
+          alert(error.error.error);
         }
       },
     });

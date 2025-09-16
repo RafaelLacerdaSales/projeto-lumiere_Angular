@@ -18,9 +18,6 @@ const routes: Routes = [
   { path: 'contact', component: ContactComponent },
   { path: 'login', component: LoginComponent },
 
-  { path: 'aulas', component: AulasComponent },
-  { path: 'compras', component: CarrinhoComponent },
-
   { path: 'aulas', component: AulasComponent, canActivate: [alunoGuard] },
   { path: 'pagar', component: CarrinhoComponent, canActivate: [alunoGuard] },
 

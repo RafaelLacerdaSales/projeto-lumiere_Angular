@@ -77,8 +77,10 @@ public class UsersControllers {
 			// geramos o token JWT para o usuário autenticado.
 			var token = tokenService.generateToken((UsersEntities) auth.getPrincipal());
 			
+			var usuarioAutenticado = (UsersEntities) auth.getPrincipal();
+			
 			//UsersEntities u = null;
-			BuscarDadosUserDTO dados = new BuscarDadosUserDTO(auth.getIdUser().toString(), auth.getNome(), auth.getEmail(), auth.getTelefone(), auth.getCpf());
+			BuscarDadosUserDTO dados = new BuscarDadosUserDTO(usuarioAutenticado.getIdUser().toString(), usuarioAutenticado.getNome(), usuarioAutenticado.getEmail(), usuarioAutenticado.getTelefone(), usuarioAutenticado.getCpf());
 
 			 LoginResponseDTO response = new LoginResponseDTO(token, dados);
 			// 4. Retornamos o status 200 OK com o token no corpo da resposta.

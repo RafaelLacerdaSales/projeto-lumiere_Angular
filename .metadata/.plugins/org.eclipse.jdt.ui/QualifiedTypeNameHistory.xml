@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="org.springframework.security.core.userdetails.UserDetails"/>
-    <fullyQualifiedTypeName name="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
     <fullyQualifiedTypeName name="javax.xml.crypto.Data"/>
     <fullyQualifiedTypeName name="org.springframework.http.HttpMethod"/>
     <fullyQualifiedTypeName name="com.auth0.jwt.algorithms.Algorithm"/>
@@ -60,4 +58,6 @@
     <fullyQualifiedTypeName name="com.lumiere.project.dto.CadastrarDTO"/>
     <fullyQualifiedTypeName name="com.lumiere.project.dto.BuscarDadosUserDTO"/>
     <fullyQualifiedTypeName name="com.lumiere.project.enums.EnumsLumiere"/>
+    <fullyQualifiedTypeName name="jakarta.transaction.Transactional"/>
+    <fullyQualifiedTypeName name="org.springframework.transaction.annotation.Transactional"/>
 </qualifiedTypeNameHistroy>

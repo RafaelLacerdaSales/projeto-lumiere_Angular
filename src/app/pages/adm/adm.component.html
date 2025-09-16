@@ -213,24 +213,26 @@
             </thead>
             <tbody>
               <tr>
-                <td>{{ curso.id }}</td>
+                <td>{{curso.id}}</td>
                 <td>
                   <img src="/assets/cillios.jpg" alt="" width="50" />
                 </td>
-                <td>{{ curso.tituloDoCurso }}</td>
-                <td>{{ curso.descricao }}</td>
-                <td>{{ curso.preco }}</td>
+                <td>{{curso.tituloDoCurso}}</td>
+                <td>{{curso.descricao}}</td>
+                <td>{{curso.preco}}</td>
                 <td>
                   <button
                     class="btn btn-sm btn-warning me-2"
-                    onclick="editar()"
+                    (click)="editar(curso.id)"
                     data-bs-toggle="modal"
                     data-bs-target="#editarCursoModal"
                   >
                     Editar
                   </button>
-                  <button class="btn btn-sm btn-danger" onclick="excluir()">
+                  <button class="btn btn-sm btn-danger"  (click)="editar(curso.id)">
+                    <form (ngSubmit)="deletar()">
                     Excluir
+                    </form>
                   </button>
                 </td>
               </tr>
@@ -286,6 +288,7 @@
                     class="form-control"
                     id="tituloCurso"
                     [(ngModel)]="tituloDoCurso"
+                    name="tituloDoCurso"
                     placeholder="Digite o título do curso"
                   />
                 </div>
@@ -299,6 +302,7 @@
                     id="descricaoCurso"
                     rows="3"
                     [(ngModel)]="descricao"
+                    name="descricao"
                     placeholder="Digite a descrição do curso"
                   ></textarea>
                 </div>
@@ -310,6 +314,7 @@
                     class="form-control"
                     [(ngModel)]="preco"
                     id="precoCurso"
+                    name="preco"
                     placeholder="Digite o preço"
                     step="0.01"
                     min="0"

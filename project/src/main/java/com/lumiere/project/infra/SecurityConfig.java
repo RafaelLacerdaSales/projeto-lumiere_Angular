@@ -46,9 +46,11 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET, "/workshop/buscar").permitAll()
                         .requestMatchers(HttpMethod.DELETE, "/workshop/{id}").permitAll()
                         .requestMatchers(HttpMethod.POST, "/funcionario/cadastrar").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/funcionario/validar").permitAll()
                         .requestMatchers(HttpMethod.POST, "/aulas/adicionarAula/{id}").permitAll()
                         .requestMatchers(HttpMethod.GET, "/aulas/buscar").permitAll()
                         .requestMatchers(HttpMethod.DELETE, "/aulas/deletarAula/{id}").permitAll()
+                        .requestMatchers(HttpMethod.PUT, "/aulas/atualizar/{id}").permitAll()
 
                         .anyRequest().authenticated()
                 )

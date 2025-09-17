@@ -7,19 +7,23 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.lumiere.project.dto.AulaWorkshopDTO;
 import com.lumiere.project.dto.BuscarAulaWorkshop;
+import com.lumiere.project.dto.CursoDTO;
 import com.lumiere.project.entities.VideosWorkshopEntities;
 import com.lumiere.project.entities.WorkshopEntities;
+import com.lumiere.project.infra.SecurityConfig;
 import com.lumiere.project.repositories.VideosWorkshopRepositories;
 import com.lumiere.project.repositories.WorkShopRepositories;
 
@@ -27,11 +31,17 @@ import com.lumiere.project.repositories.WorkShopRepositories;
 @RequestMapping("/aulas")
 public class VideosWorkshopController {
 
+    private final SecurityConfig securityConfig;
+
 	@Autowired
 	WorkShopRepositories workshopRepositories;
 
 	@Autowired
 	VideosWorkshopRepositories videosRepositories;
+
+    VideosWorkshopController(SecurityConfig securityConfig) {
+        this.securityConfig = securityConfig;
+    }
 
 	@CrossOrigin(origins = "http://localhost:4200")
 	@PostMapping("/adicionarAula/{id}")
@@ -70,6 +80,36 @@ public class VideosWorkshopController {
 	public List<BuscarAulaWorkshop> listUsers() {
 		return videosRepositories.findAll().stream()
 				.map(u -> new BuscarAulaWorkshop(u.getId(), u.getTitulo(), u.getUrlDaAula(), u.getDescricao())).toList();
+	}
+	
+	@CrossOrigin(origins = "http://localhost:4200")
+	@PutMapping("/atualizar/{id}")
+	@Transactional
+	public ResponseEntity atualizarCapa(@PathVariable Long id, @RequestBody AulaWorkshopDTO aula) {
+		Optional<VideosWorkshopEntities> optionalWorkshop = videosRepositories.findById(id); // o optional sempre verifica se existe
+																				// ou n
+		if (optionalWorkshop.isEmpty()) {
+			return ResponseEntity.badRequest().body(Map.of("error", "não foi possívela achar a aula"));
+		}
+		
+		VideosWorkshopEntities workshop = optionalWorkshop.get();
+		
+		if (aula.titulo() != null && !aula.titulo().isBlank()) {
+			workshop.setTitulo(aula.titulo());
+		}
+		
+		if (aula.descricao() != null && !(aula.descricao().isBlank())) {
+			workshop.setDescricao(aula.descricao());
+		}
+		
+		if (aula.urlDaAula() != null && !aula.urlDaAula().isBlank()) {
+			workshop.setUrlDaAula(aula.urlDaAula());
+		}
+	
+			
+		videosRepositories.save(workshop);
+
+		return ResponseEntity.ok().body(Map.of("sucesso", "Aula atualizada"));
 	}
 
 }

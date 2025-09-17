@@ -34,7 +34,7 @@ public class WorkshopController {
 		WorkshopEntities wk = new WorkshopEntities(curso.tituloDoCurso(), curso.descricao(), curso.preco(),
 				curso.caminhoDaCapa());
 		repository.save(wk);
-		return ResponseEntity.ok().body(Map.of("sucesso", "curso concluido"));
+		return ResponseEntity.ok().body(Map.of("sucesso", "curso cadastrado"));
 	}
 
 	@GetMapping("/buscar")

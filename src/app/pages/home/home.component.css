@@ -1,3 +1,4 @@
+/* CSS Original Mantido */
 .container_header {
   position: relative;
   width: 100%;
@@ -7,6 +8,7 @@
   font-family: var(--font-principal), serif;
   background-color: var(--cor-principal);
   display: flex;
+  justify-content: center;
 }
 
 .img_primary {
@@ -25,21 +27,21 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: flex-end; /* conteúdo vai para a direita */
+  align-items: center;
   gap: 25px;
-  width: 100vw;
+  width: 50%;
   height: 100%;
-  padding: 0 120px; /* afastado da borda direita */
-  text-align: right;
+  padding: 0 20px;
   z-index: 1;
+  text-align: center;
+  margin-left: 12%; /* Ajuste aumentado para 12% */
 }
 
 .text_header {
   display: flex;
-  align-items: flex-end;
-  justify-content: flex-end;
+  align-items: center;
+  justify-content: center;
   flex-direction: column;
-  gap: 15px;
 }
 
 .header__TXT img {
@@ -49,7 +51,7 @@
 .text-button-wrapper {
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
+  align-items: center;
   justify-content: center;
   gap: 10px;
 }
@@ -60,11 +62,10 @@
   font-family: var(--font-secundaria), sans-serif;
   margin-bottom: 0;
   line-height: 1.4;
-  text-align: right;
 }
 
 .icon {
-  margin: 0;
+  margin: 0 auto;
 }
 
 .icon button {
@@ -121,7 +122,7 @@
 .about p,
 .aesthetic_txt p {
   width: 50%;
-  font-size: 1.1rem; /* texto maior */
+  font-size: 1rem;
   color: var(--cor-texto);
   line-height: 1.8;
   text-align: justify;
@@ -180,9 +181,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 20px; /* espaçamento menor entre texto e imagem */
+  gap: 40px;
   padding: 40px 20px;
   width: 100%;
+
 }
 
 .about {
@@ -224,7 +226,10 @@
   border-radius: 30px;
   text-decoration: none;
   transition: background-color 0.3s ease;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
   margin-top: 15px;
 }
 
@@ -241,4 +246,121 @@
   max-width: 800px;
   height: 50vw;
   max-height: 400px;
+}
+
+/* MEDIA QUERIES RESPONSIVOS */
+@media (max-width: 1200px) {
+  .header__TXT {
+    transform: translateX(8%); /* Ajuste aumentado para 8% */
+  }
+
+  .about p,
+  .aesthetic_txt p {
+    width: 70%;
+  }
+
+  .about-text,
+  .aesthetic_txt {
+    width: 60%;
+  }
+}
+
+@media (max-width: 992px) {
+  .container_header {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .img_primary {
+    display: none;
+  }
+
+  .header__TXT {
+    transform: translateX(0);
+    text-align: center;
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .about,
+  .aesthetic_group {
+    flex-direction: column !important;
+    gap: 20px;
+  }
+
+  .about-text,
+  .aesthetic_txt {
+    width: 90%;
+  }
+
+  .about p,
+  .aesthetic_txt p {
+    width: 100%;
+  }
+
+  .container_objective {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .container_objective img {
+    width: 90%;
+    height: auto;
+  }
+
+  .texto-com-rolagem_2 {
+    height: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .header__TXT img {
+    width: 200px;
+  }
+
+  .text-button-wrapper p {
+    font-size: 1.2rem;
+  }
+
+  .container_objective h2 {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .header__TXT img {
+    width: 150px;
+  }
+
+  .text-button-wrapper p {
+    font-size: 1rem;
+  }
+
+  .container_objective img {
+    width: 100%;
+  }
+
+  .container_objective h2 {
+    font-size: 1rem;
+  }
+}
+
+.btn-whatsapp,
+.icon button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 16px;
+  font-size: 0.9rem;
+  border-radius: 30px;
+  width: auto;
+}
+
+.icon img {
+  width: 24px;
+  height: 24px;
+}
+
+.icon button {
+  gap: 8px;
 }

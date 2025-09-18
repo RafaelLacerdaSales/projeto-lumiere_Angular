@@ -41,12 +41,12 @@
               />
             </div>
             <div class="col-md-6">
-              <label for="telefone" class="form-label">Telefone</label>
+              <label for="nome" class="form-label">Telefone</label>
               <input
                 type="text"
                 class="form-control"
                 [(ngModel)]="telefone"
-                id="telefone"
+                id="nome"
                 name="telefone"
                 required
               />
@@ -154,7 +154,7 @@
             />
           </div>
           <div class="mb-3">
-            <label for="descricao" class="form-label"
+            <label for="videoTitle" class="form-label"
               >Descrição do curso</label
             >
             <textarea
@@ -179,13 +179,13 @@
             />
           </div>
           <div class="mb-3">
-            <label for="addImg" class="form-label"
+            <label for="videoTitle" class="form-label"
               >Adicionar capa do curso</label
             >
             <input
               class="form-control"
               type="file"
-              [(ngModel)]="caminhoDaCapa"
+             [(ngModel)]="caminhoDaCapa"
               id="addImg"
               name="caminhoDaCapa"
               accept=".jpg,.png,.jpeg,.gif,.bmp"
@@ -196,44 +196,7 @@
             Adicionar novo curso
           </button>
         </form>
-
-        <!-- Botão Excluir Curso -->
-        <button
-          type="button"
-          class="btn btn-danger mt-3"
-          data-bs-toggle="modal"
-          data-bs-target="#excluirCursoModal"
-        >
-          Excluir curso
-        </button>
-
-        <!-- Modal Clean -->
-        <div
-          class="modal fade"
-          id="excluirCursoModal"
-          tabindex="-1"
-          aria-hidden="true"
-        >
-          <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content text-center p-4">
-              <p class="mb-4 fs-5">
-                Você tem certeza que deseja excluir esse curso?
-              </p>
-              <div class="d-flex justify-content-center gap-3">
-                <button
-                  type="button"
-                  class="btn btn-secondary px-4"
-                  data-bs-dismiss="modal"
-                >
-                  Não
-                </button>
-                <button type="button" class="btn btn-danger px-4">Sim</button>
-              </div>
-            </div>
-          </div>
-        </div>
       </section>
-
       <section id="tabela_videios">
         <h2 class="mb-4 text-center">Tabela de cursos</h2>
         <div class="table-responsive" *ngFor="let curso of buscarCursos">
@@ -266,10 +229,15 @@
                   >
                     Editar
                   </button>
-                  <button class="btn btn-sm btn-danger" (click)="editar(curso.id)">
-                    <form (ngSubmit)="deletar()">
-                      Excluir
-                    </form>
+
+                  <!-- Botão Excluir com Modal -->
+                  <button
+                    class="btn btn-sm btn-danger"
+                    (click)="cursoSelecionadoParaExcluir = curso.id"
+                    data-bs-toggle="modal"
+                    data-bs-target="#confirmDeleteModal"
+                  >
+                    Excluir
                   </button>
                 </td>
               </tr>
@@ -278,7 +246,51 @@
         </div>
       </section>
 
-      <!-- Modal Editar Curso -->
+      <!-- Modal de confirmação para excluir curso -->
+      <div
+        class="modal fade"
+        id="confirmDeleteModal"
+        tabindex="-1"
+        aria-labelledby="confirmDeleteModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="confirmDeleteModalLabel">
+                Confirmação
+              </h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Fechar"
+              ></button>
+            </div>
+            <div class="modal-body">
+              Você tem certeza que deseja excluir o curso?
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Não
+              </button>
+              <button
+                type="button"
+                class="btn btn-danger"
+                (click)="deletar()"
+                data-bs-dismiss="modal"
+              >
+                Sim
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div
         class="modal fade"
         id="editarCursoModal"
@@ -378,5 +390,10 @@
         </div>
       </div>
     </main>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ENjdO4Dr2bkBIFxQpeoXhF5lFELvFIhvjF/Jr59b6EGGoI1aFkw7cmDA6j6gD4c"
+      crossorigin="anonymous"
+    ></script>
   </body>
 </html>

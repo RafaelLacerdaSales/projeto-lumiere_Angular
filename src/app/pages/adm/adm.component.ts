@@ -18,6 +18,9 @@ export class AdmComponent {
   //para puxar os cursos
   buscarCursos: cursosInterface[] = [];
 
+  // NOVA PROPRIEDADE PARA O MODAL DE EXCLUSÃO
+  cursoSelecionadoParaExcluir: number = 0;
+
   // DADOS DOS CURSOS
   cursos: any[] = [];
   id: number = 0;
@@ -78,7 +81,7 @@ export class AdmComponent {
   }
 
   deletar(){
-      this.workshopService.deletarCurso(this.id).subscribe({
+      this.workshopService.deletarCurso(this.cursoSelecionadoParaExcluir).subscribe({
       next: (response) => {
         console.log('entrei 2 etapa');
         if (response.sucesso) {

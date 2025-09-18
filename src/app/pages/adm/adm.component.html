@@ -41,12 +41,12 @@
               />
             </div>
             <div class="col-md-6">
-              <label for="nome" class="form-label">Telefone</label>
+              <label for="telefone" class="form-label">Telefone</label>
               <input
                 type="text"
                 class="form-control"
                 [(ngModel)]="telefone"
-                id="nome"
+                id="telefone"
                 name="telefone"
                 required
               />
@@ -154,7 +154,7 @@
             />
           </div>
           <div class="mb-3">
-            <label for="videoTitle" class="form-label"
+            <label for="descricao" class="form-label"
               >Descrição do curso</label
             >
             <textarea
@@ -179,13 +179,13 @@
             />
           </div>
           <div class="mb-3">
-            <label for="videoTitle" class="form-label"
+            <label for="addImg" class="form-label"
               >Adicionar capa do curso</label
             >
             <input
               class="form-control"
               type="file"
-             [(ngModel)]="caminhoDaCapa"
+              [(ngModel)]="caminhoDaCapa"
               id="addImg"
               name="caminhoDaCapa"
               accept=".jpg,.png,.jpeg,.gif,.bmp"
@@ -196,7 +196,44 @@
             Adicionar novo curso
           </button>
         </form>
+
+        <!-- Botão Excluir Curso -->
+        <button
+          type="button"
+          class="btn btn-danger mt-3"
+          data-bs-toggle="modal"
+          data-bs-target="#excluirCursoModal"
+        >
+          Excluir curso
+        </button>
+
+        <!-- Modal Clean -->
+        <div
+          class="modal fade"
+          id="excluirCursoModal"
+          tabindex="-1"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content text-center p-4">
+              <p class="mb-4 fs-5">
+                Você tem certeza que deseja excluir esse curso?
+              </p>
+              <div class="d-flex justify-content-center gap-3">
+                <button
+                  type="button"
+                  class="btn btn-secondary px-4"
+                  data-bs-dismiss="modal"
+                >
+                  Não
+                </button>
+                <button type="button" class="btn btn-danger px-4">Sim</button>
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
+
       <section id="tabela_videios">
         <h2 class="mb-4 text-center">Tabela de cursos</h2>
         <div class="table-responsive" *ngFor="let curso of buscarCursos">
@@ -229,9 +266,9 @@
                   >
                     Editar
                   </button>
-                  <button class="btn btn-sm btn-danger"  (click)="editar(curso.id)">
+                  <button class="btn btn-sm btn-danger" (click)="editar(curso.id)">
                     <form (ngSubmit)="deletar()">
-                    Excluir
+                      Excluir
                     </form>
                   </button>
                 </td>
@@ -240,6 +277,8 @@
           </table>
         </div>
       </section>
+
+      <!-- Modal Editar Curso -->
       <div
         class="modal fade"
         id="editarCursoModal"

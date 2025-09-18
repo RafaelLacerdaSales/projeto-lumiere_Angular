@@ -71,6 +71,29 @@ export class AdmComponent {
     });
   }
   //REQUISIÇÕES!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+  editar(curso: any){
+    console.log('Objeto CURSO completo recebido:', curso);
+    this.id = curso;
+  }
+
+  deletar(){
+      this.workshopService.deletarCurso(this.id).subscribe({
+      next: (response) => {
+        console.log('entrei 2 etapa');
+        if (response.sucesso) {
+          console.log('entrei 3 etapa');
+          alert(response.sucesso);
+        }
+      },
+      error: (err) => {
+        if (err.error) {
+          alert(err.error.error);
+        }
+      },
+    });
+  }
+
   atualizarCursos() {
     const dadosCursos = {
       tituloDoCurso: this.tituloDoCurso,
@@ -79,7 +102,7 @@ export class AdmComponent {
       caminhoDaCapa: this.caminhoDaCapa,
     };
 
-    this.workshopService.atualizarCurso(dadosCursos).subscribe({
+    this.workshopService.atualizarCurso(this.id, dadosCursos).subscribe({
       next: (response) => {
         console.log('entrei 2 etapa');
         if (response.sucesso) {

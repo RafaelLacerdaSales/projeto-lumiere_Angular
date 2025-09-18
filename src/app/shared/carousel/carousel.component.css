@@ -1,65 +1,86 @@
 .main_testimony {
-  background-color: var(--fundo-unidade);
-}
+    background-color: var(--fundo-unidade);
+  }
 
-.main_testimony h1 {
-  font-family: "Playfair Display", serif;
-  font-weight: bold;
-  color: goldenrod;
-  letter-spacing: 2px;
-}
+  .main_testimony h1 {
+    font-family: "Playfair Display", serif;
+    font-weight: bold;
+    color: goldenrod;
+    letter-spacing: 2px;
+  }
 
-.testimony-carousel {
-  max-width: 100vw;
-  margin: 0 auto;
-}
+  .testimony-carousel {
+    max-width: 100vw;
+    margin: 0 auto;
+  }
 
-.testimony-card {
-  background: white;
-  border-radius: 20px;
-  padding: 2rem;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-  position: relative;
-  max-width: 62vw;
-}
+  .testimony-card {
+    background: white;
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    position: relative;
+    max-width: 62vw;
+  }
 
-.testimony-card p {
-  font-style: italic;
-  font-size: 1.1rem;
-  color: #444;
-  margin: 0;
-  line-height: 1.6;
-}
+  .testimony-card p {
+    font-style: italic;
+    font-size: 1.1rem;
+    color: #444;
+    margin: 0;
+    line-height: 1.6;
+  }
 
-.testimony-card::before {
-  content: "“";
-  font-size: 4rem;
-  color: goldenrod;
-  position: absolute;
-  top: -15px;
-  left: 15px;
-  font-family: Georgia, serif;
-}
+  .testimony-card::before {
+    content: "“";
+    font-size: 4rem;
+    color: goldenrod;
+    position: absolute;
+    top: -15px;
+    left: 15px;
+    font-family: Georgia, serif;
+  }
 
-.testimony-card::after {
-  content: "”";
-  font-size: 4rem;
-  color: goldenrod;
-  position: absolute;
-  bottom: -15px;
-  right: 15px;
-  font-family: Georgia, serif;
-}
+  .testimony-card::after {
+    content: "”";
+    font-size: 4rem;
+    color: goldenrod;
+    position: absolute;
+    bottom: -15px;
+    right: 15px;
+    font-family: Georgia, serif;
+  }
 
-.carousel-control-prev-icon,
-.carousel-control-next-icon {
-  background-color: rgba(0, 0, 0, 0.6);
-  border-radius: 50%;
-  padding: 20px;
-  background-size: 50% 50%;
-}
+  .carousel-control-prev-icon,
+  .carousel-control-next-icon {
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: 50%;
+    padding: 20px;
+    background-size: 50% 50%;
+  }
 
-.carousel-control-prev:hover .carousel-control-prev-icon,
-.carousel-control-next:hover .carousel-control-next-icon {
-  background-color: goldenrod;
-}
+  .carousel-control-prev:hover .carousel-control-prev-icon,
+  .carousel-control-next:hover .carousel-control-next-icon {
+    background-color: goldenrod;
+  }
+
+  /* 🚀 Ajuste para evitar quebra no desktop */
+  @media (min-width: 768px) {
+    .testimony-carousel .carousel-inner {
+      min-height: 260px; /* altura mínima só no desktop */
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  /* 🔧 Mobile: deixa o carrossel crescer naturalmente */
+  @media (max-width: 767px) {
+    .testimony-carousel .carousel-inner {
+      display: block;
+      min-height: auto;
+    }
+
+    .testimony-card {
+      max-width: 90vw;
+    }
+  }

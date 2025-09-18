@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.lumiere.project.dto.AtualizarCursoDTO;
 import com.lumiere.project.dto.CursoDTO;
 import com.lumiere.project.entities.WorkshopEntities;
 import com.lumiere.project.repositories.WorkShopRepositories;
@@ -34,7 +34,7 @@ public class WorkshopController {
 		WorkshopEntities wk = new WorkshopEntities(curso.tituloDoCurso(), curso.descricao(), curso.preco(),
 				curso.caminhoDaCapa());
 		repository.save(wk);
-		return ResponseEntity.ok().body(Map.of("sucesso", "curso concluido"));
+		return ResponseEntity.ok().body(Map.of("sucesso", "curso cadastrado"));
 	}
 
 	@GetMapping("/buscar")
@@ -46,23 +46,25 @@ public class WorkshopController {
 	
 
 	@CrossOrigin(origins = "http://localhost:4200")
-	@DeleteMapping("/{id}")
-	public String deletarUsuario(@PathVariable Long id) {
+	@DeleteMapping("delete/{id}")
+	public  ResponseEntity  deletarUsuario(@PathVariable Long id) {
 		try {
 			repository.deleteById(id);
-			return "Usuario deletado com sucesso";
+			return ResponseEntity.ok().body(Map.of("sucesso", "Curso deletado"));
 		} catch (Exception e) {
-			return "não foi possível deletar o usuario " + e.getMessage();
+			return ResponseEntity.ok().body(Map.of("error", "Não foi possível achar o curso"));
 		}
 	}
 
 	@CrossOrigin(origins = "http://localhost:4200")
 	@PutMapping("/atualizar/{id}")
+	@Transactional
 	public ResponseEntity atualizarCapa(@PathVariable Long id, @RequestBody CursoDTO curso) {
 		Optional<WorkshopEntities> optionalWorkshop = repository.findById(id); // o optional sempre verifica se existe
 																				// ou n
 		if (optionalWorkshop.isEmpty()) {
-			return ResponseEntity.badRequest().build();
+			System.out.println("!! ERRO: CURSO COM ID " + id + " NÃO ENCONTRADO !!");
+			return ResponseEntity.badRequest().body(Map.of("error", "não foi possívela achar o curso"));
 		}
 		
 		WorkshopEntities workshop = optionalWorkshop.get();

@@ -26,9 +26,14 @@ export class WorkshopServiceService {
       return this.httpClient.get<cursosInterface[]>(`${this.baseUrl}/workshop/buscar`, this.httpOptions)
     }
 
-      atualizarCurso(cursosDados: any): Observable<any> {
+      atualizarCurso(id: number, cursosDados: any): Observable<any> {
     //nota, o repsonseType text é para quando quer receber uma STRING
-    return this.httpClient.put(`${this.baseUrl}/workshop/atualizar`, cursosDados, this.httpOptions)
+    return this.httpClient.put(`${this.baseUrl}/workshop/atualizar/${id}`, cursosDados, this.httpOptions)
+   }
+
+   deletarCurso(id: number): Observable<any> {
+    //nota, o repsonseType text é para quando quer receber uma STRING
+    return this.httpClient.delete(`${this.baseUrl}/workshop/atualizar/${id}`, this.httpOptions)
    }
   
 

@@ -1,4 +1,4 @@
-package com.lumiere.project.controllers;
+package com.lumiere.project.Controllers;
 
 import java.util.List;
 import java.util.Map;
@@ -43,6 +43,7 @@ public class WorkshopController {
 				.map(u -> new CursoDTO(u.getId(), u.getTituloDoCurso(), u.getDescricao(), u.getPreco(), u.getCaminhoDaCapa()))
 				.toList();
 	}
+	
 
 	@CrossOrigin(origins = "http://localhost:4200")
 	@DeleteMapping("/{id}")

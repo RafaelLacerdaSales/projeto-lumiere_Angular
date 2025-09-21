@@ -141,6 +141,10 @@
         class="mx-auto w-50 mt-5 containerAddVideios container"
       >
         <h2 class="mb-4">Adicionar Cursos</h2>
+        <div class="box_btn">
+          <button class="addAula">Adicionar aula --></button>
+          <button class="addCurso" id="addCurso">Adicionar curso --></button>
+        </div>
         <form (ngSubmit)="cadastrarCursos()">
           <div class="mb-3">
             <label for="videoTitle" class="form-label">Título do curso</label>
@@ -197,6 +201,174 @@
           </button>
         </form>
       </section>
+      <section class="container_aulas" id="container_aulas">
+        <div *ngFor="let curso of buscarCursos" class="card">
+          <img src="/assets/goldenflower.jpg" class="card-img-top" alt="" />
+          <div class="card-body text-center">
+            <h2 class="card-title">{{ curso.tituloDoCurso }}</h2>
+            <p class="card-text">{{ curso.descricao }}</p>
+            <span class="d-block mb-2">{{ curso.preco }}</span>
+            <button
+              class="btn btn-primary"
+              data-bs-toggle="modal"
+              data-bs-target="#modalAdicionarAula"
+            >
+              Adicionar aula
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <div
+        class="modal fade"
+        id="modalAdicionarAula"
+        tabindex="-1"
+        aria-labelledby="modalAdicionarAulaLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-fullscreen">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title fw-bold" id="modalAdicionarAulaLabel">
+                Adicionar Aula ao Módulo
+              </h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Fechar"
+              ></button>
+            </div>
+
+            <div class="modal-body d-flex flex-row gap-4 flex-wrap">
+              <div class="box_aulas border p-3 rounded">
+                <h1>Aula 1</h1>
+                <p>Descrição da Aula 1</p>
+                <input
+                  type="button"
+                  class="btn btn-success"
+                  value="Editar"
+                  data-bs-toggle="modal"
+                  data-bs-target="#modalEditarAula"
+                />
+                <input
+                  type="button"
+                  class="btn btn-danger"
+                  value="Excluir"
+                  data-bs-toggle="modal"
+                  data-bs-target="#modalExcluirAula"
+                />
+              </div>
+
+              <div class="box_aulas border p-3 rounded">
+                <h1>Aula 2</h1>
+                <p>Descrição da Aula 2</p>
+                <input
+                  type="button"
+                  class="btn btn-success"
+                  value="Editar"
+                  data-bs-toggle="modal"
+                  data-bs-target="#modalEditarAula"
+                />
+                <input
+                  type="button"
+                  class="btn btn-danger"
+                  value="Excluir"
+                  data-bs-toggle="modal"
+                  data-bs-target="#modalExcluirAula"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="modal fade"
+        id="modalEditarAula"
+        tabindex="-1"
+        aria-labelledby="modalEditarAulaLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title fw-bold" id="modalEditarAulaLabel">
+                Editar Aula
+              </h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Fechar"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <form>
+                <div class="mb-3">
+                  <label class="form-label fw-bold">Título da Aula</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Digite o título"
+                  />
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label fw-bold">Adicionar PDF</label>
+                  <input
+                    type="file"
+                    class="form-control"
+                    accept="application/pdf"
+                  />
+                </div>
+
+                <button type="submit" class="btn btn-primary">
+                  Salvar Alterações
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="modal fade"
+        id="modalExcluirAula"
+        tabindex="-1"
+        aria-labelledby="modalExcluirAulaLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title fw-bold" id="modalExcluirAulaLabel">
+                Confirmar Exclusão
+              </h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Fechar"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <p>Tem certeza que deseja excluir esta aula?</p>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Cancelar
+              </button>
+              <button type="button" class="btn btn-danger">Excluir</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <section id="tabela_videios">
         <h2 class="mb-4 text-center">Tabela de cursos</h2>
         <div class="table-responsive" *ngFor="let curso of buscarCursos">
@@ -238,6 +410,7 @@
           </table>
         </div>
       </section>
+
       <div
         class="modal fade"
         id="editarCursoModal"

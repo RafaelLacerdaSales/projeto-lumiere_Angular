@@ -103,6 +103,42 @@ body {
   width: 10vw;
 }
 
+.container_aulas {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+  padding: 1rem;
+}
+
+.container_aulas .card {
+  width: 20rem;
+}
+
+.container_aulas .card button {
+  background-color: #6d5632;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  padding: 10px;
+  width: 100%;
+  margin-top: 10px;
+}
+.box_aulas {
+  display: flex;
+  flex-direction: column;
+}
+.box_aulas input {
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  padding: 10px;
+  width: 10vw;
+  margin-top: 10px;
+}
+
 #containerAddVideios {
   display: none;
 }
@@ -110,8 +146,27 @@ body {
   display: none;
 }
 
+#addCurso {
+  display: none;
+}
+
+#container_aulas {
+  display: none;
+}
+
 .tabela_videios {
   margin: 7vw;
+}
+
+.addAula {
+  font-size: 16px;
+}
+
+.box_btn {
+  display: flex;
+  position: relative;
+  margin-left: auto;
+  width: 9vw;
 }
 
 .nav-roll button {

@@ -2,36 +2,21 @@
 <div class="container">
   <section class="card">
     <h2 class="card-header">Resumo da Compra</h2>
-    <div class="cart-items">
-      <article class="cart-item">
-        <div
-          class="item-thumb"
-          style="
-            background-image: url(&quot;https://img-c.udemycdn.com/course/240x135/750012_fc61_3.jpg&quot;);
-          "
-        ></div>
-        <div class="item-details">
-          <a href="#" class="item-title">Curso Completo de Limpeza de Pele</a>
-          <div class="item-instructor">por João Silva</div>
-          <div class="item-price">R$ 79,90</div>
-        </div>
-        <button class="remove-btn">X</button>
-      </article>
 
-      <article class="cart-item">
-        <div
-          class="item-thumb"
-          style="
-            background-image: url(&quot;https://img-c.udemycdn.com/course/240x135/3124288_6f29_2.jpg&quot;);
-          "
-        ></div>
-        <div class="item-details">
-          <a href="#" class="item-title">Design Gráfico para Iniciantes</a>
-          <div class="item-instructor">por Maria Oliveira</div>
-          <div class="item-price">R$ 59,90</div>
-        </div>
-        <button class="remove-btn">X</button>
-      </article>
+    <div *ngIf="cursosNoCarrinho.length > 0; else null" class="cart-items">
+  <article class="cart-item" *ngFor="let curso of cursosNoCarrinho; let i = index">
+    <div class="item-thumb">
+      <img [src]="curso.caminhoDaCapa" [alt]="curso.tituloDoCurso">
+    </div>
+    <div class="item-details">
+      <a href="#" class="item-title">{{ curso.tituloDoCurso }}</a>
+      <div class="item-price">{{ curso.preco }}</div>
+    </div>
+    <button class="remove-btn" (click)="remover(i)">X</button>
+  </article>
+
+
+
     </div>
   </section>
 
@@ -39,15 +24,15 @@
     <h3>Resumo do Pedido</h3>
     <div class="summary-line">
       <span>Subtotal</span>
-      <span>R$ 139,80</span>
+      <span>{{ total | currency:'BRL':'symbol':'1.2-2' }}</span>
     </div>
     <div class="summary-line">
       <span>Descontos</span>
       <span>R$ 0,00</span>
     </div>
     <div class="summary-line total">
-      <span>Total</span>
-      <span>R$ 139,80</span>
+      <span>Total : {{ total | currency:'BRL':'symbol':'1.2-2' }}</span>
+      <span></span>
     </div>
 
     <form id="payment-form" class="payment-methods">

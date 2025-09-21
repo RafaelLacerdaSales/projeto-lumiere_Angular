@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { cursosInterface } from 'src/app/interfaces/cursos-interface';
 import { WorkshopServiceService } from 'src/app/Service/workshop-service.service';
 
@@ -7,9 +8,11 @@ import { WorkshopServiceService } from 'src/app/Service/workshop-service.service
   templateUrl: './workshop.component.html',
   styleUrls: ['./workshop.component.css'],
 })
-export class WorkshopComponent {
-  constructor(private workshopService: WorkshopServiceService) { }
-  
+export class WorkshopComponent implements OnInit {
+  constructor(private workshopService: WorkshopServiceService,
+     private router: Router
+  ) { }
+
   // Propriedades existentes
   id: number = 0;
   tituloDoCurso: String = ``;
@@ -39,4 +42,18 @@ export class WorkshopComponent {
       })
     };
   }
+  comprar(curso: cursosInterface) {
+
+  let carrinho: cursosInterface[] = JSON.parse(sessionStorage.getItem("carrinho") || "[]");
+
+  
+  carrinho.push(curso);
+
+
+  sessionStorage.setItem("carrinho", JSON.stringify(carrinho));
+
+
+  this.router.navigate(['/pagar']);
+}
+
 }

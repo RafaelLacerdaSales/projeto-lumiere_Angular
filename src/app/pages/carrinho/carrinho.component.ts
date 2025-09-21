@@ -1,4 +1,4 @@
-import { CarrinhoModule } from './carrinho.module';
+import { WorkshopServiceService } from 'src/app/Service/workshop-service.service';
 import {
   AfterViewInit,
   Component,
@@ -6,6 +6,7 @@ import {
   Renderer2,
   ViewChild,
 } from '@angular/core';
+import { cursosInterface } from 'src/app/interfaces/cursos-interface';
 
 @Component({
   selector: 'app-carrinho',
@@ -18,6 +19,7 @@ export class CarrinhoComponent implements AfterViewInit {
   constructor(
     private renderer: Renderer2,
     private el: ElementRef,
+    private workshopService: WorkshopServiceService
   ) {}
 
   ngAfterViewInit(): void {
@@ -173,4 +175,42 @@ export class CarrinhoComponent implements AfterViewInit {
       }
     }, 0);
   }
+
+ // Propriedades existentes
+    id: number = 0;
+    tituloDoCurso: String = ``;
+    descricao: String = ``;
+    preco: String = ``;
+    caminhoDaCapa: String = ``;
+  cursosNoCarrinho: cursosInterface[] = [];
+  total : number = 0;
+
+ngOnInit(): void {
+  const carrinho = sessionStorage.getItem("carrinho");
+  if (carrinho) {
+    this.cursosNoCarrinho = JSON.parse(carrinho);
+    this.calcularTotal();
+  }
+
+}
+
+remover(index: number) {
+ 
+  this.cursosNoCarrinho.splice(index, 1);
+
+
+  sessionStorage.setItem("carrinho", JSON.stringify(this.cursosNoCarrinho));
+
+  this.calcularTotal();
+}
+
+calcularTotal() {
+
+  this.total = this.cursosNoCarrinho.reduce((acc, curso) => {
+    let precoNumerico = Number(curso.preco.toString().replace(",", "."));
+    return acc + (isNaN(precoNumerico) ? 0 : precoNumerico);
+  }, 0);
+}
+
+
 }

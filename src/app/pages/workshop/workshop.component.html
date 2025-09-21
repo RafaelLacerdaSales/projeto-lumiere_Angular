@@ -21,10 +21,10 @@
           <img [src]="curso.caminhoDaCapa" [alt]="curso.tituloDoCurso">
 
           <div class="course-info">
-            <h3>{{ curso.tituloDoCurso }}</h3>
-            <p class="course-meta">{{ curso.descricao }}</p>
-            <span class="price">{{ curso.preco }}</span>
-            <button class="buy-btn"  routerLink="/pagar">Comprar</button>
+            <h3>{{curso.tituloDoCurso}}</h3>
+            <p class="course-meta">{{curso.descricao}}</p>
+            <span class="price">{{curso.preco}}</span>
+            <button class="buy-btn" (click)="comprar(curso)">Comprar</button>
           </div>
         </div>
       </div>

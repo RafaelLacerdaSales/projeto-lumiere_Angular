@@ -2,6 +2,7 @@
 <section name="Workbench">
 	<section name="MavenProjectImportWizardPage">
 		<list key="rootDirectory">
+			<item value="C:\Users\Pichau\projeto-lumiere_Angular"/>
 			<item value="C:\Users\Hugo\auth-api"/>
 			<item value="C:\Users\Hugo\Desktop\back-end-lumiere\project"/>
 		</list>

@@ -1,109 +1,176 @@
-<header class="container_header">
-  <div class="header-blur"></div>
-  <!-- fundo desfocado -->
+<div>
+  <header class="container_header">
+    <div class="header-blur"></div>
+    <!-- fundo desfocado -->
 
-  <img src="/assets/icone-2.png" alt="logo" />
-  <nav class="navbar navbar-expand-lg">
-    <ul class="navbar-nav gap-4">
-      <!-- gap-4 = 1.5rem -->
-      <li class="nav-item BtnNoneVisible">
-        <a class="nav-link" routerLink="/home">Home</a>
-      </li>
-      <li class="nav-item Btn_visible">
-        <a class="nav-link" routerLink="/workshop">Workshop</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#" (click)="abrirModalContato($event)"
-          >Canais</a
-        >
-      </li>
-    </ul>
-  </nav>
+    <img src="/assets/icone-2.png" alt="logo" />
+    <nav class="navbar navbar-expand-lg">
+      <ul class="navbar-nav gap-4">
+        <!-- gap-4 = 1.5rem -->
+        <li class="nav-item BtnNoneVisible">
+          <a class="nav-link" routerLink="/home">Home</a>
+        </li>
+        <li class="nav-item Btn_visible">
+          <a class="nav-link" routerLink="/workshop">Workshop</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" (click)="abrirModalContato($event)"
+            >Canais</a
+          >
+        </li>
+      </ul>
+    </nav>
 
-  <div *ngIf="isWorkshopRoute || isAuthenticated" class="auth-section">
-    <div *ngIf="!isAuthenticated && isWorkshopRoute">
-      <input
-        class="btn-login btn-login_block"
-        (click)="redirectToLogin()"
-        type="button"
-        value="Login"
-      />
+    <div *ngIf="isWorkshopRoute || isAuthenticated" class="auth-section">
+      <div *ngIf="!isAuthenticated && isWorkshopRoute">
+        <input
+          class="btn-login btn-login_block"
+          (click)="redirectToLogin()"
+          type="button"
+          value="Login"
+        />
+      </div>
+      <div *ngIf="isAuthenticated" class="user-logged">
+        <i
+          class="bi bi-person-circle fs-1 avatar"
+          style="cursor: pointer"
+          data-bs-toggle="modal"
+          data-bs-target="#modalConta"
+        ></i>
+      </div>
     </div>
-    <div *ngIf="isAuthenticated" class="user-logged">
-      <img
-        src="/assets/user.png"
-        alt="Usuário"
-        width="40"
-        height="40"
-        class="avatar"
-        (click)="logout()"
-      />
+  </header>
+
+  <!--========== Modal Conta ========= -->
+  <div
+    class="modal fade"
+    id="modalConta"
+    tabindex="-1"
+    aria-labelledby="modalContaLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content rounded-4 shadow">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalContaLabel">Atualizar Conta</h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <form id="formConta">
+            <div class="mb-3">
+              <label for="email" class="form-label">Novo E-mail</label>
+              <input
+                type="email"
+                class="form-control"
+                id="email"
+                placeholder="Digite seu novo e-mail"
+                required
+              />
+            </div>
+
+            <div class="mb-3">
+              <label for="senha" class="form-label">Nova Senha</label>
+              <input
+                type="password"
+                class="form-control"
+                id="senha"
+                placeholder="Digite sua nova senha"
+                required
+              />
+            </div>
+
+            <button type="submit" class="btn btn-success w-100">
+              Atualizar Conta
+            </button>
+          </form>
+        </div>
+        <div class="modal-footer d-flex justify-content-between">
+          <button type="button" class="btn btn-info text-white">
+            Meu Aprendizado
+          </button>
+          <button type="button" class="btn btn-info text-white">Sair</button>
+          <button
+            (click)="logout()"
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Fechar
+          </button>
+        </div>
+      </div>
     </div>
   </div>
-</header>
 
-<div
-  class="modal fade"
-  id="modalContato"
-  tabindex="-1"
-  aria-labelledby="modalContatoLabel"
-  aria-hidden="true"
->
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content text-center p-3">
-      <div class="modal-header border-0">
-        <h5 class="modal-title w-100" id="modalContatoLabel">
-          Acesse nossos canais
-        </h5>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="modal"
-          aria-label="Fechar"
-        ></button>
-      </div>
-
-      <div class="modal-body">
-        <p>Nos siga nas redes sociais:</p>
-        <div class="d-flex justify-content-center gap-3 mb-3">
+  <!-- ======= Modal Contato ========== -->
+  <div
+    class="modal fade"
+    id="modalContato"
+    tabindex="-1"
+    aria-labelledby="modalContatoLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content text-center p-3">
+        <div class="modal-header border-0">
+          <h5 class="modal-title w-100" id="modalContatoLabel">
+            Acesse nossos canais
+          </h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Fechar"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <p>Nos siga nas redes sociais:</p>
+          <div class="d-flex justify-content-center gap-3 mb-3">
+            <a
+              href="https://www.instagram.com/seu_usuario"
+              target="_blank"
+              class="text-dark fs-3"
+            >
+              <i class="bi bi-instagram"></i>
+            </a>
+            <a
+              href="https://www.facebook.com/seu_usuario"
+              target="_blank"
+              class="text-dark fs-3"
+            >
+              <i class="bi bi-facebook"></i>
+            </a>
+            <a
+              href="https://www.tiktok.com/@seu_usuario"
+              target="_blank"
+              class="text-dark fs-3"
+            >
+              <i class="bi bi-tiktok"></i>
+            </a>
+          </div>
+          <p>Ou entre em contato direto:</p>
           <a
-            href="https://www.instagram.com/seu_usuario"
+            href="https://wa.me/552199999999"
             target="_blank"
-            class="text-dark fs-3"
+            class="btn btn-success"
           >
-            <i class="bi bi-instagram"></i>
-          </a>
-          <a
-            href="https://www.facebook.com/seu_usuario"
-            target="_blank"
-            class="text-dark fs-3"
-          >
-            <i class="bi bi-facebook"></i>
-          </a>
-          <a
-            href="https://www.tiktok.com/@seu_usuario"
-            target="_blank"
-            class="text-dark fs-3"
-          >
-            <i class="bi bi-tiktok"></i>
+            <i class="bi bi-whatsapp"></i> Agende pelo WhatsApp
           </a>
         </div>
-
-        <p>Ou entre em contato direto:</p>
-        <a
-          href="https://wa.me/5599999999999"
-          class="btn btn-success"
-          target="_blank"
-        >
-          <i class="bi bi-whatsapp"></i>
-          (99) 99999-9999
-        </a>
-      </div>
-
-      <div class="modal-footer border-0">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-          Fechar
-        </button>
+        <div class="modal-footer border-0 justify-content-center">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Fechar
+          </button>
+        </div>
       </div>
     </div>
   </div>

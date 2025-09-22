@@ -24,7 +24,7 @@ export class LoginComponent {
   telefone: String = '';
   email: String = '';
   senha: String = '';
-  role: String =  'USER';
+  role: String = 'USER';
 
   submitUser() {
     const user = {
@@ -34,8 +34,8 @@ export class LoginComponent {
       telefone: this.telefone,
       email: this.email,
       senha: this.senha,
-      role: this.role
-    }
+      role: this.role,
+    };
 
     this.lumiereService.cadastrarUser(user).subscribe({
       next: (response) => {
@@ -63,16 +63,21 @@ export class LoginComponent {
       email: this.email,
       senha: this.senha,
     };
-
     this.lumiereService.validarUser(user).subscribe({
       next: (response) => {
         if (response.response) {
-          localStorage.setItem('token', response.token);
-          sessionStorage.setItem('dadosUsuario', JSON.stringify(response.response))
-          console.log(response.response)
+          localStorage.setItem('token', 'validado');
+          sessionStorage.setItem('token', response.token);
+          sessionStorage.setItem(
+            'dadosUsuario',
+            JSON.stringify(response.response)
+          );
+          console.log(response.response);
 
-          window.dispatchEvent(new Event('storage'));
-          this.router.navigate(['/workshop']);
+          this.router.navigateByUrl('/workshop').then(() => {
+            this.router.navigate([this.router.url]);
+          });
+          window.location.reload();
         }
       },
       error: (error) => {

@@ -189,7 +189,7 @@
             <input
               class="form-control"
               type="file"
-             [(ngModel)]="caminhoDaCapa"
+              [(ngModel)]="caminhoDaCapa"
               id="addImg"
               name="caminhoDaCapa"
               accept=".jpg,.png,.jpeg,.gif,.bmp"
@@ -385,13 +385,13 @@
             </thead>
             <tbody>
               <tr>
-                <td>{{curso.id}}</td>
+                <td>{{ curso.id }}</td>
                 <td>
                   <img src="/assets/cillios.jpg" alt="" width="50" />
                 </td>
-                <td>{{curso.tituloDoCurso}}</td>
-                <td>{{curso.descricao}}</td>
-                <td>{{curso.preco}}</td>
+                <td>{{ curso.tituloDoCurso }}</td>
+                <td>{{ curso.descricao }}</td>
+                <td>{{ curso.preco }}</td>
                 <td>
                   <button
                     class="btn btn-sm btn-warning me-2"
@@ -418,9 +418,6 @@
         </div>
       </section>
 
-<<<<<<< HEAD
-=======
-      <!-- Modal de confirmação para excluir curso -->
       <div
         class="modal fade"
         id="confirmDeleteModal"
@@ -465,7 +462,6 @@
         </div>
       </div>
 
->>>>>>> e79a9d6d7e493e5403af5f3f526d0b67fe310443
       <div
         class="modal fade"
         id="editarCursoModal"

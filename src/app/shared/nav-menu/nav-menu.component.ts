@@ -1,4 +1,9 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  AfterViewInit,
+  ChangeDetectorRef,
+} from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import * as bootstrap from 'bootstrap';
@@ -13,7 +18,7 @@ export class NavMenuComponent implements OnInit, AfterViewInit {
   isWorkshopRoute: boolean = false;
   modalContato: bootstrap.Modal | undefined;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
     this.checkAuthentication();
@@ -26,6 +31,7 @@ export class NavMenuComponent implements OnInit, AfterViewInit {
     window.addEventListener('storage', (event) => {
       if (event.key === 'token') {
         this.checkAuthentication();
+        this.cdr.detectChanges();
       }
     });
   }

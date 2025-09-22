@@ -16,7 +16,7 @@ export class LoginComponent {
     private lumiereService: LumiereService,
     private fb: FormBuilder,
     private router: Router
-  ) { }
+  ) {}
   chaveInicial: boolean = false;
   nome: String = '';
   cpf: number = 0;
@@ -66,7 +66,6 @@ export class LoginComponent {
     this.lumiereService.validarUser(user).subscribe({
       next: (response) => {
         if (response.response) {
-<<<<<<< HEAD
           localStorage.setItem('token', 'validado');
           sessionStorage.setItem('token', response.token);
           sessionStorage.setItem(
@@ -74,15 +73,14 @@ export class LoginComponent {
             JSON.stringify(response.response)
           );
           console.log(response.response);
-=======
+
           const sessao = {
-            token: response.token,      //recebo do back o token e o response, crio um date para verificar na validacao o tempo para poder limpar o localstorage
-            usuario: response.response, 
-            savedAt: Date.now()        
+            token: response.token, //recebo do back o token e o response, crio um date para verificar na validacao o tempo para poder limpar o localstorage
+            usuario: response.response,
+            savedAt: Date.now(),
           };
           localStorage.setItem('sessao', JSON.stringify(sessao));
-          console.log(response.response)
->>>>>>> 724b567b7ec9f7da5895491533141f80656e6291
+          console.log(response.response);
 
           this.router.navigateByUrl('/workshop').then(() => {
             this.router.navigate([this.router.url]);

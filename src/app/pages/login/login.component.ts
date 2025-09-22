@@ -16,7 +16,7 @@ export class LoginComponent {
     private lumiereService: LumiereService,
     private fb: FormBuilder,
     private router: Router
-  ) {}
+  ) { }
   chaveInicial: boolean = false;
   nome: String = '';
   cpf: number = 0;
@@ -24,7 +24,7 @@ export class LoginComponent {
   telefone: String = '';
   email: String = '';
   senha: String = '';
-  role: String =  'USER';
+  role: String = 'USER';
 
   submitUser() {
     const user = {
@@ -67,8 +67,12 @@ export class LoginComponent {
     this.lumiereService.validarUser(user).subscribe({
       next: (response) => {
         if (response.response) {
-          localStorage.setItem('token', response.token);
-          sessionStorage.setItem('dadosUsuario', JSON.stringify(response.response))
+          const sessao = {
+            token: response.token,      //recebo do back o token e o response, crio um date para verificar na validacao o tempo para poder limpar o localstorage
+            usuario: response.response, 
+            savedAt: Date.now()        
+          };
+          localStorage.setItem('sessao', JSON.stringify(sessao));
           console.log(response.response)
 
           window.dispatchEvent(new Event('storage'));

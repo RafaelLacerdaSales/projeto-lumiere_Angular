@@ -10,7 +10,7 @@ import { WorkshopServiceService } from 'src/app/Service/workshop-service.service
 })
 export class WorkshopComponent implements OnInit {
   constructor(private workshopService: WorkshopServiceService,
-     private router: Router
+    private router: Router
   ) { }
 
   // Propriedades existentes
@@ -29,31 +29,26 @@ export class WorkshopComponent implements OnInit {
   }
 
   carregarCursosNoCard() {
-    const dadosCursos = sessionStorage.getItem("dados");
-    if (dadosCursos) {
-      console.log("Os dados existem no cache! Carregando...");
-      this.cursosParaOsCard = JSON.parse(dadosCursos);
-    } else {
-      console.log("Cache vazio. Buscando da API...");
-      this.workshopService.buscarCursos().subscribe((dadosRecebidos: cursosInterface[]) => {
-        console.log("Dados recebidos da API!");
-        this.cursosParaOsCard = dadosRecebidos;
-        sessionStorage.setItem("dados", JSON.stringify(this.cursosParaOsCard));
-      })
-    };
+    this.workshopService.buscarCursos().subscribe((dadosRecebidos: cursosInterface[]) => {
+      console.log("Dados recebidos da API!");
+      this.cursosParaOsCard = dadosRecebidos;
+      localStorage.setItem("dados", JSON.stringify(this.cursosParaOsCard));
+      console.log("teste")
+    })
   }
+
   comprar(curso: cursosInterface) {
 
-  let carrinho: cursosInterface[] = JSON.parse(sessionStorage.getItem("carrinho") || "[]");
-
-  
-  carrinho.push(curso);
+    let carrinho: cursosInterface[] = JSON.parse(sessionStorage.getItem("carrinho") || "[]");
 
 
-  sessionStorage.setItem("carrinho", JSON.stringify(carrinho));
+    carrinho.push(curso);
 
 
-  this.router.navigate(['/pagar']);
-}
+    sessionStorage.setItem("carrinho", JSON.stringify(carrinho));
+
+
+    this.router.navigate(['/pagar']);
+  }
 
 }

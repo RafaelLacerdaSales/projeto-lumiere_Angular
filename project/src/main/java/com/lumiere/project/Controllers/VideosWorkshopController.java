@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.lumiere.project.dto.AulaWorkshopDTO;
 import com.lumiere.project.dto.BuscarAulaWorkshop;
-import com.lumiere.project.dto.CursoDTO;
 import com.lumiere.project.entities.VideosWorkshopEntities;
 import com.lumiere.project.entities.WorkshopEntities;
 import com.lumiere.project.infra.SecurityConfig;
@@ -76,11 +75,13 @@ public class VideosWorkshopController {
 		}
 
 	}
+	
 	@GetMapping("/buscar")
 	public List<BuscarAulaWorkshop> listUsers() {
 		return videosRepositories.findAll().stream()
 				.map(u -> new BuscarAulaWorkshop(u.getId(), u.getTitulo(), u.getUrlDaAula(), u.getDescricao())).toList();
 	}
+	
 	
 	@CrossOrigin(origins = "http://localhost:4200")
 	@PutMapping("/atualizar/{id}")
@@ -113,3 +114,5 @@ public class VideosWorkshopController {
 	}
 
 }
+
+

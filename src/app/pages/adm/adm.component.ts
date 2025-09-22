@@ -22,7 +22,6 @@ export class AdmComponent {
   cursoSelecionadoParaExcluir: number = 0;
 
   // DADOS DOS CURSOS
-  cursos: any[] = [];
   id: number = 0;
   tituloDoCurso: String = ``;
   descricao: String = ``;
@@ -189,22 +188,16 @@ export class AdmComponent {
     this.carregarCursosNaTabela();
   }
 
+  
   carregarCursosNaTabela() {
-    const dadosCursos = sessionStorage.getItem('dados');
-    if (dadosCursos) {
-      console.log('Os dados existem no cache! Carregando...');
-      this.buscarCursos = JSON.parse(dadosCursos);
-    } else {
-      console.log('Cache vazio. Buscando da API...');
-      this.workshopService
-        .buscarCursos()
-        .subscribe((dadosRecebidos: cursosInterface[]) => {
-          console.log('Dados recebidos da API!');
-          this.buscarCursos = dadosRecebidos;
-          sessionStorage.setItem('dados', JSON.stringify(this.buscarCursos));
-        });
-    }
+    this.workshopService.buscarCursos().subscribe((dadosRecebidos: cursosInterface[]) => {
+      console.log("Dados recebidos da API!");
+      this.buscarCursos = dadosRecebidos;
+      localStorage.setItem("dados", JSON.stringify(this.buscarCursos));
+      console.log("teste")
+    })
   }
+
 
   cadastrarFuncionario() {
     const dadosFuncionarios = {

@@ -1,6 +1,7 @@
-package com.lumiere.project.Controllers;
+package com.lumiere.project.controllers;
 
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,6 +11,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -45,8 +48,9 @@ public class FuncionarioController {
 		if (this.repository.findByTelefoneAndEmailAndCpf(funcionario.telefone(), funcionario.email(), funcionario.cpf()) != null ) {
 			return ResponseEntity.badRequest().body(Map.of("error", "verifiquei os campos"));
 		}
+	    System.out.println("recebi o " + funcionario.rg() );
 		String encryptedPassword = new BCryptPasswordEncoder().encode(funcionario.senha());
-		UsersEntities newUser = new UsersEntities(funcionario.nome(), funcionario.cpf(), funcionario.data_nascimento(), funcionario.telefone(), funcionario.email(), encryptedPassword, funcionario.role(), funcionario.RG(), funcionario.caminhoDoArquivo());
+		UsersEntities newUser = new UsersEntities(funcionario.nome(), funcionario.cpf(), funcionario.data_nascimento(), funcionario.telefone(), funcionario.email(), encryptedPassword, funcionario.role(), funcionario.rg(), funcionario.caminhoDoArquivo());
 		this.repository.save(newUser);
 		return ResponseEntity.ok().body(Map.of("sucesso", "cadastro concluido"));
 	}
@@ -74,4 +78,20 @@ public class FuncionarioController {
 			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("error", "Login ou senha inválidos."));
 		}
 	}
+	
+	@CrossOrigin(origins = "http://localhost:4200")
+	@DeleteMapping("/{id}")
+	public ResponseEntity<?> deletarUsuario(@PathVariable String id) {
+		try {
+			Optional<UsersEntities> userId = repository.findById(id);
+			if (userId.isEmpty()) {
+				return ResponseEntity.badRequest().body(Map.of("error", "usuario não encontrado no banco de dados"));
+			}
+			repository.deleteById(id);
+			return ResponseEntity.ok().body(Map.of("sucess", "usuario deletado"));
+		} catch (Exception e) {
+			return ResponseEntity.badRequest().body(Map.of("error", "Erro inesperado"));
+		}
+	}
+
 }

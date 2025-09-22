@@ -1,4 +1,4 @@
-package com.lumiere.project.Controllers;
+package com.lumiere.project.controllers;
 
 import java.util.List;
 import java.util.Map;
@@ -31,23 +31,26 @@ public class WorkshopController {
 	@CrossOrigin(origins = "http://localhost:4200")
 	@PostMapping("/cadastrar")
 	public ResponseEntity cadastrarCurso(@RequestBody CursoDTO curso) {
-		WorkshopEntities wk = new WorkshopEntities(curso.tituloDoCurso(), curso.descricao(), curso.preco(),
-				curso.caminhoDaCapa());
-		repository.save(wk);
-		return ResponseEntity.ok().body(Map.of("sucesso", "curso cadastrado"));
+		try {
+
+			WorkshopEntities wk = new WorkshopEntities(curso.tituloDoCurso(), curso.descricao(), curso.preco(),
+					curso.caminhoDaCapa());
+			repository.save(wk);
+			return ResponseEntity.ok().body(Map.of("sucesso", "curso cadastrado"));
+		} catch (Exception e) {
+			return ResponseEntity.badRequest().body(Map.of("error", "Não foi possível cadastrar o curso"));
+		}
 	}
 
 	@GetMapping("/buscar")
 	public List<CursoDTO> listUsers() {
-		return repository.findAll().stream()
-				.map(u -> new CursoDTO(u.getId(), u.getTituloDoCurso(), u.getDescricao(), u.getPreco(), u.getCaminhoDaCapa()))
-				.toList();
+		return repository.findAll().stream().map(u -> new CursoDTO(u.getId(), u.getTituloDoCurso(), u.getDescricao(),
+				u.getPreco(), u.getCaminhoDaCapa())).toList();
 	}
-	
 
 	@CrossOrigin(origins = "http://localhost:4200")
 	@DeleteMapping("delete/{id}")
-	public  ResponseEntity  deletarUsuario(@PathVariable Long id) {
+	public ResponseEntity deletarUsuario(@PathVariable Long id) {
 		try {
 			repository.deleteById(id);
 			return ResponseEntity.ok().body(Map.of("sucesso", "Curso deletado"));
@@ -66,25 +69,25 @@ public class WorkshopController {
 			System.out.println("!! ERRO: CURSO COM ID " + id + " NÃO ENCONTRADO !!");
 			return ResponseEntity.badRequest().body(Map.of("error", "não foi possívela achar o curso"));
 		}
-		
+
 		WorkshopEntities workshop = optionalWorkshop.get();
-		
+
 		if (curso.tituloDoCurso() != null && !curso.tituloDoCurso().isBlank()) {
 			workshop.setTituloDoCurso(curso.tituloDoCurso());
 		}
-		
+
 		if (curso.preco() != null && !curso.preco().isBlank()) {
 			workshop.setPreco(curso.preco());
 		}
-		
+
 		if (curso.descricao() != null && !curso.descricao().isBlank()) {
 			workshop.setDescricao(curso.descricao());
 		}
-		
+
 		if (curso.caminhoDaCapa() != null && !curso.caminhoDaCapa().isBlank()) {
 			workshop.setCaminhoDaCapa(curso.caminhoDaCapa());
 		}
-			
+
 		repository.save(workshop);
 
 		return ResponseEntity.ok().body(Map.of("sucesso", "curso atualizado"));

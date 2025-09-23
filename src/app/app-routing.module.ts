@@ -10,6 +10,7 @@ import { CarrinhoComponent } from './pages/carrinho/carrinho.component';
 import { AdmComponent } from './pages/adm/adm.component';
 import { AlunoComponent } from './pages/aluno/aluno.component';
 import { alunoGuard } from './validacao/aluno-guard.guard';
+import { MeuAprendizadoComponent } from './pages/meu-aprendizado/meu-aprendizado.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: 'workshop', component: WorkshopComponent },
   { path: 'contact', component: ContactComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'aprendizado', component: MeuAprendizadoComponent },
 
   { path: 'aulas', component: AulasComponent, canActivate: [alunoGuard] },
   { path: 'pagar', component: CarrinhoComponent, canActivate: [alunoGuard] },
@@ -29,4 +31,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

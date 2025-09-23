@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { FormBuilder, FormsModule } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { AdmServiceService } from 'src/app/Service/adm-service.service';
 import { WorkshopServiceService } from 'src/app/Service/workshop-service.service';
 import { cursosInterface } from 'src/app/interfaces/cursos-interface';
@@ -9,122 +9,113 @@ import { cursosInterface } from 'src/app/interfaces/cursos-interface';
   templateUrl: './adm.component.html',
   styleUrls: ['./adm.component.css'],
 })
-export class AdmComponent {
+export class AdmComponent implements OnInit {
   constructor(
     private workshopService: WorkshopServiceService,
     private fb: FormBuilder,
     private admService: AdmServiceService
   ) {}
-  //para puxar os cursos
+
+  // Para puxar os cursos
   buscarCursos: cursosInterface[] = [];
 
-  // NOVA PROPRIEDADE PARA O MODAL DE EXCLUSÃO
+  // Propriedade para o modal de exclusão de curso
   cursoSelecionadoParaExcluir: number = 0;
 
-  // DADOS DOS CURSOS
+  // Dados dos cursos
   id: number = 0;
-  tituloDoCurso: String = ``;
-  descricao: String = ``;
-  preco: String = ``;
-  caminhoDaCapa: String = ``;
+  tituloDoCurso: string = '';
+  descricao: string = '';
+  preco: string = '';
+  caminhoDaCapa: string = '';
 
-  // DADOS DO FUNCIONÁRIO
-  nome: String = ``;
-  cpf: String = ``;
-  telefone: String = ``;
-  senha: String = ``;
-  email: String = ``;
-  role: String = `ADMIN`;
-  data_nascimento: String = ``;
-  rg: String = ``;
-  caminhoDoArquivo: String = ``;
+  // Dados do funcionário
+  nome: string = '';
+  cpf: string = '';
+  telefone: string = '';
+  senha: string = '';
+  email: string = '';
+  role: string = 'ADMIN';
+  data_nascimento: string = '';
+  rg: string = '';
+  caminhoDoArquivo: string = '';
+
+  // Novas propriedades para funcionários
+  funcionarios: any[] = [];
+  funcionarioEditando: any = {};
+  funcionarioIdParaExcluir: number = 0;
+
+  ngOnInit(): void {
+    this.carregarCursosNaTabela();
+    // Mostrar formulário de cadastro por padrão
+    this.mostrarSecao('formCadastro');
+  }
 
   ngAfterViewInit() {
+    this.configurarEventosBotoes();
+  }
+
+  configurarEventosBotoes() {
+    // Configurar eventos de clique para os botões de navegação
     const cadastro = document.getElementById('Cadastro');
     const videosWorkshop = document.getElementById('videosWorkshop');
-    const formCadastro = document.getElementById('formCadastro');
-    const containerAddVideios = document.getElementById('containerAddVideios');
     const tabela = document.getElementById('tabela');
-    const tabela_videios = document.getElementById('tabela_videios');
+    const tabelafuncionarios = document.getElementById('tabelafuncionarios');
     const addAula = document.querySelector('.addAula');
     const addCurso = document.querySelector('.addCurso');
 
-    const container_aulas = document.getElementById('container_aulas');
-
-    videosWorkshop?.addEventListener('click', (e) => {
-      e.preventDefault();
-      if (
-        formCadastro &&
-        tabela_videios &&
-        containerAddVideios &&
-        container_aulas
-      ) {
-        tabela_videios.style.display = 'none';
-        formCadastro.style.display = 'none';
-        containerAddVideios.style.display = 'block';
-        container_aulas.style.display = 'none';
-      }
+    cadastro?.addEventListener('click', () => this.mostrarSecao('formCadastro'));
+    videosWorkshop?.addEventListener('click', () => this.mostrarSecao('containerAddVideios'));
+    tabela?.addEventListener('click', () => this.mostrarSecao('tabela_videios'));
+    tabelafuncionarios?.addEventListener('click', () => {
+      this.mostrarSecao('tabela_funcionarios');
+      this.carregarFuncionarios();
     });
-    cadastro?.addEventListener('click', (e) => {
-      e.preventDefault();
-      if (
-        containerAddVideios &&
-        formCadastro &&
-        tabela_videios &&
-        container_aulas
-      ) {
-        containerAddVideios.style.display = 'none';
-        formCadastro.style.display = 'block';
-        tabela_videios.style.display = 'none';
-        container_aulas.style.display = 'none';
-      }
-    });
-    tabela?.addEventListener('click', (e) => {
-      e.preventDefault();
-      if (
-        formCadastro &&
-        tabela_videios &&
-        containerAddVideios &&
-        container_aulas
-      ) {
-        containerAddVideios.style.display = 'none';
-        formCadastro.style.display = 'none';
-        container_aulas.style.display = 'none';
-        tabela_videios.style.display = 'flex';
-      }
-    });
-    addAula?.addEventListener('click', (e) => {
-      e.preventDefault();
-      if (container_aulas && containerAddVideios) {
-        containerAddVideios.style.display = 'none';
-        container_aulas.style.display = 'flex';
-      }
-    });
-
-    addCurso?.addEventListener('click', (e) => {
-      e.preventDefault();
-      if (container_aulas && containerAddVideios) {
-        containerAddVideios.style.display = 'block';
-        container_aulas.style.display = 'none';
-      }
-    });
+    
+    addAula?.addEventListener('click', () => this.mostrarSecao('container_aulas'));
+    addCurso?.addEventListener('click', () => this.mostrarSecao('containerAddVideios'));
   }
-  //REQUISIÇÕES!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
+  mostrarSecao(secaoId: string) {
+    // Esconder todas as seções
+    const secoes = [
+      'formCadastro', 
+      'tabela_funcionarios', 
+      'containerAddVideios', 
+      'container_aulas', 
+      'tabela_videios'
+    ];
+    
+    secoes.forEach(id => {
+      const elemento = document.getElementById(id);
+      if (elemento) {
+        elemento.style.display = 'none';
+      }
+    });
+
+    // Mostrar a seção específica
+    const secaoAtiva = document.getElementById(secaoId);
+    if (secaoAtiva) {
+      secaoAtiva.style.display = 'block';
+    }
+  }
+
+  // MÉTODOS PARA CURSOS
   editar(curso: any) {
     console.log('Objeto CURSO completo recebido:', curso);
-    this.id = curso;
+    this.id = curso.id;
+    this.tituloDoCurso = curso.tituloDoCurso;
+    this.descricao = curso.descricao;
+    this.preco = curso.preco;
   }
 
   deletar() {
-    this.workshopService
-      .deletarCurso(this.cursoSelecionadoParaExcluir)
-      .subscribe({
+    if (this.cursoSelecionadoParaExcluir) {
+      this.workshopService.deletarCurso(this.cursoSelecionadoParaExcluir).subscribe({
         next: (response) => {
-          console.log('entrei 2 etapa');
           if (response.sucesso) {
-            console.log('entrei 3 etapa');
             alert(response.sucesso);
+            this.carregarCursosNaTabela();
           }
         },
         error: (err) => {
@@ -133,6 +124,7 @@ export class AdmComponent {
           }
         },
       });
+    }
   }
 
   atualizarCursos() {
@@ -145,10 +137,10 @@ export class AdmComponent {
 
     this.workshopService.atualizarCurso(this.id, dadosCursos).subscribe({
       next: (response) => {
-        console.log('entrei 2 etapa');
         if (response.sucesso) {
-          console.log('entrei 3 etapa');
           alert(response.sucesso);
+          this.carregarCursosNaTabela();
+          // Fechar modal (você pode adicionar lógica para fechar o modal Bootstrap)
         }
       },
       error: (err) => {
@@ -160,7 +152,6 @@ export class AdmComponent {
   }
 
   cadastrarCursos() {
-    console.log('entrei 1 etapa');
     const dadosCursos = {
       tituloDoCurso: this.tituloDoCurso,
       descricao: this.descricao,
@@ -170,10 +161,14 @@ export class AdmComponent {
 
     this.workshopService.cadastrarCurso(dadosCursos).subscribe({
       next: (response) => {
-        console.log('entrei 2 etapa');
         if (response.sucesso) {
-          console.log('entrei 3 etapa');
           alert(response.sucesso);
+          this.carregarCursosNaTabela();
+          // Limpar formulário
+          this.tituloDoCurso = '';
+          this.descricao = '';
+          this.preco = '';
+          this.caminhoDaCapa = '';
         }
       },
       error: (err) => {
@@ -184,21 +179,13 @@ export class AdmComponent {
     });
   }
 
-  ngOnInit(): void {
-    this.carregarCursosNaTabela();
-  }
-
-  
   carregarCursosNaTabela() {
     this.workshopService.buscarCursos().subscribe((dadosRecebidos: cursosInterface[]) => {
-      console.log("Dados recebidos da API!");
       this.buscarCursos = dadosRecebidos;
-      localStorage.setItem("dados", JSON.stringify(this.buscarCursos));
-      console.log("teste")
-    })
+    });
   }
 
-
+  // MÉTODOS PARA FUNCIONÁRIOS
   cadastrarFuncionario() {
     const dadosFuncionarios = {
       nome: this.nome,
@@ -211,12 +198,20 @@ export class AdmComponent {
       rg: this.rg,
       caminhoDoArquivo: this.caminhoDoArquivo,
     };
+
     this.admService.cadastrarFuncionario(dadosFuncionarios).subscribe({
       next: (response) => {
-        console.log('entrei 2 etapa');
         if (response.sucesso) {
-          console.log('entrei 3 etapa');
           alert(response.sucesso);
+          // Limpar formulário
+          this.nome = '';
+          this.cpf = '';
+          this.telefone = '';
+          this.senha = '';
+          this.email = '';
+          this.data_nascimento = '';
+          this.rg = '';
+          this.caminhoDoArquivo = '';
         }
       },
       error: (err) => {
@@ -225,5 +220,67 @@ export class AdmComponent {
         }
       },
     });
+  }
+
+  carregarFuncionarios() {
+    // Dados de exemplo para demonstração
+    this.funcionarios = [
+      {
+        id: 1,
+        nome: 'João Silva',
+        email: 'joao@empresa.com',
+        telefone: '(11) 99999-9999',
+        cpf: '123.456.789-00',
+        data_nascimento: '1990-01-15',
+        rg: '12.345.678-9'
+      },
+      {
+        id: 2,
+        nome: 'Maria Santos',
+        email: 'maria@empresa.com',
+        telefone: '(11) 88888-8888',
+        cpf: '987.654.321-00',
+        data_nascimento: '1985-05-20',
+        rg: '98.765.432-1'
+      }
+    ];
+
+    // Quando tiver o serviço real, descomente:
+    /*
+    this.admService.buscarFuncionarios().subscribe({
+      next: (response: any) => {
+        this.funcionarios = response;
+      },
+      error: (err) => {
+        console.error('Erro ao carregar funcionários:', err);
+        alert('Erro ao carregar funcionários');
+      }
+    });
+    */
+  }
+
+  editarFuncionario(funcionario: any) {
+    this.funcionarioEditando = { ...funcionario };
+  }
+
+  selecionarFuncionarioParaExcluir(id: number) {
+    this.funcionarioIdParaExcluir = id;
+  }
+
+  atualizarFuncionario() {
+    // Implementação real quando tiver o serviço
+    console.log('Atualizando funcionário:', this.funcionarioEditando);
+    alert('Funcionário atualizado com sucesso!');
+    this.carregarFuncionarios();
+  }
+
+  excluirFuncionario() {
+    if (this.funcionarioIdParaExcluir) {
+      // Implementação real quando tiver o serviço
+      console.log('Excluindo funcionário ID:', this.funcionarioIdParaExcluir);
+      alert('Funcionário excluído com sucesso!');
+      this.carregarFuncionarios();
+      this.funcionarioIdParaExcluir = 0;
+    }
   }
 }

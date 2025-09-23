@@ -23,6 +23,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { SharedModule } from './shared/shared.module';
 import { CommonModule } from '@angular/common';
 import { AdmComponent } from './pages/adm/adm.component';
+import { MeuAprendizadoModule } from './pages/meu-aprendizado/meu-aprendizado.module';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { AdmComponent } from './pages/adm/adm.component';
     LoginModule,
     FormsModule,
     HttpClientModule,
-    CommonModule
+    CommonModule,
+    MeuAprendizadoModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

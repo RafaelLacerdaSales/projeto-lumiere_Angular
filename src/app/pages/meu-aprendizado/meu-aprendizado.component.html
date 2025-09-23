@@ -1,0 +1,17 @@
+<div class="aprendizado-container">
+  <header class="aprendizado-header">
+    <h1>Meu aprendizado</h1>
+    <h3>Continuar assistindo</h3>
+  </header>
+
+  <div class="cursos-grid">
+    <div class="curso-card" *ngFor="let curso of cursos">
+      <img [src]="curso.imagem" [alt]="curso.nome" />
+      <div class="curso-info">
+        <p>{{ curso.nome }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>

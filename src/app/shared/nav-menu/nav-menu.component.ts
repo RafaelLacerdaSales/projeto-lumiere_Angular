@@ -16,6 +16,7 @@ import * as bootstrap from 'bootstrap';
 export class NavMenuComponent implements OnInit, AfterViewInit {
   isAuthenticated = false;
   isWorkshopRoute: boolean = false;
+  isHomePage: boolean = false;
   modalContato: bootstrap.Modal | undefined;
 
   constructor(private router: Router, private cdr: ChangeDetectorRef) {}
@@ -41,6 +42,8 @@ export class NavMenuComponent implements OnInit, AfterViewInit {
   }
 
   private checkCurrentRoute(): void {
+    const currentUrl = this.router.url;
+    this.isHomePage = currentUrl === '/' || currentUrl.includes('/home');
     this.isWorkshopRoute = this.router.url.includes('/workshop');
   }
   redirectToLogin() {

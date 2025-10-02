@@ -9,6 +9,7 @@
   background-color: var(--cor-principal);
   display: flex;
   justify-content: center;
+  z-index: 1;
 }
 
 .img_primary {
@@ -21,6 +22,7 @@
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
+  z-index: 2;
 }
 
 .header__TXT {

@@ -32,7 +32,10 @@
           />
         </div>
 
-        <div *ngIf="isAuthenticated" class="user-logged dropdown">
+        <div
+          *ngIf="isAuthenticated && !isHomePage"
+          class="user-logged dropdown"
+        >
           <i
             class="bi bi-person-circle fs-1 avatar"
             style="cursor: pointer"

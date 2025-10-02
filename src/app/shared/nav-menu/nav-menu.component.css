@@ -8,6 +8,10 @@
   transition: all 0.3s ease;
 }
 
+.bi-person-circle {
+  color: var(--cor-texto);
+}
+
 /* CONTÊINER PARA LOGO + MENU (lado esquerdo) */
 .header-left {
   display: flex;
@@ -49,10 +53,6 @@
   white-space: nowrap;
 }
 
-modal-dialog {
-  z-index: 1000;
-}
-
 .container_header nav ul li a:hover {
   color: #ffffff;
   font-weight: 700;
@@ -86,7 +86,7 @@ modal-dialog {
 /* CLASSE CORRIGIDA - removidas as propriedades que escondiam o botão */
 .btn-login {
   /* As propriedades problemáticas foram removidas */
-  background-color: #826538; /* Marrom para combinar com o header */
+  background-color: #826538;
   color: white;
   pointer-events: auto;
 }
@@ -99,6 +99,11 @@ modal-dialog {
 
 .modal-title {
   color: var(--cor-titulo);
+}
+
+.dropdown-menu {
+  width: 13vw;
+  height: 15vh;
 }
 
 /* ========== MEDIA QUERIES AJUSTADAS ========== */

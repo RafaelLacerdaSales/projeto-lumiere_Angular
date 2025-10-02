@@ -21,161 +21,115 @@
       </ul>
     </nav>
 
-    <div *ngIf="isWorkshopRoute || isAuthenticated" class="auth-section">
-      <div *ngIf="!isAuthenticated && isWorkshopRoute">
-        <input
-          class="btn-login btn-login_block"
-          (click)="redirectToLogin()"
-          type="button"
-          value="Login"
-        />
+    <header>
+      <div *ngIf="isWorkshopRoute || isAuthenticated" class="auth-section">
+        <div *ngIf="!isAuthenticated && isWorkshopRoute">
+          <input
+            class="btn-login btn-login_block"
+            (click)="redirectToLogin()"
+            type="button"
+            value="Login"
+          />
+        </div>
+
+        <div *ngIf="isAuthenticated" class="user-logged dropdown">
+          <i
+            class="bi bi-person-circle fs-1 avatar"
+            style="cursor: pointer"
+            id="dropdownUserMenu"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          ></i>
+
+          <ul
+            class="dropdown-menu dropdown-menu-end shadow"
+            aria-labelledby="dropdownUserMenu"
+          >
+            <li><hr class="dropdown-divider" /></li>
+
+            <li>
+              <a class="dropdown-item" routerLink="/aprendizado">
+                <i class="bi bi-mortarboard"></i> Meu Aprendizado
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="#">
+                <i class="bi bi-person"></i> Perfil
+              </a>
+            </li>
+            <li><hr class="dropdown-divider" /></li>
+
+            <li>
+              <a class="dropdown-item" href="#" (click)="logout()">
+                <i class="bi bi-box-arrow-right"></i> Sair
+              </a>
+            </li>
+          </ul>
+        </div>
       </div>
-      <div *ngIf="isAuthenticated" class="user-logged">
-        <i
-          class="bi bi-person-circle fs-1 avatar"
-          style="cursor: pointer"
-          data-bs-toggle="modal"
-          data-bs-target="#modalConta"
-        ></i>
-      </div>
-    </div>
+    </header>
   </header>
+</div>
 
-  <!--========== Modal Conta ========= -->
-  <div
-    class="modal fade"
-    id="modalConta"
-    tabindex="-1"
-    aria-labelledby="modalContaLabel"
-    aria-hidden="true"
-  >
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content rounded-4 shadow">
-        <div class="modal-header">
-          <h5 class="modal-title" id="modalContaLabel">Atualizar Conta</h5>
-          <button
-            type="button"
-            class="btn-close"
-            data-bs-dismiss="modal"
-            aria-label="Close"
-          ></button>
-        </div>
-        <div class="modal-body">
-          <form id="formConta">
-            <div class="mb-3">
-              <label for="email" class="form-label">Novo E-mail</label>
-              <input
-                type="email"
-                class="form-control"
-                id="email"
-                placeholder="Digite seu novo e-mail"
-                required
-              />
-            </div>
-
-            <div class="mb-3">
-              <label for="senha" class="form-label">Nova Senha</label>
-              <input
-                type="password"
-                class="form-control"
-                id="senha"
-                placeholder="Digite sua nova senha"
-                required
-              />
-            </div>
-
-            <button type="submit" class="btn btn-success w-100">
-              Atualizar Conta
-            </button>
-          </form>
-        </div>
-        <div class="modal-footer d-flex justify-content-between">
-          <button type="button" class="btn btn-info text-white">
-            Meu Aprendizado
-          </button>
-          <button
-            type="button"
-            class="btn btn-info text-white"
-            (click)="logout()"
-          >
-            Sair
-          </button>
-          <button
-            type="button"
-            class="btn btn-secondary"
-            data-bs-dismiss="modal"
-          >
-            Fechar
-          </button>
-        </div>
+<!-- ======= Modal Contato ========== -->
+<div
+  class="modal fade"
+  id="modalContato"
+  tabindex="-1"
+  aria-labelledby="modalContatoLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content text-center p-3">
+      <div class="modal-header border-0">
+        <h5 class="modal-title w-100" id="modalContatoLabel">
+          Acesse nossos canais
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Fechar"
+        ></button>
       </div>
-    </div>
-  </div>
-
-  <!-- ======= Modal Contato ========== -->
-  <div
-    class="modal fade"
-    id="modalContato"
-    tabindex="-1"
-    aria-labelledby="modalContatoLabel"
-    aria-hidden="true"
-  >
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content text-center p-3">
-        <div class="modal-header border-0">
-          <h5 class="modal-title w-100" id="modalContatoLabel">
-            Acesse nossos canais
-          </h5>
-          <button
-            type="button"
-            class="btn-close"
-            data-bs-dismiss="modal"
-            aria-label="Fechar"
-          ></button>
-        </div>
-        <div class="modal-body">
-          <p>Nos siga nas redes sociais:</p>
-          <div class="d-flex justify-content-center gap-3 mb-3">
-            <a
-              href="https://www.instagram.com/seu_usuario"
-              target="_blank"
-              class="text-dark fs-3"
-            >
-              <i class="bi bi-instagram"></i>
-            </a>
-            <a
-              href="https://www.facebook.com/seu_usuario"
-              target="_blank"
-              class="text-dark fs-3"
-            >
-              <i class="bi bi-facebook"></i>
-            </a>
-            <a
-              href="https://www.tiktok.com/@seu_usuario"
-              target="_blank"
-              class="text-dark fs-3"
-            >
-              <i class="bi bi-tiktok"></i>
-            </a>
-          </div>
-          <p>Ou entre em contato direto:</p>
+      <div class="modal-body">
+        <p>Nos siga nas redes sociais:</p>
+        <div class="d-flex justify-content-center gap-3 mb-3">
           <a
-            href="https://wa.me/552199999999"
+            href="https://www.instagram.com/seu_usuario"
             target="_blank"
-            class="btn btn-success"
+            class="text-dark fs-3"
           >
-            <i class="bi bi-whatsapp"></i> Agende pelo WhatsApp
+            <i class="bi bi-instagram"></i>
+          </a>
+          <a
+            href="https://www.facebook.com/seu_usuario"
+            target="_blank"
+            class="text-dark fs-3"
+          >
+            <i class="bi bi-facebook"></i>
+          </a>
+          <a
+            href="https://www.tiktok.com/@seu_usuario"
+            target="_blank"
+            class="text-dark fs-3"
+          >
+            <i class="bi bi-tiktok"></i>
           </a>
         </div>
-        <div class="modal-footer border-0 justify-content-center">
-          <button
-            type="button"
-            class="btn btn-secondary"
-            data-bs-dismiss="modal"
-          >
-            Fechar
-          </button>
-        </div>
+        <p>Ou entre em contato direto:</p>
+        <a
+          href="https://wa.me/552199999999"
+          target="_blank"
+          class="btn btn-success"
+        >
+          <i class="bi bi-whatsapp"></i> Agende pelo WhatsApp
+        </a>
+      </div>
+      <div class="modal-footer border-0 justify-content-center">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Fechar
+        </button>
       </div>
     </div>
   </div>

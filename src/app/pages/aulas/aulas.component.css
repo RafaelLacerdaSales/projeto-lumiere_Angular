@@ -191,3 +191,227 @@ nav .links a:hover {
   background-color: #ccc;
   margin: 10px 0; /* espaçamento acima e abaixo da barra */
 }
+/* Estilos Modernizados */
+.aula-card {
+  background: linear-gradient(135deg, var(--Fundo-caixas-workshop) 0%, #ffffff 100%);
+  border: none;
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.aula-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid var(--fundo-procedimentos);
+}
+
+.aula-badge {
+  background: linear-gradient(45deg, var(--cor-botao), var(--cor-titulo-destaque));
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 25px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-right: 1rem;
+}
+
+.card-title {
+  font-family: var(--font-principal);
+  font-size: 2.2rem;
+  color: var(--cor-titulo);
+  margin: 0;
+  background: linear-gradient(45deg, var(--cor-titulo), var(--cor-titulo-destaque));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.video-container iframe {
+  width: 100%;
+  height: 480px;
+  border-radius: 16px;
+  border: none;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease;
+}
+
+.video-container iframe:hover {
+  transform: scale(1.01);
+}
+
+.description h4 {
+  font-family: var(--font-principal);
+  font-weight: 700;
+  color: var(--cor-titulo);
+  display: flex;
+  align-items: center;
+}
+
+.description p {
+  font-family: var(--font-principal);
+  color: var(--cor-texto);
+  font-size: 1.1rem;
+  line-height: 1.6;
+  padding: 1rem;
+  background: rgba(142, 116, 76, 0.05);
+  border-radius: 12px;
+  border-left: 4px solid var(--cor-botao);
+}
+
+/* Sidebar Modernizada */
+.sidebar-modern {
+  background: white;
+  border-radius: 0;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  border-left: 6px solid var(--cor-botao);
+  height: fit-content;
+  position: sticky;
+  top: 100px;
+}
+
+.sidebar-header {
+  background: linear-gradient(135deg, var(--cor-botao), var(--cor-titulo-destaque));
+  color: white;
+  padding: 1.5rem;
+  margin: -1px -1px 0 -1px;
+}
+
+.sidebar-header h3 {
+  margin: 0;
+  font-family: var(--font-principal);
+  font-size: 1.4rem;
+  display: flex;
+  align-items: center;
+}
+
+.aulas-list {
+  padding: 1rem;
+}
+
+.aula-item {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  margin-bottom: 0.5rem;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.aula-item:hover {
+  background: rgba(142, 116, 76, 0.1);
+  transform: translateX(5px);
+}
+
+.aula-item.active {
+  background: linear-gradient(135deg, var(--cor-botao), var(--cor-titulo-destaque));
+  color: white;
+  border-color: var(--cor-botao);
+}
+
+.aula-indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--cor-botao);
+  margin-right: 1rem;
+  transition: all 0.3s ease;
+}
+
+.aula-item.active .aula-indicator {
+  background: white;
+  transform: scale(1.2);
+}
+
+.aula-number {
+  font-weight: 700;
+  font-size: 0.9rem;
+  margin-right: 1rem;
+  min-width: 30px;
+}
+
+.aula-title {
+  font-weight: 500;
+  flex: 1;
+}
+
+/* Seção de Comentários Modernizada */
+.comments-card {
+  background: white;
+  border: none;
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.comments-section h4 {
+  font-family: var(--font-principal);
+  font-weight: 700;
+  color: var(--cor-titulo);
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.comments-section textarea {
+  resize: none;
+  padding: 1.2rem;
+  border-radius: 12px;
+  border: 2px solid #e9ecef;
+  transition: all 0.3s ease;
+}
+
+.comments-section textarea:focus {
+  border-color: var(--cor-botao);
+  box-shadow: 0 0 0 0.2rem rgba(142, 116, 76, 0.25);
+}
+
+.btn-primary {
+  background: linear-gradient(45deg, var(--cor-botao), var(--cor-titulo-destaque));
+  border: none;
+  border-radius: 25px;
+  padding: 0.8rem 2rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(142, 116, 76, 0.4);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .aula-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .aula-badge {
+    margin-bottom: 1rem;
+  }
+  
+  .video-container iframe {
+    height: 300px;
+  }
+  
+  .sidebar-modern {
+    border-left: none;
+    border-top: 6px solid var(--cor-botao);
+    margin-top: 2rem;
+  }
+}
+
+.sidebar-modern {
+  position: relative; /* remove o sticky */
+  top: auto;
+  align-self: center; /* força centralizar na coluna */
+}
+.sidebar-modern {
+  position: relative;
+  top: auto;
+  margin-top: 115px; /* ajuste o valor conforme necessário */
+}

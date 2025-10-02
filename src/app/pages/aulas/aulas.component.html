@@ -1,76 +1,58 @@
 <div class="container mt-4">
   <div class="row">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <!-- Conteúdo principal -->
     <div class="col-lg-8">
-      <div class="card">
+      <div class="card aula-card">
         <div class="card-body">
-          <h2 class="card-title">Aula 1 - Boas-vindas</h2>
+          <div class="aula-header">
+            <span class="aula-badge">Aula {{ currentLesson?.id }}</span>
+            <h2 class="card-title">{{ currentLesson?.title }}</h2>
+          </div>
           <div class="video-container my-3">
-            <iframe
-              src="https://www.youtube.com/embed/tgbNymZ7vqY"
-              title="Vídeo Aula"
-              frameborder="0"
-              allowfullscreen
-            ></iframe>
+            <iframe [src]="currentVideo" title="Vídeo Aula" frameborder="0" allowfullscreen></iframe>
           </div>
           <div class="description mt-4">
-            <h4>Descrição:</h4>
-            <p>
-              Bem-vindo ao curso! Nesta primeira aula, você conhecerá os
-              objetivos do curso e como aproveitar melhor as aulas.
-            </p>
+            <h4><i class="fas fa-info-circle me-2"></i>Descrição:</h4>
+            <p>{{ currentLesson?.description }}</p>
           </div>
         </div>
       </div>
 
-      <div class="card">
+      <div class="card comments-card">
         <div class="card-body comments-section">
-          <h4>Comentários:</h4>
+          <h4><i class="fas fa-comments me-2"></i>Comentários:</h4>
           <div id="comments-list" class="mb-3">
             <!-- Comentários -->
           </div>
           <form id="comment-form">
-            <textarea
-              id="comment-input"
-              class="form-control"
-              placeholder="Digite seu comentário..."
-              required
-            ></textarea>
-            <button type="submit" class="btn btn-dark mt-3">
-              Enviar Comentário
+            <textarea id="comment-input" class="form-control"
+                      placeholder="Digite seu comentário..." rows="4" required></textarea>
+            <button type="submit" class="btn btn-primary mt-3">
+              <i class="fas fa-paper-plane me-2"></i>Enviar Comentário
             </button>
           </form>
         </div>
       </div>
     </div>
-<!-- Barra lateral -->
-<div class="col-lg-4">
-  <div class="sidebar-full">
-    <div class="modulo">
-      <h2 class="modulo-header" onclick="toggleModulo(this)">
-        Módulo 1: Introdução <span class="arrow">▶</span>
-      </h2>
-      <ul class="modulo-lista d-none">
-        <li><span class="aula-num">1</span> Boas-vindas</li>
-        <li><span class="aula-num">2</span> Apresentação do Curso</li>
-        <li><span class="aula-num">3</span> Como usar a plataforma</li>
-      </ul>
-    </div>
 
-    <div class="barra-modulo"></div> <!-- barra separadora -->
-
-    <div class="modulo">
-      <h2 class="modulo-header" onclick="toggleModulo(this)">
-        Módulo 2: Avançado <span class="arrow">▶</span>
-      </h2>
-      <ul class="modulo-lista d-none">
-        <li><span class="aula-num">1</span> Aula 4</li>
-        <li><span class="aula-num">2</span> Aula 5</li>
-      </ul>
+    <!-- Barra lateral - Lista de Aulas -->
+    <div class="col-lg-4">
+      <div class="sidebar-modern">
+        <div class="sidebar-header">
+          <h3><i class="fas fa-play-circle me-2"></i>Lista de Aulas</h3>
+        </div>
+        <div class="aulas-list">
+          <div *ngFor="let lesson of lessons"
+               class="aula-item"
+               [class.active]="lesson.id === selectedLesson"
+               (click)="selectLesson(lesson.id)">
+            <span class="aula-indicator"></span>
+            <span class="aula-number">{{ lesson.id | number:'2.0' }}</span>
+            <span class="aula-title">{{ lesson.title }}</span>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
-
-  </div>
-</div>
-

@@ -68,7 +68,7 @@ export class LoginComponent {
         if (response.response) {
           localStorage.setItem('token', 'validado');
           sessionStorage.setItem('token', response.token);
-          sessionStorage.setItem(
+          localStorage.setItem(
             'dadosUsuario',
             JSON.stringify(response.response)
           );

@@ -91,6 +91,54 @@
   pointer-events: auto;
 }
 
+/* NOVO ESTILO PARA BOTÃO WHATSAPP NO MODAL */
+.btn-whatsapp-simple {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 24px;
+  font-size: 1rem;
+  background-color: #25d366;
+  color: white;
+  border: none;
+  border-radius: 50px;
+  font-family: var(--font-secundaria), sans-serif;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+  text-decoration: none;
+}
+
+.btn-whatsapp-simple:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+  background-color: #1ebe5d;
+  color: white;
+  text-decoration: none;
+}
+
+.btn-whatsapp-simple i {
+  font-size: 1.3rem;
+  color: white;
+}
+
+/* Efeito de pulso animado */
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(37, 211, 102, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+  }
+}
+
+.btn-whatsapp-simple {
+  animation: pulse 2s infinite;
+}
+
 .modal-body {
   color: var(--cor-titulo-destaque);
   font-size: 18px;

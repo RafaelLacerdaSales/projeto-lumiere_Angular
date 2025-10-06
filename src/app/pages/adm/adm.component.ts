@@ -4,23 +4,36 @@ import { AdmServiceService } from 'src/app/Service/adm-service.service';
 import { WorkshopServiceService } from 'src/app/Service/workshop-service.service';
 import { cursosInterface } from 'src/app/interfaces/cursos-interface';
 
+// Interface para funcionários
+export interface FuncionarioInterface {
+  id: number;
+  nome: string;
+  email: string;
+  telefone: string;
+  cpf: string;
+  data_nascimento: string;
+  rg: string;
+  senha?: string;
+  role?: string;
+  caminhoDoArquivo?: string;
+}
+
 @Component({
   selector: 'app-adm',
   templateUrl: './adm.component.html',
   styleUrls: ['./adm.component.css'],
 })
 export class AdmComponent implements OnInit {
-  constructor(
-    private workshopService: WorkshopServiceService,
-    private fb: FormBuilder,
-    private admService: AdmServiceService
-  ) {}
-
+  
   // Para puxar os cursos
   buscarCursos: cursosInterface[] = [];
 
-  // Propriedade para o modal de exclusão de curso
+  // Para puxar os funcionários
+  funcionarios: FuncionarioInterface[] = [];
+
+  // Propriedades para exclusão
   cursoSelecionadoParaExcluir: number = 0;
+  funcionarioIdParaExcluir: number = 0;
 
   // Dados dos cursos
   id: number = 0;
@@ -29,7 +42,7 @@ export class AdmComponent implements OnInit {
   preco: string = '';
   caminhoDaCapa: string = '';
 
-  // Dados do funcionário
+  // Dados do funcionário (para cadastro)
   nome: string = '';
   cpf: string = '';
   telefone: string = '';
@@ -40,14 +53,26 @@ export class AdmComponent implements OnInit {
   rg: string = '';
   caminhoDoArquivo: string = '';
 
-  // Novas propriedades para funcionários
-  funcionarios: any[] = [];
-  funcionarioEditando: any = {};
-  funcionarioIdParaExcluir: number = 0;
+  // Funcionário em edição
+  funcionarioEditando: FuncionarioInterface = {
+    id: 0,
+    nome: '',
+    email: '',
+    telefone: '',
+    cpf: '',
+    data_nascimento: '',
+    rg: ''
+  };
+
+  constructor(
+    private workshopService: WorkshopServiceService,
+    private fb: FormBuilder,
+    private admService: AdmServiceService
+  ) {}
 
   ngOnInit(): void {
     this.carregarCursosNaTabela();
-    // Mostrar formulário de cadastro por padrão
+    this.carregarFuncionarios();
     this.mostrarSecao('formCadastro');
   }
 
@@ -55,8 +80,29 @@ export class AdmComponent implements OnInit {
     this.configurarEventosBotoes();
   }
 
+  mostrarSecao(secaoId: string) {
+    const secoes = [
+      'formCadastro',
+      'tabela_funcionarios',
+      'containerAddVideios',
+      'container_aulas',
+      'tabela_videios'
+    ];
+    
+    secoes.forEach(id => {
+      const elemento = document.getElementById(id);
+      if (elemento) {
+        elemento.style.display = 'none';
+      }
+    });
+
+    const secaoAtiva = document.getElementById(secaoId);
+    if (secaoAtiva) {
+      secaoAtiva.style.display = 'block';
+    }
+  }
+
   configurarEventosBotoes() {
-    // Configurar eventos de clique para os botões de navegação
     const cadastro = document.getElementById('Cadastro');
     const videosWorkshop = document.getElementById('videosWorkshop');
     const tabela = document.getElementById('tabela');
@@ -71,38 +117,12 @@ export class AdmComponent implements OnInit {
       this.mostrarSecao('tabela_funcionarios');
       this.carregarFuncionarios();
     });
-    
     addAula?.addEventListener('click', () => this.mostrarSecao('container_aulas'));
     addCurso?.addEventListener('click', () => this.mostrarSecao('containerAddVideios'));
   }
 
-  mostrarSecao(secaoId: string) {
-    // Esconder todas as seções
-    const secoes = [
-      'formCadastro', 
-      'tabela_funcionarios', 
-      'containerAddVideios', 
-      'container_aulas', 
-      'tabela_videios'
-    ];
-    
-    secoes.forEach(id => {
-      const elemento = document.getElementById(id);
-      if (elemento) {
-        elemento.style.display = 'none';
-      }
-    });
-
-    // Mostrar a seção específica
-    const secaoAtiva = document.getElementById(secaoId);
-    if (secaoAtiva) {
-      secaoAtiva.style.display = 'block';
-    }
-  }
-
   // MÉTODOS PARA CURSOS
   editar(curso: any) {
-    console.log('Objeto CURSO completo recebido:', curso);
     this.id = curso.id;
     this.tituloDoCurso = curso.tituloDoCurso;
     this.descricao = curso.descricao;
@@ -134,13 +154,12 @@ export class AdmComponent implements OnInit {
       preco: this.preco,
       caminhoDaCapa: this.caminhoDaCapa,
     };
-
+    
     this.workshopService.atualizarCurso(this.id, dadosCursos).subscribe({
       next: (response) => {
         if (response.sucesso) {
           alert(response.sucesso);
           this.carregarCursosNaTabela();
-          // Fechar modal (você pode adicionar lógica para fechar o modal Bootstrap)
         }
       },
       error: (err) => {
@@ -158,13 +177,12 @@ export class AdmComponent implements OnInit {
       preco: this.preco,
       caminhoDaCapa: this.caminhoDaCapa,
     };
-
+    
     this.workshopService.cadastrarCurso(dadosCursos).subscribe({
       next: (response) => {
         if (response.sucesso) {
           alert(response.sucesso);
           this.carregarCursosNaTabela();
-          // Limpar formulário
           this.tituloDoCurso = '';
           this.descricao = '';
           this.preco = '';
@@ -185,7 +203,7 @@ export class AdmComponent implements OnInit {
     });
   }
 
-  // MÉTODOS PARA FUNCIONÁRIOS
+  // MÉTODOS PARA FUNCIONÁRIOS - CORRIGIDOS
   cadastrarFuncionario() {
     const dadosFuncionarios = {
       nome: this.nome,
@@ -203,7 +221,6 @@ export class AdmComponent implements OnInit {
       next: (response) => {
         if (response.sucesso) {
           alert(response.sucesso);
-          // Limpar formulário
           this.nome = '';
           this.cpf = '';
           this.telefone = '';
@@ -212,6 +229,7 @@ export class AdmComponent implements OnInit {
           this.data_nascimento = '';
           this.rg = '';
           this.caminhoDoArquivo = '';
+          this.carregarFuncionarios();
         }
       },
       error: (err) => {
@@ -223,64 +241,94 @@ export class AdmComponent implements OnInit {
   }
 
   carregarFuncionarios() {
-    // Dados de exemplo para demonstração
-    this.funcionarios = [
-      {
-        id: 1,
-        nome: 'João Silva',
-        email: 'joao@empresa.com',
-        telefone: '(11) 99999-9999',
-        cpf: '123.456.789-00',
-        data_nascimento: '1990-01-15',
-        rg: '12.345.678-9'
-      },
-      {
-        id: 2,
-        nome: 'Maria Santos',
-        email: 'maria@empresa.com',
-        telefone: '(11) 88888-8888',
-        cpf: '987.654.321-00',
-        data_nascimento: '1985-05-20',
-        rg: '98.765.432-1'
-      }
-    ];
-
-    // Quando tiver o serviço real, descomente:
-    /*
     this.admService.buscarFuncionarios().subscribe({
       next: (response: any) => {
-        this.funcionarios = response;
+        if (Array.isArray(response)) {
+          this.funcionarios = response;
+        } 
+        else if (response.dados) {
+          this.funcionarios = response.dados;
+        }
+        else {
+          this.funcionarios = response;
+        }
       },
       error: (err) => {
         console.error('Erro ao carregar funcionários:', err);
-        alert('Erro ao carregar funcionários');
+        this.funcionarios = [];
       }
     });
-    */
   }
 
-  editarFuncionario(funcionario: any) {
-    this.funcionarioEditando = { ...funcionario };
+  // CORREÇÃO: Garantir que o funcionárioEditando tenha todos os dados
+  editarFuncionario(funcionario: FuncionarioInterface) {
+    this.funcionarioEditando = { 
+      id: funcionario.id,
+      nome: funcionario.nome,
+      email: funcionario.email,
+      telefone: funcionario.telefone,
+      cpf: funcionario.cpf,
+      data_nascimento: funcionario.data_nascimento,
+      rg: funcionario.rg
+    };
   }
 
+  // CORREÇÃO: Garantir que o ID está sendo setado
   selecionarFuncionarioParaExcluir(id: number) {
     this.funcionarioIdParaExcluir = id;
+    console.log('Funcionário selecionado para excluir:', id);
   }
 
+  // CORREÇÃO: Verificar se o ID existe antes de atualizar
   atualizarFuncionario() {
-    // Implementação real quando tiver o serviço
-    console.log('Atualizando funcionário:', this.funcionarioEditando);
-    alert('Funcionário atualizado com sucesso!');
-    this.carregarFuncionarios();
+    if (!this.funcionarioEditando.id) {
+      alert('Erro: ID do funcionário não encontrado');
+      return;
+    }
+
+    this.admService.atualizarFuncionario(this.funcionarioEditando.id, this.funcionarioEditando).subscribe({
+      next: (response) => {
+        if (response.sucesso) {
+          alert(response.sucesso);
+          this.carregarFuncionarios();
+          // Fechar o modal (opcional)
+          const modal = document.getElementById('editarFuncionarioModal');
+          if (modal) {
+            const bootstrapModal = (window as any).bootstrap.Modal.getInstance(modal);
+            if (bootstrapModal) {
+              bootstrapModal.hide();
+            }
+          }
+        }
+      },
+      error: (err) => {
+        if (err.error) {
+          alert(err.error.error);
+        }
+      },
+    });
   }
 
+  // CORREÇÃO: Verificar se o ID existe antes de excluir
   excluirFuncionario() {
-    if (this.funcionarioIdParaExcluir) {
-      // Implementação real quando tiver o serviço
-      console.log('Excluindo funcionário ID:', this.funcionarioIdParaExcluir);
-      alert('Funcionário excluído com sucesso!');
-      this.carregarFuncionarios();
-      this.funcionarioIdParaExcluir = 0;
+    if (!this.funcionarioIdParaExcluir) {
+      alert('Erro: ID do funcionário não encontrado');
+      return;
     }
+
+    this.admService.excluirFuncionario(this.funcionarioIdParaExcluir).subscribe({
+      next: (response) => {
+        if (response.sucesso) {
+          alert(response.sucesso);
+          this.carregarFuncionarios();
+          this.funcionarioIdParaExcluir = 0;
+        }
+      },
+      error: (err) => {
+        if (err.error) {
+          alert(err.error.error);
+        }
+      },
+    });
   }
 }

@@ -70,28 +70,52 @@
   margin: 0 auto;
 }
 
-.icon button {
-  display: flex;
+/* NOVO ESTILO SIMPLES PARA BOTÃO WHATSAPP */
+.btn-whatsapp-simple {
+  display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 8px 16px;
+  gap: 10px;
+  padding: 12px 24px;
   font-size: 1rem;
   background-color: #25d366;
   color: white;
   border: none;
-  border-radius: 100px;
+  border-radius: 50px;
   font-family: var(--font-secundaria), sans-serif;
   cursor: pointer;
-  transition: transform 0.3s ease;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+  text-decoration: none;
 }
 
-.icon img {
-  width: 24px;
+.btn-whatsapp-simple:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+  background-color: #1ebe5d;
+  color: white;
+  text-decoration: none;
 }
 
-.icon:hover,
-.icon button:hover {
-  transform: scale(1.05);
+.btn-whatsapp-simple i {
+  font-size: 1.3rem;
+  color: white;
+}
+
+/* Efeito de pulso animado */
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(37, 211, 102, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+  }
+}
+
+.btn-whatsapp-simple {
+  animation: pulse 2s infinite;
 }
 
 .about img,
@@ -219,26 +243,6 @@
   color: goldenrod;
 }
 
-.btn-whatsapp {
-  background-color: #25d366;
-  color: white;
-  padding: 10px 16px;
-  font-size: 0.9rem;
-  border-radius: 30px;
-  text-decoration: none;
-  transition: background-color 0.3s ease;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: auto;
-  margin-top: 15px;
-}
-
-.btn-whatsapp:hover {
-  background-color: #1ebe5d;
-  color: white;
-}
-
 .map-container {
   border-radius: 15px;
   overflow: hidden;
@@ -326,6 +330,16 @@
   .container_objective h2 {
     font-size: 1.1rem;
   }
+
+  .btn-whatsapp-simple {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+    gap: 8px;
+  }
+
+  .btn-whatsapp-simple i {
+    font-size: 1.1rem;
+  }
 }
 
 @media (max-width: 576px) {
@@ -344,24 +358,14 @@
   .container_objective h2 {
     font-size: 1rem;
   }
-}
 
-.btn-whatsapp,
-.icon button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 10px 16px;
-  font-size: 0.9rem;
-  border-radius: 30px;
-  width: auto;
-}
+  .btn-whatsapp-simple {
+    padding: 8px 16px;
+    font-size: 0.85rem;
+    gap: 6px;
+  }
 
-.icon img {
-  width: 24px;
-  height: 24px;
-}
-
-.icon button {
-  gap: 8px;
+  .btn-whatsapp-simple i {
+    font-size: 1rem;
+  }
 }

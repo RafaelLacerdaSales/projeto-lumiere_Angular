@@ -24,7 +24,6 @@ export interface FuncionarioInterface {
   styleUrls: ['./adm.component.css'],
 })
 export class AdmComponent implements OnInit {
-  
   // Para puxar os cursos
   buscarCursos: cursosInterface[] = [];
 
@@ -41,6 +40,11 @@ export class AdmComponent implements OnInit {
   descricao: string = '';
   preco: string = '';
   caminhoDaCapa: string = '';
+
+  // NOVO: Para armazenar o arquivo de imagem selecionado para upload
+  selectedFile: File | null = null;
+  // NOVO: Para armazenar o ID do curso em edição
+  cursoEmEdicaoId: number | null = null;
 
   // Dados do funcionário (para cadastro)
   nome: string = '';
@@ -61,7 +65,7 @@ export class AdmComponent implements OnInit {
     telefone: '',
     cpf: '',
     data_nascimento: '',
-    rg: ''
+    rg: '',
   };
 
   constructor(
@@ -86,10 +90,10 @@ export class AdmComponent implements OnInit {
       'tabela_funcionarios',
       'containerAddVideios',
       'container_aulas',
-      'tabela_videios'
+      'tabela_videios',
     ];
-    
-    secoes.forEach(id => {
+
+    secoes.forEach((id) => {
       const elemento = document.getElementById(id);
       if (elemento) {
         elemento.style.display = 'none';
@@ -122,11 +126,32 @@ export class AdmComponent implements OnInit {
   }
 
   // MÉTODOS PARA CURSOS
+  onFileSelectedCadastro(event: any): void {
+    const fileList: FileList = event.target.files;
+    if (fileList && fileList.length > 0) {
+      this.selectedFile = fileList[0];
+    } else {
+      this.selectedFile = null;
+    }
+  }
+
+  onFileSelectedEdicao(event: any): void {
+    const fileList: FileList = event.target.files;
+    if (fileList && fileList.length > 0) {
+      this.selectedFile = fileList[0];
+    } else {
+      this.selectedFile = null;
+    }
+  }
+
   editar(curso: any) {
     this.id = curso.id;
     this.tituloDoCurso = curso.tituloDoCurso;
     this.descricao = curso.descricao;
     this.preco = curso.preco;
+    this.caminhoDaCapa = curso.caminhoDaCapa;
+    this.selectedFile = null;
+    this.cursoEmEdicaoId = curso.id;
   }
 
   deletar() {
@@ -152,14 +177,14 @@ export class AdmComponent implements OnInit {
       tituloDoCurso: this.tituloDoCurso,
       descricao: this.descricao,
       preco: this.preco,
-      caminhoDaCapa: this.caminhoDaCapa,
     };
-    
-    this.workshopService.atualizarCurso(this.id, dadosCursos).subscribe({
+
+    this.workshopService.atualizarCurso(this.id, dadosCursos, this.selectedFile).subscribe({
       next: (response) => {
         if (response.sucesso) {
           alert(response.sucesso);
           this.carregarCursosNaTabela();
+          this.selectedFile = null;
         }
       },
       error: (err) => {
@@ -171,14 +196,18 @@ export class AdmComponent implements OnInit {
   }
 
   cadastrarCursos() {
+    if (!this.selectedFile) {
+      alert('Por favor, selecione uma imagem de capa.');
+      return;
+    }
+
     const dadosCursos = {
       tituloDoCurso: this.tituloDoCurso,
       descricao: this.descricao,
       preco: this.preco,
-      caminhoDaCapa: this.caminhoDaCapa,
     };
-    
-    this.workshopService.cadastrarCurso(dadosCursos).subscribe({
+
+    this.workshopService.cadastrarCurso(dadosCursos, this.selectedFile).subscribe({
       next: (response) => {
         if (response.sucesso) {
           alert(response.sucesso);
@@ -186,7 +215,7 @@ export class AdmComponent implements OnInit {
           this.tituloDoCurso = '';
           this.descricao = '';
           this.preco = '';
-          this.caminhoDaCapa = '';
+          this.selectedFile = null;
         }
       },
       error: (err) => {
@@ -203,7 +232,7 @@ export class AdmComponent implements OnInit {
     });
   }
 
-  // MÉTODOS PARA FUNCIONÁRIOS - CORRIGIDOS
+  // MÉTODOS PARA FUNCIONÁRIOS
   cadastrarFuncionario() {
     const dadosFuncionarios = {
       nome: this.nome,
@@ -245,41 +274,36 @@ export class AdmComponent implements OnInit {
       next: (response: any) => {
         if (Array.isArray(response)) {
           this.funcionarios = response;
-        } 
-        else if (response.dados) {
+        } else if (response.dados) {
           this.funcionarios = response.dados;
-        }
-        else {
+        } else {
           this.funcionarios = response;
         }
       },
       error: (err) => {
         console.error('Erro ao carregar funcionários:', err);
         this.funcionarios = [];
-      }
+      },
     });
   }
 
-  // CORREÇÃO: Garantir que o funcionárioEditando tenha todos os dados
   editarFuncionario(funcionario: FuncionarioInterface) {
-    this.funcionarioEditando = { 
+    this.funcionarioEditando = {
       id: funcionario.id,
       nome: funcionario.nome,
       email: funcionario.email,
       telefone: funcionario.telefone,
       cpf: funcionario.cpf,
       data_nascimento: funcionario.data_nascimento,
-      rg: funcionario.rg
+      rg: funcionario.rg,
     };
   }
 
-  // CORREÇÃO: Garantir que o ID está sendo setado
   selecionarFuncionarioParaExcluir(id: number) {
     this.funcionarioIdParaExcluir = id;
     console.log('Funcionário selecionado para excluir:', id);
   }
 
-  // CORREÇÃO: Verificar se o ID existe antes de atualizar
   atualizarFuncionario() {
     if (!this.funcionarioEditando.id) {
       alert('Erro: ID do funcionário não encontrado');
@@ -291,7 +315,6 @@ export class AdmComponent implements OnInit {
         if (response.sucesso) {
           alert(response.sucesso);
           this.carregarFuncionarios();
-          // Fechar o modal (opcional)
           const modal = document.getElementById('editarFuncionarioModal');
           if (modal) {
             const bootstrapModal = (window as any).bootstrap.Modal.getInstance(modal);
@@ -309,7 +332,6 @@ export class AdmComponent implements OnInit {
     });
   }
 
-  // CORREÇÃO: Verificar se o ID existe antes de excluir
   excluirFuncionario() {
     if (!this.funcionarioIdParaExcluir) {
       alert('Erro: ID do funcionário não encontrado');

@@ -1,3 +1,4 @@
+import 'package:app_lumiere/pages/cadastrar.dart';
 import 'package:flutter/material.dart';
 import 'pages/curso_page.dart';
 
@@ -17,7 +18,7 @@ class LumiereApp extends StatelessWidget {
         useMaterial3: true,
         colorSchemeSeed: const Color(0xFF5C4033),
       ),
-      home: const CursosPage(),
+      home: const AuthScreen(),
     );
   }
 }

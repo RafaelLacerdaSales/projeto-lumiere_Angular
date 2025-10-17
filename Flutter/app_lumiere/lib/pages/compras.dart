@@ -50,6 +50,54 @@ class _ComprasPageState extends State<ComprasPage> {
     });
   }
 
+  Widget _buildQRCodePix() {
+    return Container(
+      width: 150,
+      height: 150,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: Colors.grey[300]!),
+      ),
+      child: Stack(
+        children: [
+          // Padrão de fundo do QR Code (simulação)
+          Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(8),
+              color: Colors.white,
+            ),
+            child: CustomPaint(
+              size: const Size(150, 150),
+              painter: _QRCodePainter(),
+            ),
+          ),
+          // Centralizando o símbolo do Pix
+          Center(
+            child: Container(
+              width: 40,
+              height: 40,
+              decoration: BoxDecoration(
+                color: const Color(0xFF32BCAD), // Verde oficial do Pix
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: const Center(
+                child: Text(
+                  'PIX',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 10,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   Widget _modalContent() {
     switch (metodoPagamento) {
       case 'credit':
@@ -76,11 +124,42 @@ class _ComprasPageState extends State<ComprasPage> {
               decoration: const InputDecoration(labelText: 'CVV'),
             ),
             const SizedBox(height: 16),
-            ElevatedButton(
-              onPressed: fecharModal,
-              style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF716243)),
-              child: const Text('Pagar'),
+            Row(
+              children: [
+                Expanded(
+                  child: ElevatedButton(
+                    onPressed: fecharModal,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xFF716243),
+                      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                    ),
+                    child: const Text(
+                      'Confirmar',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: ElevatedButton(
+                    onPressed: fecharModal,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.grey[300],
+                      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                    ),
+                    child: Text(
+                      'Cancelar',
+                      style: TextStyle(
+                        color: Colors.grey[800],
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
           ],
         );
@@ -101,18 +180,23 @@ class _ComprasPageState extends State<ComprasPage> {
             ),
             const SizedBox(height: 16),
             if (metodoPagamento == 'pix')
-              Container(
-                width: 150,
-                height: 150,
-                color: Colors.grey[300],
-                child: const Center(child: Text('QR Code Pix')),
-              )
+              _buildQRCodePix() // QR CODE ESTILIZADO
             else
               Container(
                 width: double.infinity,
                 height: 50,
-                color: Colors.grey[300],
-                child: const Center(child: Text('Boleto PDF')),
+                decoration: BoxDecoration(
+                  color: Colors.grey[100],
+                  borderRadius: BorderRadius.circular(8),
+                  border: Border.all(color: Colors.grey[300]!),
+                ),
+                child: const Center(
+                  child: Text(
+                    'Boleto Bancário - Código: 12345.67890.12345.678900.123456.789000.1 12345.678901',
+                    style: TextStyle(fontSize: 10),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
               ),
             const SizedBox(height: 16),
             TextField(
@@ -120,11 +204,42 @@ class _ComprasPageState extends State<ComprasPage> {
                   const InputDecoration(labelText: 'Informe seu e-mail'),
             ),
             const SizedBox(height: 16),
-            ElevatedButton(
-              onPressed: fecharModal,
-              style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF716243)),
-              child: const Text('Finalizar'),
+            Row(
+              children: [
+                Expanded(
+                  child: ElevatedButton(
+                    onPressed: fecharModal,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xFF716243),
+                      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                    ),
+                    child: const Text(
+                      'Confirmar',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: ElevatedButton(
+                    onPressed: fecharModal,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.grey[300],
+                      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                    ),
+                    child: Text(
+                      'Cancelar',
+                      style: TextStyle(
+                        color: Colors.grey[800],
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
           ],
         );
@@ -468,4 +583,65 @@ class _ComprasPageState extends State<ComprasPage> {
       ),
     );
   }
+}
+
+// Classe para desenhar um QR Code simulado
+class _QRCodePainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint = Paint()
+      ..color = Colors.black
+      ..style = PaintingStyle.fill;
+
+    // Desenha padrão quadriculado simulando QR Code
+    final squareSize = size.width / 15;
+    
+    for (int i = 0; i < 15; i++) {
+      for (int j = 0; j < 15; j++) {
+        // Padrão aleatório para simular QR Code
+        if ((i + j) % 3 == 0 || (i * j) % 5 == 0 || i % 4 == 0 && j % 4 == 0) {
+          canvas.drawRect(
+            Rect.fromLTWH(
+              i * squareSize,
+              j * squareSize,
+              squareSize - 0.5,
+              squareSize - 0.5,
+            ),
+            paint,
+          );
+        }
+      }
+    }
+
+    // Marcadores de posição (típicos em QR Codes)
+    _drawPositionMarker(canvas, Offset(squareSize * 2, squareSize * 2), squareSize * 3);
+    _drawPositionMarker(canvas, Offset(size.width - squareSize * 5, squareSize * 2), squareSize * 3);
+    _drawPositionMarker(canvas, Offset(squareSize * 2, size.height - squareSize * 5), squareSize * 3);
+  }
+
+  void _drawPositionMarker(Canvas canvas, Offset offset, double size) {
+    final paint = Paint()
+      ..color = Colors.black
+      ..style = PaintingStyle.fill;
+
+    // Quadrado externo
+    canvas.drawRect(Rect.fromLTWH(offset.dx, offset.dy, size, size), paint);
+    
+    // Quadrado interno branco
+    paint.color = Colors.white;
+    canvas.drawRect(
+      Rect.fromLTWH(offset.dx + size * 0.25, offset.dy + size * 0.25, size * 0.5, size * 0.5),
+      paint,
+    );
+    
+    // Quadrado central preto
+    paint.color = Colors.black;
+    canvas.drawRect(
+      Rect.fromLTWH(offset.dx + size * 0.375, offset.dy + size * 0.375, size * 0.25, size * 0.25),
+      paint,
+    );
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 }

@@ -18,7 +18,7 @@
       <!-- Lista de cursos -->
       <div class="course-list">
         <div class="course-list-item" *ngFor="let curso of cursosParaOsCard">
-          <img [src]="curso.caminhoDaCapa" [alt]="curso.tituloDoCurso">
+          <img [src]="'http://localhost:8080' + curso.caminhoDaCapa" [alt]="curso.tituloDoCurso">
 
           <div class="course-info">
             <h3>{{curso.tituloDoCurso}}</h3>

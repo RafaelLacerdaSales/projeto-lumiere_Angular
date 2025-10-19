@@ -32,7 +32,44 @@
         </form>
         <div class="text-center mt-3">
           <a (click)="mudarSection('recuperar')">Esqueci minha senha</a> |
-          <a (click)="mudarSection('cadastro')">Cadastrar-se</a>
+          <a (click)="mudarSection('cadastro')">Cadastrar-se</a> |
+          <a (click)="mudarSection('adm')">Login ADM</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- LOGIN ADM -->
+    <div *ngIf="sectionAtual === 'adm'" class="card">
+      <div class="logo-container">
+        <img src="/assets/icone-2.png" alt="Logo da Empresa" class="logo" />
+      </div>
+      <div class="card-header">
+        <h4>Logar como Administrador</h4>
+      </div>
+      <div class="card-body">
+        <form (ngSubmit)="onLogin()">
+          <label class="form-label">E-mail</label>
+          <input
+            type="email"
+            class="form-control"
+            [(ngModel)]="email"
+            name="email"
+            required
+          />
+          <label class="form-label">Senha</label>
+          <input
+            type="password"
+            class="form-control"
+            [(ngModel)]="senha"
+            name="senha"
+            required
+          />
+          <button type="submit" class="btn btn-primary mt-3">Entrar</button>
+        </form>
+        <div class="text-center mt-3">
+          <a (click)="mudarSection('recuperar')">Esqueci minha senha</a> |
+          <a (click)="mudarSection('cadastro')">Cadastrar-se</a> |
+          <a (click)="mudarSection('login')">Voltar</a>
         </div>
       </div>
     </div>
@@ -124,7 +161,8 @@
         </form>
 
         <div class="text-center mt-3">
-          <a (click)="mudarSection('login')">Já tenho uma conta</a>
+          <a (click)="mudarSection('login')">Já tenho uma conta</a> |
+          <a (click)="mudarSection('adm')">Login ADM</a>
         </div>
       </div>
     </div>
@@ -149,7 +187,8 @@
           </button>
         </form>
         <div class="text-center mt-3">
-          <a (click)="mudarSection('login')">Voltar ao login</a>
+          <a (click)="mudarSection('login')">Voltar</a> |
+          <a (click)="mudarSection('adm')">Login ADM</a>
         </div>
       </div>
     </div>

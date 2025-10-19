@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
-  sectionAtual: 'login' | 'cadastro' | 'recuperar' = 'login';
+  sectionAtual: 'login' | 'cadastro' | 'recuperar' | 'adm' = 'login';
 
   constructor(
     private lumiereService: LumiereService,
@@ -53,7 +53,7 @@ export class LoginComponent {
 
   recuperarData = { email_recuperar: '' };
 
-  mudarSection(section: 'login' | 'cadastro' | 'recuperar') {
+  mudarSection(section: 'login' | 'cadastro' | 'recuperar' | 'adm') {
     this.sectionAtual = section;
   }
 

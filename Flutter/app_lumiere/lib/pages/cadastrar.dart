@@ -1,159 +1,146 @@
+
 import 'package:flutter/material.dart';
-import 'dart:ui'; // Necessário para BackdropFilter
+import 'dart:ui'; // Para BackdropFilter
 
-// Definição da cor primária baseada na variável CSS (--cor-titulo)
-const Color _corTitulo = Color(0xFF5A4C39);
-// Cor de fundo do cartão (55% de opacidade preta)
-const Color _corFundoCard = Color(0x8C000000);
+// --- Definições de Cores e Estilos (Simulando Variáveis CSS) ---
+// Em um projeto real, estas cores seriam definidas em um tema global.
+const Color _corTitulo = Color(0xFF8E744C); // Cor principal (simulando var(--cor-titulo))
+const Color _corPrimariaBtn = _corTitulo;
+const Color _corWarningBtn = Color(0xFFFFA500); // Para o botão de Recuperar Senha
+const Color _corFundoCard = Colors.black; // A base para o fundo transparente do card
 
-class LoginApp extends StatelessWidget {
-  const LoginApp({super.key});
+// Simulação das seções do HTML
+enum AuthSection { login, cadastro, recuperar }
+
+class LoginAuthScreen extends StatefulWidget {
+  const LoginAuthScreen({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Tela de Autenticação',
-      // Definição de propriedades básicas do tema
-      theme: ThemeData(
-        fontFamily: 'Inter', // Fonte padrão
-        useMaterial3: true,
-        brightness: Brightness.dark,
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: _corTitulo,
-          brightness: Brightness.dark,
-          primary: _corTitulo,
-          onPrimary: Colors.white,
-        ),
-      ),
-      home: const AuthScreen(),
+  State<LoginAuthScreen> createState() => _LoginAuthScreenState();
+}
+
+class _LoginAuthScreenState extends State<LoginAuthScreen> with SingleTickerProviderStateMixin {
+  AuthSection _sectionAtual = AuthSection.login; // Simula sectionAtual
+  
+  // Controladores para formulários (Simulando [(ngModel)])
+  final TextEditingController _emailController = TextEditingController(text: 'exemplo@email.com');
+  final TextEditingController _senhaController = TextEditingController(text: 'senha123');
+  
+  // Cadastro
+  final TextEditingController _nomeController = TextEditingController();
+  final TextEditingController _cpfController = TextEditingController();
+  final TextEditingController _dataNascController = TextEditingController();
+  final TextEditingController _telController = TextEditingController();
+  
+  // Recuperar
+  final TextEditingController _emailRecuperarController = TextEditingController();
+
+  late AnimationController _animationController;
+  late Animation<double> _fadeInAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+    // Configura a animação para simular o 'fadeIn 0.5s ease-in-out' do CSS
+    _animationController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 500),
     );
+    _fadeInAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(parent: _animationController, curve: Curves.easeIn),
+    );
+    _animationController.forward();
   }
-}
-
-class AuthScreen extends StatefulWidget {
-  const AuthScreen({super.key});
 
   @override
-  State<AuthScreen> createState() => _AuthScreenState();
-}
+  void dispose() {
+    _animationController.dispose();
+    _emailController.dispose();
+    _senhaController.dispose();
+    _nomeController.dispose();
+    _cpfController.dispose();
+    _dataNascController.dispose();
+    _telController.dispose();
+    _emailRecuperarController.dispose();
+    super.dispose();
+  }
 
-class _AuthScreenState extends State<AuthScreen> {
-  // Gestão de estado para alternar entre as vistas: 'login', 'cadastro', 'recuperar'
-  String _sectionAtual = 'login';
-
-  // Dados do formulário (campos fictícios para demonstração)
-  final Map<String, dynamic> _loginData = {'email': '', 'senha': ''};
-  final Map<String, dynamic> _cadastroData = {
-    'nome': '',
-    'cpf': '',
-    'data_nascimento': '',
-    'telefone': '',
-    'email': '',
-    'senha': '',
-  };
-  final Map<String, dynamic> _recuperarData = {'email_recuperar': ''};
-
-  void _mudarSection(String newSection) {
+  // Simula (click)="mudarSection('nome')"
+  void _mudarSection(AuthSection novaSection) {
     setState(() {
-      _sectionAtual = newSection;
+      _sectionAtual = novaSection;
+      // Reinicia a animação para o novo card
+      _animationController.reset();
+      _animationController.forward();
     });
   }
 
+  // Simula (ngSubmit)
   void _onLogin() {
-    // Lógica de login (simulação)
-    print('Tentativa de Login: ${_loginData['email']}');
+    print('Tentativa de Login com: ${_emailController.text} / ${_senhaController.text}');
+    // Lógica de autenticação aqui
   }
-
+  
   void _submitUser() {
-    // Lógica de registo (simulação)
-    print('Tentativa de Registo para: ${_cadastroData['nome']}');
+    print('Tentativa de Cadastro para: ${_nomeController.text} / ${_emailController.text}');
+    // Lógica de cadastro aqui
   }
 
   void _onRecuperar() {
-    // Lógica de recuperação de palavra-passe (simulação)
-    print(
-      'Recuperação de Palavra-passe solicitada para: ${_recuperarData['email_recuperar']}',
-    );
-  }
-
-  Widget _buildSection() {
-    // Chave única para que o AnimatedSwitcher saiba quando trocar o widget
-    return KeyedSubtree(
-      key: ValueKey<String>(_sectionAtual),
-      child: switch (_sectionAtual) {
-        'cadastro' => CadastroCard(
-          data: _cadastroData,
-          onSubmit: _submitUser,
-          onGoToLogin: () => _mudarSection('login'),
-        ),
-        'recuperar' => RecuperarCard(
-          data: _recuperarData,
-          onSubmit: _onRecuperar,
-          onGoToLogin: () => _mudarSection('login'),
-        ),
-        _ => LoginCard(
-          data: _loginData,
-          onSubmit: _onLogin,
-          onMudarSection: _mudarSection,
-        ),
-      },
-    );
+    print('Recuperar Senha para: ${_emailRecuperarController.text}');
+    // Lógica de recuperação de senha aqui
   }
 
   @override
   Widget build(BuildContext context) {
-    // Scaffold fornece a estrutura básica
+    // Determina o tamanho da tela para responsividade
+    final screenWidth = MediaQuery.of(context).size.width;
+    final cardMaxWidth = _sectionAtual == AuthSection.cadastro ? 600.0 : 480.0;
+    
+    // Simula img_background (fundo fixo com imagem e blur)
+    final background = Container(
+      width: screenWidth,
+      height: MediaQuery.of(context).size.height,
+      decoration: const BoxDecoration(
+        // Simulação de background_login.jpg
+        image: DecorationImage(
+          image: AssetImage('assets/background_login.jpg'), // Placeholder for asset
+          fit: BoxFit.cover,
+        ),
+      ),
+      child: BackdropFilter(
+        // Simula backdrop-filter: blur(12px)
+        filter: ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0),
+        child: Container(color: Colors.black.withOpacity(0.1)), // Ajuste de opacidade para a imagem
+      ),
+    );
+
     return Scaffold(
       body: Stack(
+        fit: StackFit.expand,
         children: [
-          // 1. Imagem de Fundo (Simulação de /assets/background_login.jpg)
-          Container(
-            width: double.infinity,
-            height: double.infinity,
-            decoration: const BoxDecoration(
-              image: DecorationImage(
-                // Imagem de espaço reservado
-                image: NetworkImage(
-                  'https://placehold.co/1080x1920/1a1a1a/white?text=Imagem%20de%20Fundo',
-                ),
-                fit: BoxFit.cover,
-                colorFilter: ColorFilter.mode(
-                  Colors.black45, // Escurece ligeiramente a imagem
-                  BlendMode.darken,
+          background, // Fundo fixo
+          // Container: display: flex; align-items: center; justify-content: center; min-height: 100vh;
+          Center(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.all(20),
+              child: ConstrainedBox(
+                constraints: BoxConstraints(maxWidth: cardMaxWidth),
+                child: FadeTransition(
+                  opacity: _fadeInAnimation,
+                  child: _buildAuthCard(context, cardMaxWidth),
                 ),
               ),
             ),
           ),
-          // 2. Content Container (.container)
-          Center(
-            child: SingleChildScrollView(
-              padding: const EdgeInsets.all(20.0),
-              // CORREÇÃO: Adicionando Directionality para satisfazer a exigência de direção do texto
-              // de widgets como TextFormField e resolver o erro da tela vermelha.
-              child: Directionality(
-                textDirection:
-                    TextDirection.ltr, // Definindo LTR (Left-to-Right)
-                child: AnimatedSwitcher(
-                  duration: const Duration(milliseconds: 500),
-                  transitionBuilder:
-                      (Widget child, Animation<double> animation) {
-                        // Transição para imitar o efeito fadeIn
-                        return FadeTransition(
-                          opacity: animation,
-                          child: SlideTransition(
-                            position: Tween<Offset>(
-                              begin: const Offset(
-                                0,
-                                -0.05,
-                              ), // Ligeiro movimento para baixo
-                              end: Offset.zero,
-                            ).animate(animation),
-                            child: child,
-                          ),
-                        );
-                      },
-                  child: _buildSection(),
-                ),
+          // app-footer placeholder (assumindo que seja um widget de rodapé simples)
+          const Align(
+            alignment: Alignment.bottomCenter,
+            child: Padding(
+              padding: EdgeInsets.only(bottom: 10),
+              child: Text(
+                '© 2024 Minha Empresa. Todos os direitos reservados.',
+                style: TextStyle(color: Color.fromARGB(195, 104, 63, 2), fontSize: 12),
               ),
             ),
           ),
@@ -161,41 +148,384 @@ class _AuthScreenState extends State<AuthScreen> {
       ),
     );
   }
-}
 
-// --- Card Wrapper com Efeito de Vidro Fosco ---
+  Widget _buildAuthCard(BuildContext context, double cardMaxWidth) {
+    // Card Style: border-radius: 15px; box-shadow; background-color: rgba(0, 0, 0, 0.55); backdrop-filter: blur(12px);
+    Widget currentCard;
 
-class FrostedCard extends StatelessWidget {
-  final Widget child;
-  final double maxWidth;
+    switch (_sectionAtual) {
+      case AuthSection.login:
+        currentCard = _buildLoginForm();
+        break;
+      case AuthSection.cadastro:
+        currentCard = _buildRegisterForm(context);
+        break;
+      case AuthSection.recuperar:
+        currentCard = _buildRecoverForm();
+        break;
+    }
 
-  const FrostedCard({super.key, required this.child, required this.maxWidth});
-
-  @override
-  Widget build(BuildContext context) {
-    return ConstrainedBox(
-      constraints: BoxConstraints(maxWidth: maxWidth),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(15.0),
-        child: BackdropFilter(
-          filter: ImageFilter.blur(
-            sigmaX: 12.0,
-            sigmaY: 12.0,
-          ), // backdrop-filter: blur(12px)
-          child: Container(
-            padding: const EdgeInsets.all(30.0),
-            decoration: BoxDecoration(
-              color: _corFundoCard, // background-color: rgba(0, 0, 0, 0.55)
-              borderRadius: BorderRadius.circular(15.0),
-              boxShadow: const [
-                BoxShadow(
-                  color: Colors.black38,
-                  blurRadius: 14.0,
-                  offset: Offset(0, 6),
+    // Aplica o estilo do Card base
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(15),
+      child: BackdropFilter(
+        filter: ImageFilter.blur(sigmaX: 8.0, sigmaY: 8.0), // Aplica o blur do card
+        child: Container(
+          padding: const EdgeInsets.all(30),
+          width: cardMaxWidth,
+          decoration: BoxDecoration(
+            color: const Color.fromARGB(212, 255, 245, 227), // background-color: rgba(0, 0, 0, 0.55);
+            borderRadius: BorderRadius.circular(15),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.3),
+                blurRadius: 14,
+                offset: const Offset(0, 6),
+              ),
+            ],
+          ),
+          child: currentCard,
+        ),
+      ),
+    );
+  }
+  
+  // --- LOGIN SECTION ---
+  Widget _buildLoginForm() {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        // Logo
+        const Padding(
+          padding: EdgeInsets.only(bottom: 10),
+          child: Image(
+            image: AssetImage('assets/icone-2.png'), // Placeholder
+            height: 80,
+            width: 150,
+          ),
+        ),
+        // Card Header
+        _CardHeader(title: 'Login', isCadastro: false),
+        
+        const SizedBox(height: 20),
+        
+        // Form
+        _AuthForm(
+          onSubmitted: _onLogin,
+          children: [
+            _CustomLabel(text: 'E-mail'),
+            _CustomInput(
+              controller: _emailController,
+              keyboardType: TextInputType.emailAddress,
+            ),
+            _CustomLabel(text: 'Senha'),
+            _CustomInput(
+              controller: _senhaController,
+              obscureText: true,
+              keyboardType: TextInputType.visiblePassword,
+            ),
+            _CustomButton(
+              text: 'Entrar',
+              onPressed: _onLogin,
+              color: _corPrimariaBtn,
+              marginTop: 15, // mt-3
+            ),
+          ],
+        ),
+        
+        // Links
+        const SizedBox(height: 15),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            _CustomLink(
+              text: 'Esqueci minha senha',
+              onTap: () => _mudarSection(AuthSection.recuperar),
+            ),
+            const Text(' | ', style: TextStyle(color: Colors.white)),
+            _CustomLink(
+              text: 'Cadastrar-se',
+              onTap: () => _mudarSection(AuthSection.cadastro),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+  
+  // --- CADASTRO SECTION ---
+  Widget _buildRegisterForm(BuildContext context) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        // Header personalizado do Cadastro
+        Container(
+          padding: const EdgeInsets.all(12),
+          decoration: BoxDecoration(
+            color: _corTitulo, // background-color: var(--cor-titulo)
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: Column(
+            children: [
+              const Image(
+                image: AssetImage('assets/icone-2.png'), // Placeholder
+                height: 80,
+                width: 80,
+              ),
+              const SizedBox(height: 5),
+              Text(
+                'Cadastro',
+                style: TextStyle(
+                  fontSize: 26,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                  fontFamily: DefaultTextStyle.of(context).style.fontFamily, // Simula var(--font-principal)
+                ),
+              ),
+            ],
+          ),
+        ),
+        
+        const SizedBox(height: 20),
+        
+        // Form
+        _AuthForm(
+          onSubmitted: _submitUser,
+          children: [
+            // Row: Nome (col-md-8) e CPF (col-md-4)
+            Row(
+              children: [
+                Expanded(
+                  flex: 2, // Simula col-md-8
+                  child: _CustomInput(
+                    controller: _nomeController,
+                    hintText: 'Nome Completo',
+                  ),
+                ),
+                const SizedBox(width: 10),
+                Expanded(
+                  flex: 1, // Simula col-md-4
+                  child: _CustomInput(
+                    controller: _cpfController,
+                    hintText: 'CPF',
+                    keyboardType: TextInputType.number,
+                  ),
                 ),
               ],
             ),
-            child: child,
+            
+            // Row: Data de Nascimento (col-md-6) e Telefone (col-md-6)
+            Row(
+              children: [
+                Expanded(
+                  child: _CustomInput(
+                    controller: _dataNascController,
+                    hintText: 'Data de Nascimento',
+                    keyboardType: TextInputType.datetime,
+                    onTap: () async {
+                      // Simula type="date"
+                      FocusScope.of(context).requestFocus(new FocusNode());
+                      await showDatePicker(
+                        context: context,
+                        initialDate: DateTime.now(),
+                        firstDate: DateTime(1900),
+                        lastDate: DateTime.now(),
+                      );
+                      // Atualizar controller com data selecionada
+                    },
+                  ),
+                ),
+                const SizedBox(width: 10),
+                Expanded(
+                  child: _CustomInput(
+                    controller: _telController,
+                    hintText: 'Telefone',
+                    keyboardType: TextInputType.phone,
+                  ),
+                ),
+              ],
+            ),
+            
+            // Email
+            _CustomInput(
+              controller: _emailController,
+              hintText: 'E-mail',
+              keyboardType: TextInputType.emailAddress,
+            ),
+            
+            // Senha
+            _CustomInput(
+              controller: _senhaController,
+              hintText: 'Senha',
+              obscureText: true,
+              keyboardType: TextInputType.visiblePassword,
+
+            ),
+            
+            // Botão Cadastrar (w-100 mt-2)
+            _CustomButton(
+              text: 'Cadastrar',
+              onPressed: _submitUser,
+              color: _corPrimariaBtn,
+              marginTop: 10,
+            ),
+          ],
+        ),
+        
+        // Link
+        const SizedBox(height: 15),
+        _CustomLink(
+          text: 'Já tenho uma conta',
+          onTap: () => _mudarSection(AuthSection.login),
+        ),
+      ],
+    );
+  }
+
+  // --- RECUPERAR SENHA SECTION ---
+  Widget _buildRecoverForm() {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        // Card Header
+        _CardHeader(title: 'Recuperar Senha', isCadastro: false),
+        
+        const SizedBox(height: 20),
+        
+        // Form
+        _AuthForm(
+          onSubmitted: _onRecuperar,
+          children: [
+            _CustomInput(
+              controller: _emailRecuperarController,
+              hintText: 'Digite seu e-mail',
+              keyboardType: TextInputType.emailAddress,
+            ),
+            // Botão Redefinir Senha (btn-warning mt-3)
+            _CustomButton(
+              text: 'Redefinir Senha',
+              onPressed: _onRecuperar,
+              color: _corWarningBtn,
+              marginTop: 15,
+            ),
+          ],
+        ),
+        
+        // Link
+        const SizedBox(height: 15),
+        _CustomLink(
+          text: 'Voltar ao login',
+          onTap: () => _mudarSection(AuthSection.login),
+        ),
+      ],
+    );
+  }
+}
+
+// --- Componentes Reutilizáveis (Simulando Classes CSS) ---
+
+class _CardHeader extends StatelessWidget {
+  final String title;
+  final bool isCadastro;
+
+  const _CardHeader({required this.title, required this.isCadastro});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 12),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Text(
+        title,
+        textAlign: TextAlign.center,
+        style: TextStyle(
+          fontSize: 26,
+          fontWeight: FontWeight.bold,
+          color: Colors.brown,
+          fontFamily: DefaultTextStyle.of(context).style.fontFamily, // Simula var(--font-principal)
+        ),
+      ),
+    );
+  }
+}
+
+class _AuthForm extends StatelessWidget {
+  final List<Widget> children;
+  final VoidCallback onSubmitted;
+
+  const _AuthForm({required this.children, required this.onSubmitted});
+
+  @override
+  Widget build(BuildContext context) {
+    // No Flutter, o formulário é implícito. Usamos Column para organização.
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: children,
+    );
+  }
+}
+
+class _CustomLabel extends StatelessWidget {
+  final String text;
+
+  const _CustomLabel({required this.text});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 10, bottom: 5),
+      child: Text(
+        text,
+        style: TextStyle(
+          color: const Color.fromARGB(255, 0, 0, 0),
+          fontSize: 18,
+          fontWeight: FontWeight.w500,
+          fontFamily: DefaultTextStyle.of(context).style.fontFamily, // Simula var(--font-principal)
+        ),
+      ),
+    );
+  }
+}
+
+class _CustomInput extends StatelessWidget {
+  final TextEditingController controller;
+  final String? hintText;
+  final bool obscureText;
+  final TextInputType keyboardType;
+  final VoidCallback? onTap;
+
+  const _CustomInput({
+    required this.controller,
+    this.hintText,
+    this.obscureText = false,
+    this.keyboardType = TextInputType.text,
+    this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 15),
+      child: TextFormField(
+        controller: controller,
+        obscureText: obscureText,
+        keyboardType: keyboardType,
+        onTap: onTap,
+        style: const TextStyle(color: Colors.black, fontSize: 16),
+        decoration: InputDecoration(
+          hintText: hintText,
+          fillColor: Colors.white,
+          filled: true,
+          contentPadding: const EdgeInsets.all(12),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(8),
+            borderSide: BorderSide.none,
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(8),
+            borderSide: BorderSide(color: _corTitulo, width: 2),
           ),
         ),
       ),
@@ -203,485 +533,62 @@ class FrostedCard extends StatelessWidget {
   }
 }
 
-// --- Secção de Login (max-width: 480px) ---
+class _CustomButton extends StatelessWidget {
+  final String text;
+  final VoidCallback onPressed;
+  final Color color;
+  final double marginTop;
 
-class LoginCard extends StatelessWidget {
-  final Map<String, dynamic> data;
-  final VoidCallback onSubmit;
-  final Function(String) onMudarSection;
-
-  const LoginCard({
-    super.key,
-    required this.data,
-    required this.onSubmit,
-    required this.onMudarSection,
+  const _CustomButton({
+    required this.text,
+    required this.onPressed,
+    required this.color,
+    this.marginTop = 0,
   });
 
   @override
   Widget build(BuildContext context) {
-    return FrostedCard(
-      maxWidth: 480.0,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          // Content of icon-2.png
-          Center(
-            child: Image.network(
-              'https://placehold.co/150x50/5A4C39/ffffff?text=LOGO',
-              width: 150,
-              height: 50,
-              fit: BoxFit.contain,
-              errorBuilder: (context, error, stackTrace) => const SizedBox(
-                height: 50,
-                child: Center(
-                  child: Text('LOGO', style: TextStyle(fontSize: 24)),
-                ),
-              ),
-            ),
+    return Padding(
+      padding: EdgeInsets.only(top: marginTop),
+      child: ElevatedButton(
+        onPressed: onPressed,
+        style: ElevatedButton.styleFrom(
+          backgroundColor: color, // background-color: var(--cor-titulo) ou btn-warning
+          foregroundColor: Colors.white,
+          minimumSize: const Size(double.infinity, 50), // padding: 12px; width: 100%;
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
           ),
-          const SizedBox(height: 10),
-
-          // Card Header
-          Container(
-            padding: const EdgeInsets.symmetric(vertical: 12),
-            decoration: BoxDecoration(
-              color: _corTitulo,
-              borderRadius: BorderRadius.circular(10.0),
-            ),
-            child: const Text(
-              'Login',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 26,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-          const SizedBox(height: 20),
-
-          // Form
-          Form(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text(
-                  'E-mail',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 18,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-                const SizedBox(height: 8),
-                TextFormField(
-                  initialValue: data['email'],
-                  onChanged: (value) => data['email'] = value,
-                  keyboardType: TextInputType.emailAddress,
-                  style: const TextStyle(color: Colors.black),
-                  decoration: _inputDecoration.copyWith(
-                    hintText: 'Digite seu e-mail',
-                  ),
-                ),
-                // Espaçamento vertical (mb-3)
-                const SizedBox(height: 15),
-
-                const Text(
-                  'Senha',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 18,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-                const SizedBox(height: 8),
-                TextFormField(
-                  initialValue: data['senha'],
-                  onChanged: (value) => data['senha'] = value,
-                  obscureText: true,
-                  style: const TextStyle(color: Colors.black),
-                  decoration: _inputDecoration.copyWith(
-                    hintText: 'Digite sua senha',
-                  ),
-                ),
-                const SizedBox(
-                  height: 25,
-                ), // Espaçamento maior antes do botão (mt-3)
-                // Submit Button
-                ElevatedButton(
-                  onPressed: onSubmit,
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: _corTitulo,
-                    foregroundColor: Colors.white,
-                    padding: const EdgeInsets.symmetric(vertical: 12),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    textStyle: const TextStyle(fontSize: 18),
-                  ),
-                  child: const Text('Entrar'),
-                ),
-              ],
-            ),
-          ),
-
-          // Links
-          Padding(
-            padding: const EdgeInsets.only(top: 20.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                GestureDetector(
-                  onTap: () => onMudarSection('recuperar'),
-                  child: const Text('Esqueci minha senha', style: _linkStyle),
-                ),
-                const Text(' | ', style: _linkStyle),
-                GestureDetector(
-                  onTap: () => onMudarSection('cadastro'),
-                  child: const Text('Cadastrar-se', style: _linkStyle),
-                ),
-              ],
-            ),
-          ),
-        ],
+          elevation: 0,
+        ),
+        child: Text(
+          text,
+          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+        ),
       ),
     );
   }
 }
 
-// --- Secção de Cadastro (max-width: 600px) ---
+class _CustomLink extends StatelessWidget {
+  final String text;
+  final VoidCallback onTap;
 
-class CadastroCard extends StatelessWidget {
-  final Map<String, dynamic> data;
-  final VoidCallback onSubmit;
-  final VoidCallback onGoToLogin;
-
-  const CadastroCard({
-    super.key,
-    required this.data,
-    required this.onSubmit,
-    required this.onGoToLogin,
-  });
+  const _CustomLink({required this.text, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
-    // Determina o layout com base na largura do ecrã
-    final isMobile = MediaQuery.of(context).size.width < 600;
-
-    return FrostedCard(
-      maxWidth: 600.0,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          // Header com Logo
-          Container(
-            padding: const EdgeInsets.symmetric(vertical: 12),
-            decoration: BoxDecoration(
-              color: _corTitulo,
-              borderRadius: BorderRadius.circular(10.0),
-            ),
-            child: Column(
-              children: [
-                // Simulação da imagem icon-2.png
-                Image.network(
-                  'https://placehold.co/80x80/5A4C39/ffffff?text=ICO',
-                  width: 80,
-                  height: 80,
-                  fit: BoxFit.contain,
-                  errorBuilder: (context, error, stackTrace) => const SizedBox(
-                    height: 80,
-                    child: Center(
-                      child: Text('ICON', style: TextStyle(fontSize: 20)),
-                    ),
-                  ),
-                ),
-                const Text(
-                  'Cadastro',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 26,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(height: 20),
-
-          // Form
-          Form(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                // Nome Completo e CPF
-                _buildResponsiveRow(
-                  isMobile,
-                  children: [
-                    Expanded(
-                      flex: 2,
-                      child: TextFormField(
-                        initialValue: data['nome'],
-                        onChanged: (value) => data['nome'] = value,
-                        decoration: _inputDecoration.copyWith(
-                          hintText: 'Nome Completo',
-                        ),
-                        style: const TextStyle(color: Colors.black),
-                      ),
-                    ),
-                    if (!isMobile) const SizedBox(width: 15),
-                    Expanded(
-                      flex: 1,
-                      child: TextFormField(
-                        initialValue: data['cpf'],
-                        onChanged: (value) => data['cpf'] = value,
-                        keyboardType: TextInputType.number,
-                        decoration: _inputDecoration.copyWith(hintText: 'CPF'),
-                        style: const TextStyle(color: Colors.black),
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 15), // Espaçamento após a primeira linha
-                // Data de Nascimento e Telefone
-                _buildResponsiveRow(
-                  isMobile,
-                  children: [
-                    Expanded(
-                      child: TextFormField(
-                        initialValue: data['data_nascimento'],
-                        onChanged: (value) => data['data_nascimento'] = value,
-                        keyboardType: TextInputType.datetime,
-                        decoration: _inputDecoration.copyWith(
-                          hintText: 'Data de Nascimento (AAAA-MM-DD)',
-                        ),
-                        style: const TextStyle(color: Colors.black),
-                      ),
-                    ),
-                    if (!isMobile) const SizedBox(width: 15),
-                    Expanded(
-                      child: TextFormField(
-                        initialValue: data['telefone'],
-                        onChanged: (value) => data['telefone'] = value,
-                        keyboardType: TextInputType.phone,
-                        decoration: _inputDecoration.copyWith(
-                          hintText: 'Telefone',
-                        ),
-                        style: const TextStyle(color: Colors.black),
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 15), // Espaçamento após a segunda linha
-                // Email
-                TextFormField(
-                  initialValue: data['email'],
-                  onChanged: (value) => data['email'] = value,
-                  keyboardType: TextInputType.emailAddress,
-                  decoration: _inputDecoration.copyWith(hintText: 'E-mail'),
-                  style: const TextStyle(color: Colors.black),
-                ),
-                const SizedBox(height: 15),
-
-                // Senha
-                TextFormField(
-                  initialValue: data['senha'],
-                  onChanged: (value) => data['senha'] = value,
-                  obscureText: true,
-                  decoration: _inputDecoration.copyWith(hintText: 'Senha'),
-                  style: const TextStyle(color: Colors.black),
-                ),
-                const SizedBox(
-                  height: 25,
-                ), // Espaçamento maior antes do botão (mt-2)
-                // Submit Button
-                ElevatedButton(
-                  onPressed: onSubmit,
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: _corTitulo,
-                    foregroundColor: Colors.white,
-                    padding: const EdgeInsets.symmetric(vertical: 12),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    textStyle: const TextStyle(fontSize: 18),
-                  ),
-                  child: const Text('Cadastrar'),
-                ),
-              ],
-            ),
-          ),
-
-          // Link
-          Padding(
-            padding: const EdgeInsets.only(top: 20.0),
-            child: GestureDetector(
-              onTap: onGoToLogin,
-              child: const Text(
-                'Já tenho uma conta',
-                textAlign: TextAlign.center,
-                style: _linkStyle,
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  // Ajuda a criar uma linha responsiva (Row para desktop, Column para dispositivos móveis)
-  Widget _buildResponsiveRow(bool isMobile, {required List<Widget> children}) {
-    if (isMobile) {
-      // Em dispositivos móveis, os campos ficam em coluna sem padding extra, pois já é gerado pelo campo
-      return Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: children
-            .map(
-              (w) => Padding(
-                padding: const EdgeInsets.only(
-                  bottom: 15,
-                ), // Simula mb-3 para cada campo na coluna
-                child: w,
-              ),
-            )
-            .toList(),
-      );
-    } else {
-      // Em ecrãs maiores, os campos ficam lado a lado
-      return Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: children,
-      );
-    }
-  }
-}
-
-// --- Secção de Recuperar Senha (max-width: 480px) ---
-
-class RecuperarCard extends StatelessWidget {
-  final Map<String, dynamic> data;
-  final VoidCallback onSubmit;
-  final VoidCallback onGoToLogin;
-
-  const RecuperarCard({
-    super.key,
-    required this.data,
-    required this.onSubmit,
-    required this.onGoToLogin,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return FrostedCard(
-      maxWidth: 480.0,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          // Card Header
-          Container(
-            padding: const EdgeInsets.symmetric(vertical: 12),
-            decoration: BoxDecoration(
-              color: _corTitulo,
-              borderRadius: BorderRadius.circular(10.0),
-            ),
-            child: const Text(
-              'Recuperar Senha',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 26,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-          const SizedBox(height: 20),
-
-          // Form
-          Form(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                TextFormField(
-                  initialValue: data['email_recuperar'],
-                  onChanged: (value) => data['email_recuperar'] = value,
-                  keyboardType: TextInputType.emailAddress,
-                  style: const TextStyle(color: Colors.black),
-                  decoration: _inputDecoration.copyWith(
-                    hintText: 'Digite seu e-mail',
-                  ),
-                ),
-                const SizedBox(height: 25), // Espaçamento antes do botão (mt-3)
-                // Submit Button (Estilo de aviso)
-                ElevatedButton(
-                  onPressed: onSubmit,
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor:
-                        Colors.amber, // Amarelo para aviso/redefinir
-                    foregroundColor: Colors.black,
-                    padding: const EdgeInsets.symmetric(vertical: 12),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    textStyle: const TextStyle(fontSize: 18),
-                  ),
-                  child: const Text('Redefinir Senha'),
-                ),
-              ],
-            ),
-          ),
-
-          // Link
-          Padding(
-            padding: const EdgeInsets.only(top: 20.0),
-            child: GestureDetector(
-              onTap: onGoToLogin,
-              child: const Text(
-                'Voltar ao login',
-                textAlign: TextAlign.center,
-                style: _linkStyle,
-              ),
-            ),
-          ),
-        ],
+    return InkWell(
+      onTap: onTap,
+      child: Text(
+        text,
+        textAlign: TextAlign.center,
+        style: const TextStyle(
+          color: Color.fromARGB(255, 0, 0, 0),
+          decoration: TextDecoration.none,
+          fontSize: 14,
+        ),
       ),
     );
   }
 }
-
-// --- Estilos Comuns ---
-
-// Estilo para os links
-const TextStyle _linkStyle = TextStyle(
-  color: Colors.white,
-  decoration: TextDecoration.underline,
-  decorationColor: Colors.white,
-  fontWeight: FontWeight.w500,
-);
-
-// Estilo para os campos de entrada (InputDecoration)
-const InputDecoration _inputDecoration = InputDecoration(
-  contentPadding: EdgeInsets.all(12.0),
-  filled: true,
-  fillColor: Colors.white,
-  hintStyle: TextStyle(color: Colors.grey),
-  border: OutlineInputBorder(
-    borderRadius: BorderRadius.all(Radius.circular(8.0)), // border-radius: 8px
-    borderSide: BorderSide.none,
-  ),
-  enabledBorder: OutlineInputBorder(
-    borderRadius: BorderRadius.all(Radius.circular(8.0)),
-    borderSide: BorderSide.none,
-  ),
-  focusedBorder: OutlineInputBorder(
-    borderRadius: BorderRadius.all(Radius.circular(8.0)),
-    borderSide: BorderSide(color: _corTitulo, width: 2.0),
-  ),
-  isDense: true,
-  errorStyle: TextStyle(
-    fontSize: 0,
-    height: 0,
-  ), // Oculta o texto de erro padrão
-);

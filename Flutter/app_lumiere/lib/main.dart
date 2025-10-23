@@ -1,3 +1,4 @@
+import 'package:app_lumiere/pages/aluno.dart';
 import 'package:flutter/material.dart';
 import 'pages/compras.dart';
 
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
         colorSchemeSeed: const Color(0xFF5C4033),
       ),
-      home: const ComprasPage(cursosNoCarrinho: []), // LISTA VAZIA INICIAL
+      home: const PerfilScreen()
     );
   }
 }

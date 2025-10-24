@@ -16,7 +16,7 @@
       <button class="btn px-4 py-2" id="tabela">Tabela de Cursos</button>
     </div>
   </header>
-  
+
   <main class="container_main">
     <!-- FORMULÁRIO DE CADASTRO DE FUNCIONÁRIO -->
     <div id="formCadastro" class="container mt-5 formCadastro">
@@ -461,7 +461,7 @@
             <tr *ngFor="let curso of buscarCursos">
               <td>{{ curso.id }}</td>
               <td>
-                <img src="/assets/cillios.jpg" alt="Curso" width="50" />
+                <img [src]="'http://localhost:8080' + curso.caminhoDaCapa" [alt]="curso.tituloDoCurso">
               </td>
               <td>{{ curso.tituloDoCurso }}</td>
               <td>{{ curso.descricao }}</td>
@@ -521,7 +521,6 @@
           <form (ngSubmit)="atualizarCursos()">
             <div class="modal-body">
               <div class="mb-3 text-center">
-                <img id="previewImagem" src="assets/angular.png" alt="Imagem do Curso" class="img-fluid mb-2" style="max-height: 100px" />
                 <input class="form-control" type="file" id="imagemCurso" accept="image/*" />
               </div>
               <div class="mb-3">

@@ -5,22 +5,42 @@ import {
   ElementRef,
   Renderer2,
   ViewChild,
+  OnInit, // ✅ Adicionado
 } from '@angular/core';
+import { Router } from '@angular/router'; // ✅ Adicionado
 import { cursosInterface } from 'src/app/interfaces/cursos-interface';
 
 @Component({
   selector: 'app-carrinho',
   templateUrl: './carrinho.component.html',
-  styleUrls: ['./carrinho.component.css'], // Pode estar vazio se você for estilizar só por código
+  styleUrls: ['./carrinho.component.css'],
 })
-export class CarrinhoComponent implements AfterViewInit {
+export class CarrinhoComponent implements AfterViewInit, OnInit {
   @ViewChild('modalContent', { static: false }) modalContentRef!: ElementRef;
 
   constructor(
     private renderer: Renderer2,
     private el: ElementRef,
-    private workshopService: WorkshopServiceService
+    private workshopService: WorkshopServiceService,
+    private router: Router // ✅ Adicionado
   ) {}
+
+  // Propriedades existentes
+  id: number = 0;
+  tituloDoCurso: String = ``;
+  descricao: String = ``;
+  preco: String = ``;
+  caminhoDaCapa: String = ``;
+  cursosNoCarrinho: cursosInterface[] = [];
+  total: number = 0;
+
+  ngOnInit(): void {
+    const carrinho = sessionStorage.getItem('carrinho');
+    if (carrinho) {
+      this.cursosNoCarrinho = JSON.parse(carrinho);
+      this.calcularTotal();
+    }
+  }
 
   ngAfterViewInit(): void {
     const form = document.getElementById('payment-form') as HTMLFormElement;
@@ -40,6 +60,7 @@ export class CarrinhoComponent implements AfterViewInit {
         return;
       }
 
+      // Mostra o modal normal
       let content = '';
       switch (selected.value) {
         case 'credit':
@@ -54,7 +75,7 @@ export class CarrinhoComponent implements AfterViewInit {
             <input type="text" placeholder="MM/AA" />
             <label>CVV</label>
             <input type="text" placeholder="123" />
-            <button class="close-modal">Fechar</button>
+            <button class="close-modal">Finalizar Compra</button> <!-- ✅ alterado -->
           `;
           break;
         case 'pix':
@@ -62,7 +83,7 @@ export class CarrinhoComponent implements AfterViewInit {
             <h3>Pagamento via Pix</h3>
             <p>Escaneie o QR Code abaixo:</p>
             <img class="qr" src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=chavepix123" alt="QR Code Pix" />
-            <button class="close-modal">Fechar</button>
+            <button class="close-modal">Confirmar Pagamento</button> <!-- ✅ alterado -->
           `;
           break;
         case 'boleto':
@@ -70,7 +91,7 @@ export class CarrinhoComponent implements AfterViewInit {
             <h3>Gerar Boleto Bancário</h3>
             <label>Informe seu e-mail</label>
             <input type="email" placeholder="seu@email.com" />
-            <button class="close-modal">Fechar</button>
+            <button class="close-modal">Gerar e Ir ao Curso</button> <!-- ✅ alterado -->
           `;
           break;
       }
@@ -161,7 +182,7 @@ export class CarrinhoComponent implements AfterViewInit {
       if (closeButton) {
         Object.assign(closeButton.style, {
           marginTop: '12px',
-          backgroundColor: '#dc3545',
+          backgroundColor: '#28a745',
           color: 'white',
           border: 'none',
           padding: '10px 16px',
@@ -171,46 +192,43 @@ export class CarrinhoComponent implements AfterViewInit {
           width: '100%',
         });
 
-        closeButton.addEventListener('click', () => this.closeModal());
+        // ✅ Aqui o segredo: finalizar a compra e redirecionar
+        closeButton.addEventListener('click', () => {
+          this.finalizarCompra();
+        });
       }
     }, 0);
   }
 
- // Propriedades existentes
-    id: number = 0;
-    tituloDoCurso: String = ``;
-    descricao: String = ``;
-    preco: String = ``;
-    caminhoDaCapa: String = ``;
-  cursosNoCarrinho: cursosInterface[] = [];
-  total : number = 0;
-
-ngOnInit(): void {
-  const carrinho = sessionStorage.getItem("carrinho");
-  if (carrinho) {
-    this.cursosNoCarrinho = JSON.parse(carrinho);
+  remover(index: number) {
+    this.cursosNoCarrinho.splice(index, 1);
+    sessionStorage.setItem('carrinho', JSON.stringify(this.cursosNoCarrinho));
     this.calcularTotal();
   }
 
-}
+  calcularTotal() {
+    this.total = this.cursosNoCarrinho.reduce((acc, curso) => {
+      let precoNumerico = Number(curso.preco.toString().replace(',', '.'));
+      return acc + (isNaN(precoNumerico) ? 0 : precoNumerico);
+    }, 0);
+  }
 
-remover(index: number) {
- 
-  this.cursosNoCarrinho.splice(index, 1);
+  // ✅ Novo método responsável pelo redirecionamento
+  finalizarCompra() {
+    if (this.cursosNoCarrinho.length > 0) {
+      const ultimoCurso = this.cursosNoCarrinho[this.cursosNoCarrinho.length - 1];
 
+      // Salva o curso no localStorage para aparecer no /aprendizado
+      localStorage.setItem('cursoRecente', JSON.stringify(ultimoCurso));
 
-  sessionStorage.setItem("carrinho", JSON.stringify(this.cursosNoCarrinho));
+      // Limpa o carrinho
+      sessionStorage.removeItem('carrinho');
 
-  this.calcularTotal();
-}
+      // Fecha o modal
+      this.closeModal();
 
-calcularTotal() {
-
-  this.total = this.cursosNoCarrinho.reduce((acc, curso) => {
-    let precoNumerico = Number(curso.preco.toString().replace(",", "."));
-    return acc + (isNaN(precoNumerico) ? 0 : precoNumerico);
-  }, 0);
-}
-
-
+      // Redireciona
+      this.router.navigate(['/aprendizado']);
+    }
+  }
 }

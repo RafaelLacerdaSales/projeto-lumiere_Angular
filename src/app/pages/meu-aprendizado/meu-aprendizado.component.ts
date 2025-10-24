@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 interface Curso {
   nome: string;
@@ -10,14 +10,29 @@ interface Curso {
   templateUrl: './meu-aprendizado.component.html',
   styleUrls: ['./meu-aprendizado.component.css'],
 })
-export class MeuAprendizadoComponent {
-  // Dados mocados para os cursos. Idealmente, viriam de um serviço.
-  cursos: Curso[] = [
-    { nome: 'Maquiagem Profissional', imagem: '/assets/img_Maquiagem.png' },
-    { nome: 'Maquiagem para Festas', imagem: '/assets/img_Maquiagem.png' },
-    { nome: 'Maquiagem Artística', imagem: '/assets/img_Maquiagem.png' },
-    { nome: 'Automaquiagem', imagem: '/assets/img_Maquiagem.png' },
-    { nome: 'Técnicas Avançadas', imagem: '/assets/img_Maquiagem.png' },
-    { nome: 'Maquiagem para Noivas', imagem: '/assets/img_Maquiagem.png' },
-  ];
+export class MeuAprendizadoComponent implements OnInit {
+  cursos: Curso[] = [];
+
+  ngOnInit() {
+
+    const cursoSalvo = localStorage.getItem('cursoRecente');
+
+    if (cursoSalvo) {
+      const cursoBruto = JSON.parse(cursoSalvo);
+
+
+      const cursoFormatado: Curso = {
+        nome: cursoBruto.tituloDoCurso || cursoBruto.nome,
+        imagem: cursoBruto.caminhoDaCapa
+          ? 'http://localhost:8080' + cursoBruto.caminhoDaCapa
+          : cursoBruto.imagem,
+      };
+
+      this.cursos = [cursoFormatado];
+
+
+      localStorage.removeItem('cursoRecente');
+    }
+    
+  }
 }

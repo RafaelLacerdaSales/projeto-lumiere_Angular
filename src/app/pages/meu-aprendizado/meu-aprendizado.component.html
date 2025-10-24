@@ -5,7 +5,11 @@
   </header>
 
   <div class="cursos-grid">
-    <div class="curso-card" *ngFor="let curso of cursos">
+    <div
+      class="curso-card"
+      *ngFor="let curso of cursos"
+
+    >
       <img [src]="curso.imagem" [alt]="curso.nome" />
       <div class="curso-info">
         <p>{{ curso.nome }}</p>
